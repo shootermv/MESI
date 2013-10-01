@@ -1,0 +1,44 @@
+<h1>Assign Tasks</h1>
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Modal header</h3>
+  </div>
+  <div class="modal-body">  
+    
+    <label>task</label>
+    <input type="text" placeholder="Type something…">
+  
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button class="btn btn-primary" ng-click="SaveTask()">Save changes</button>
+  </div>
+
+</div>
+
+
+<a href="#myModal" role="button" class="btn"data-toggle="modal">+</a>
+
+  
+    <div class="row">
+
+      <div class="span9">
+		<table class="table"> 
+		  <tr ng-repeat="task in tasks">   
+		    <td>{{task.summary}}</td>
+		  </tr>
+		</table>      	
+      </div>
+
+      <div class="span2 right-column">      	
+			<table class="table"> 
+			   <tr ng-repeat="programmer in programmers" >   
+			   <td> <a href="#/programmer/{{programmer.id}}">{{programmer.name}}</a></td>
+			  </tr> 
+			</table>      	
+      </div>
+
+    </div>
+

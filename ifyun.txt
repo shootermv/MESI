@@ -1,0 +1,22 @@
+frameworks:
+	frontend:
+	    gui
+			bootstrap
+		javascript	
+			angularjs
+    backend
+		nodejs
+		express
+		
+-----------------------
+screens
+	proj manager
+		edit project details	
+			add module
+		project
+			tasks
+			add task/edit task
+	programmer
+		tasks
+		
+		
