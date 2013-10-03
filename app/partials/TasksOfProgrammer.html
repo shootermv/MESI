@@ -1,7 +1,8 @@
-<div>Here is the tasks of <strong>{{programmer.name}}</strong></div>
+<div class="timer"></div>
 
 <table class="table">
  <tr ng-repeat="task in tasks">
- 	<td>{{task.summary}}</td><td><input type="checkbox" id="c1{{task.id}}" name="cc"><label for="c1{{task.id}}"><span></span></label></td>
+ 	<td>{{task.summary}}</td>
+ 	<td class="right-td"><input type="checkbox" id="c1{{task.id}}" ng-model="task.completed" name="cc"><label for="c1{{task.id}}" ><span></span></label></td>
  </tr>
 </table>

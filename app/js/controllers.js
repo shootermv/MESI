@@ -10,42 +10,7 @@ angular.module('MesiApp.controllers', []).
   	     	$scope.programmer = tasksView.programmer;
   	     });
         
-         
-         /* 
-	  	  var Shlomo =	{
-			"id":"1",
-			"name":"Shlomo",
-			"lname":"Ben Momo"		
-		  };
 
-	  	  var Moshe =	{
-			"id":"2",
-			"name":"Moshe",
-			"lname":"Vilner"		
-		  };
-          
-
-          
-		  $scope.programmer= $routeParams.id=="1" ? Shlomo : Moshe;
-	      $scope.tasks = [
-			{
-				"id":1,
-				"summary":"change title of check-details-popup widget",
-				"module":"heck-details-popup",
-				"text":"title of check-details-popup widget should be :'pipi kaki be tzeva chaki'",
-				"createdate":"13/08/2013 17:04"
-			},
-			{
-				"id":2,
-				"summary":"take care of no-image at this path in check-details-popup widget gallery",
-				"module":"heck-details-popup",
-				"text":"instead of default 'image-not-found' icon -some custom image should displayed",
-				"createdate":"11/08/2013 12:34"
-			}
-	     ];  
-         */
-	     
- 
   }])
   .controller('TaskCtrl',  ['$scope', function(sc) {
 
