@@ -9,6 +9,6 @@ angular.module('MesiApp.directives', []).
       restrict: 'E',      
       replace: true,
       transclude: true,     
-      templateUrl: 'partials/header.html'
+      templateUrl: 'partials/header.html'//link
     };
   });
