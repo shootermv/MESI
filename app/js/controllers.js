@@ -9,7 +9,11 @@ angular.module('MesiApp.controllers', []).
   	     	$scope.tasks = tasksView.tasks;
   	     	$scope.programmer = tasksView.programmer;
   	     });
-        
+        $scope.addTask = function(){
+
+        	alert('pppp');
+
+        }
 
   }])
   .controller('TaskCtrl',  ['$scope', function(sc) {

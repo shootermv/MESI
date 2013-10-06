@@ -11,4 +11,13 @@ angular.module('MesiApp.directives', []).
       transclude: true,     
       templateUrl: 'partials/header.html'//link
     };
+  }).
+
+  directive('ngmodal',function() {
+    return  {
+      restrict: 'E',      
+      replace: true,
+      transclude: true,     
+      templateUrl: 'partials/modal.html'//link
+    };
   });
