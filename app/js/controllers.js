@@ -3,17 +3,19 @@
 /* Controllers */
 
 angular.module('MesiApp.controllers', []).
-  controller('ProgrammerCtrl', ['$scope', '$routeParams', 'TasksOfProgrammer', function($scope, $routeParams, TasksOfProgrammer) {
-        
-  	     TasksOfProgrammer.get({programmerId: $routeParams.programmerId},function(tasksView){
-  	     	$scope.tasks = tasksView.tasks;
-  	     	$scope.programmer = tasksView.programmer;
-  	     });
-        $scope.addTask = function(){
-
-        	alert('pppp');
-
-        }
+  controller('ProgrammerCtrl', ['$scope', '$routeParams', 'TasksOfProgrammer',  function($scope, $routeParams, TasksOfProgrammer) {        		
+       
+	  	TasksOfProgrammer.get({programmerId: $routeParams.programmerId},function(tasksView){
+	  	     	$scope.tasks = tasksView.tasks;	  	     	
+	  	     	$scope.programmer = tasksView.programmer;
+	    });
+	    $scope.newtask={summary:"",text:""}
+       
+		$scope.addTask = function( dismiss, newtask) {
+		   
+		    $scope.tasks.push($scope.newtask);
+		    dismiss();
+		}
 
   }])
   .controller('TaskCtrl',  ['$scope', function(sc) {

@@ -17,7 +17,14 @@ angular.module('MesiApp.directives', []).
     return  {
       restrict: 'E',      
       replace: true,
-      transclude: true,     
-      templateUrl: 'partials/modal.html'//link
-    };
+     // transclude: true,     
+      templateUrl: 'partials/modal.html',    
+      /*controller: 'ProgrammerCtrl',*/
+      link: function(scope, element, attrs, ProgrammerCtrl) {
+          //scope.addTask =function(newtask){
+
+          //  alert('o')
+         // }
+      }
+    }
   });

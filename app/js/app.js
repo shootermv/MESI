@@ -2,7 +2,7 @@
 
 
 // Declare app level module which depends on filters, and services
-angular.module('MesiApp', ['MesiApp.filters', 'MesiApp.services', 'MesiApp.directives', 'MesiApp.controllers']).
+angular.module('MesiApp', ['MesiApp.filters', 'MesiApp.services','$strap.directives', 'MesiApp.directives', 'MesiApp.controllers']).
   config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/programmer/:programmerId', {
     	templateUrl: 'partials/TasksOfProgrammer.html',
