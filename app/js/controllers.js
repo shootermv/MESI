@@ -9,13 +9,24 @@ angular.module('MesiApp.controllers', []).
 	  	     	$scope.tasks = tasksView.tasks;	  	     	
 	  	     	$scope.programmer = tasksView.programmer;
 	    });
+
 	    $scope.newtask={summary:"",text:""}
        
 		$scope.addTask = function( dismiss, newtask) {
 		   
 		    $scope.tasks.push($scope.newtask);
 		    dismiss();
-		}
+		  // $('#myModal').modal('hide');
+		};
+
+		$scope.MakeActive = function(task){
+			if(task.completed==true)return;
+            //make other tasks to be unactive
+            angular.forEach($scope.tasks, function(value, key){
+            	value.isActive =false;
+            });
+			task.isActive =true;
+		};
 
   }])
   .controller('TaskCtrl',  ['$scope', function(sc) {

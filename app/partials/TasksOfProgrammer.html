@@ -1,14 +1,15 @@
 <div class="container">
  <button type="button" class="btn btn-primary btn-lg pull-right" bs-modal="'partials/modal-s.html'">+</button>
 </div>
+<!--<ngmodal></ngmodal>-->
 
 
-
-<div class="timer"></div>
+<div class="timer" ></div>
 
 <table class="table">
- <tr ng-repeat="task in tasks">
- 	<td>{{task.summary}}</td>
- 	<td class="right-td"><input type="checkbox" id="c1{{task.id}}" ng-model="task.completed" name="cc"><label for="c1{{task.id}}" ><span></span></label></td>
+ <tr ng-repeat="task in tasks" >
+ 	<td ng-click="MakeActive(task)"><div ng-class="{active:task.isActive}">{{task.summary}}</div></td>
+ 	<td class="right-td"><input type="checkbox" id="c1{{task.id}}" ng-model="task.completed" name="cc">
+ 	<label for="c1{{task.id}}" ><span></span></label></td>
  </tr>
 </table>
