@@ -9,8 +9,8 @@ describe('my app', function() {
   });
 
 
-  it('should ....', function() {
-      element('.programmers li:first a').click();
+  it('should redirect to programmer page', function() {
+      //element('.programmers li:first a').click();
       expect(browser().location().url()).toBe('/programmer/1');
   });
 

@@ -28,7 +28,8 @@ describe('controllers', function(){
 						"module":"category-form",
 						"text":"validation must validate fields as in spec",
 						"createdate":"11/08/2013 11:34",
-						"completed":false
+						"completed":false,
+						"isActive":true
 					},
 					{
 						"id":"4",
@@ -36,7 +37,8 @@ describe('controllers', function(){
 						"module":"category-form",
 						"text":"write unit test for checking form functionality",
 						"createdate":"11/04/2013 10:32",
-						"completed":true
+						"completed":true,
+						"isActive":false
 					}		
 				]	
 			});
@@ -54,7 +56,6 @@ describe('controllers', function(){
 
 	      
 	      $httpBackend.flush();
-
 	      expect(scope.tasks).toEqual([
 					{
 						"id":"3",
@@ -62,7 +63,8 @@ describe('controllers', function(){
 						"module":"category-form",
 						"text":"validation must validate fields as in spec",
 						"createdate":"11/08/2013 11:34",
-						"completed":false
+						"completed":false,
+						"isActive":true
 					},
 					{
 						"id":"4",
@@ -70,18 +72,25 @@ describe('controllers', function(){
 						"module":"category-form",
 						"text":"write unit test for checking form functionality",
 						"createdate":"11/04/2013 10:32",
-						"completed":true
+						"completed":true,
+						"isActive":false
 					}		
 			]);
 
-
 	    });
 
-	    /*
-	    it('should set the default value of orderProp model', function() {
-	      expect(scope.orderProp).toBe('age');
+	    
+	    it('completed task cannot became active', function() {
+	      $httpBackend.flush();
+	      scope.MakeActive(scope.tasks[1]);
+	      expect(scope.tasks[1].isActive).toBe(false);
 	    });
-	    */
+		it('not completed task can became active', function() {
+	      $httpBackend.flush();
+	      scope.tasks[1].completed = false;
+	      scope.MakeActive(scope.tasks[1]);
+	      expect(scope.tasks[1].isActive).toBe(true);
+	    });    
 	  });
 
 

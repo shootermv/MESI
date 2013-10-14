@@ -20,6 +20,7 @@ angular.module('MesiApp.controllers', []).
 		};
 
 		$scope.MakeActive = function(task){
+			//completed tasks cannot be active
 			if(task.completed==true)return;
             //make other tasks to be unactive
             angular.forEach($scope.tasks, function(value, key){
