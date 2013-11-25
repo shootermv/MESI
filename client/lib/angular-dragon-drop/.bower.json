@@ -1,0 +1,19 @@
+{
+  "name": "angular-dragon-drop",
+  "version": "0.3.1",
+  "main": "dragon-drop.js",
+  "dependencies": {
+    "angular": "~1.0.5"
+  },
+  "homepage": "https://github.com/btford/angular-dragon-drop",
+  "_release": "0.3.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.3.1",
+    "commit": "ff796ad432ae8c793de3b603ee22ff348fbbc894"
+  },
+  "_source": "git://github.com/btford/angular-dragon-drop.git",
+  "_target": "~0.3.1",
+  "_originalSource": "angular-dragon-drop",
+  "_direct": true
+}

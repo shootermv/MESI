@@ -1,0 +1,68 @@
+!!! 5
+html(lang='en', data-ng-app='angular-client-side-auth')
+    head
+        meta(charset='utf-8')
+        title Angular Auth Example
+        link(rel='stylesheet', href='css/app.css')
+        link(href="css/bootstrap-combined.no-icons.min.css", rel="stylesheet")
+        link(href="css/font-awesome.min.css", rel="stylesheet")
+        script(src="//localhost:9000/livereload.js")
+        // This is needed because Facebook login redirects add #_=_ at the end of the URL
+        script(type="text/javascript").
+            if (window.location.href.indexOf('#_=_') > 0) {
+                window.location = window.location.href.replace(/#.*/, '');
+            }
+    body(data-ng-cloak)
+
+        .navbar(data-ng-controller="NavCtrl")
+            .navbar-inner
+                .container-fluid
+                    ul.nav
+                        li(data-access-level='accessLevels.anon', active-nav)
+                            a(href='/login') Log in
+                        li(data-access-level='accessLevels.anon', active-nav)
+                            a(href='/register') Register
+                        li(data-access-level='accessLevels.user', active-nav)
+                            a(href='/') Home
+                        li(data-access-level='accessLevels.user', active-nav)
+                            a(href='/private') Private
+                        li(data-access-level='accessLevels.admin', active-nav)
+                            a(href='/admin') Admin
+                        li(data-access-level='accessLevels.user')
+                            a(href="", data-ng-click="logout()")
+                                | Log out
+                    div#userInfo.pull-right(data-access-level='accessLevels.user')
+                        | Welcome&nbsp;
+                        strong {{ user.name }}&nbsp;
+                        span.label(data-ng-class='{"label-info": user.role.title == userRoles.user.title, "label-success": user.role.title == userRoles.admin.title}') {{ user.role.title }}
+
+        .container
+            .alert.alert-error(data-ng-bind="error", data-ng-show="error")
+            div(data-ng-view='ng-view')
+            
+
+        script(src='lib/underscore/underscore-min.js')
+        script(src='lib/angular/angular/angular.min.js')
+        script(src='lib/angular/angular-cookies/angular-cookies.min.js')
+        script(src='lib/angular/angular-route/angular-route.min.js')
+        script(src='lib/angular-dragon-drop/dragon-drop.js')
+        script(src='/js/routingConfig.js')
+        script(src='/js/app.js')
+        script(src='/js/services.js')
+        script(src='/js/controllers.js')
+        script(src='/js/filters.js')
+        script(src='/js/directives.js')
+
+        // Partial views... Load up front to make transitions smoother
+        script(type="text/ng-template", id="404")
+            include partials/404
+        script(type="text/ng-template", id="admin")
+            include partials/admin
+        script(type="text/ng-template", id="home")
+            include partials/home
+        script(type="text/ng-template", id="login")
+            include partials/login
+        script(type="text/ng-template", id="private")
+            include partials/private
+        script(type="text/ng-template", id="register")
+            include partials/register

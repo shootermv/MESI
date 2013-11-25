@@ -1,0 +1,16 @@
+link(rel='stylesheet', href='css/login.css')
+.container
+    form.form-signin(ng-submit="login()", name="loginForm")
+        h2.form-signin-heading Please log in	
+        .control-group            
+            .controls
+                input.input-block-level(type="text", data-ng-model="username", placeholder="Username", name="username", required, autofocus)
+        .control-group            
+            .controls
+                input.input-block-level(type="password", data-ng-model="password", placeholder="Password", name="password", required)
+        label(for="rememberme").checkbox
+                input(type="checkbox", data-ng-model="rememberme", name="rememberme")
+                | Remember me
+        .control-group
+            .controls
+                button.btn.btn-large.btn-primary(type="submit", data-ng-disabled="loginForm.$invalid") Log in
