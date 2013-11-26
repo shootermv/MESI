@@ -71,3 +71,6 @@ ul.droparea{
 .statuspckr{
 	margin-left:10px;
 }
+li.completed {
+	text-decoration:line-through;
+}
