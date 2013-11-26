@@ -96,7 +96,7 @@ module.exports = {
 	},
 	addtask:function(req, res) {
 	    console.log('trying to add new task!')
-		var newtask= new Task({summary:req.body.summary, completed:req.body.completed})
+		var newtask= new Task({summary:req.body.summary, status:'new'})
 		newtask.save(function(err){
 			if(!err)	     
 			  res.json(newtask); 
