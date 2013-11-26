@@ -101,5 +101,28 @@ module.exports = {
 			if(!err)	     
 			  res.json(newtask); 
 		});	
+	},
+	updatetask:function(req, res) {
+	    var taskid = req.params.id;
+		var thetask= req.body;
+		Task.findOne({_id:taskid},function(err , foundtask){
+			 if(!err) {  
+				foundtask.status = thetask.status;
+				//foundtask.summary ='user screen - add task functionality';
+				foundtask.save(function(error){
+					if(!error){	
+                        console.log('finally:'+foundtask.status)					
+						res.json(foundtask);
+						console.log('task saved! ')
+					} else{
+						console.log('some error occured during save of the task! '+error)
+					}
+								 
+				});
+			}
+			else{
+                 console.log('task not found');
+			}			
+		});	
 	}
 };

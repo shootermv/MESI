@@ -4,7 +4,7 @@ var mongoose = require('mongoose')
 , _ = require('underscore');*/
 
 var TaskSchema = new Schema({
-	summary:String,
-	completed:Boolean
+	summary:String,	
+	status:String
 });	
 var Task = mongoose.model('Task',TaskSchema);

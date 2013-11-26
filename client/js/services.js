@@ -83,6 +83,14 @@ angular.module('angular-client-side-auth')
 		addTask:function(newtask, success, error){
 		
 		    $http({method:'POST', url:'/addtask',data:newtask}).success(success).error(error);	
+		},
+		updateTask:function(task, success, error){
+		    console.log('trying to  save status '+task.status);
+			try{
+			    $http({method:'PUT', url:'/task/'+task._id, data:task}).success(success).error(error);
+			}catch(err){
+				console.log(err)
+			}
 		}
     };
 })
