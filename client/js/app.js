@@ -72,20 +72,21 @@ angular.module('angular-client-side-auth', ['ngCookies', 'ngRoute', 'btford.drag
     $httpProvider.responseInterceptors.push(interceptor);
 
 }])
+.run(['$rootScope', '$location', 'Auth', function ($rootScope, $location, Auth) {
+	   //console.log('startig...');	
+	$rootScope.$on("$routeChangeStart", function (event, next, current) {
+	    //console.log('route changed...'+next.access.title);	
+		$rootScope.error = null;
+		
+		if (!Auth.authorize(next.access)) {
+			if(Auth.isLoggedIn()){
+				$location.path('/');
+			}
+			else{    
+				console.log('not logedin, redirected to login...');				
+				$location.path('/login');
+			}
+		}
+	});
 
-    .run(['$rootScope', '$location', 'Auth', function ($rootScope, $location, Auth) {
-           console.log('startig...');	
-        $rootScope.$on("$routeChangeStart", function (event, next, current) {
-            $rootScope.error = null;
-            if (!Auth.authorize(next.access)) {
-                if(Auth.isLoggedIn()){
-    				$location.path('/');
-				}
-                else{    
-                    console.log('not logedin, redirected to login...');				
-    				$location.path('/login');
-				}
-            }
-        });
-
-    }]);
+}]);

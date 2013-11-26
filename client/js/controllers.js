@@ -29,7 +29,10 @@ angular.module('angular-client-side-auth')
                 rememberme: $scope.rememberme
             },
             function(res) {
-                $location.path('/');
+                if(res.role.title=='admin')
+					$location.path('/admin');
+				else
+				   $location.path('/private');
             },
             function(err) {
 			    console.log('login error',err)
