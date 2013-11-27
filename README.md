@@ -1,4 +1,4 @@
-# MESI - Project & Tasks management app
+# MESI - programming tasks management app
 
 Mesi is an application built with [AngularJS](http://angularjs.org/).
 You can use it to manage your team of programmers.
