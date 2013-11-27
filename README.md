@@ -1,7 +1,7 @@
 # MESI - Project & Tasks management app
 
 Mesi is an application built with [AngularJS](http://angularjs.org/).
-You can use it to manage your team.
+You can use it to manage your team of programmers.
 
 The seed contains AngularJS libraries, test libraries and a bunch of scripts all preconfigured for
 instant web development gratification. Just clone the repo (or download the zip/tarball), start up
