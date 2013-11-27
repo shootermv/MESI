@@ -24,10 +24,12 @@ angular.module('angular-client-side-auth')
             function updateCSS() {
 			 
                 if(userRole && accessLevel) {
-                    if(!Auth.authorize(accessLevel, userRole))
+                    if(!Auth.authorize(accessLevel, userRole)){
                         element.css('display', 'none');
-                    else
+                    }else{
                         element.css('display', prevDisp);
+						//if(userRole.title == 'user' && accessLevel==)
+					}
                 }
             }
         }

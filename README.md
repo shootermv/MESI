@@ -1,8 +1,7 @@
-# angular-seed — the seed for AngularJS apps
+# MESI - Project & Tasks management app
 
-This project is an application skeleton for a typical [AngularJS](http://angularjs.org/) web app.
-You can use it to quickly bootstrap your angular webapp projects and dev environment for these
-projects.
+Mesi is an application built with [AngularJS](http://angularjs.org/).
+You can use it to manage your team.
 
 The seed contains AngularJS libraries, test libraries and a bunch of scripts all preconfigured for
 instant web development gratification. Just clone the repo (or download the zip/tarball), start up

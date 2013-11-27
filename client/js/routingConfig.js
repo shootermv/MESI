@@ -19,7 +19,8 @@
             'public' : "*",
             'anon': ['public'],
             'user' : ['user', 'admin'],
-            'admin': ['admin']
+            'admin': ['admin'],
+			'useronly': ['user']
         }
 
     }
