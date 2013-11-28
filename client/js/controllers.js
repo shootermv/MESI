@@ -129,7 +129,11 @@ angular.module('angular-client-side-auth')
 		
 		
 		$scope.$watch('users', function (newUsers, oldUsers) {
-	        if($scope.dropedUser && $scope.selectedTask && !(_.where($scope.dropedUser.tasks,{'_id': $scope.selectedTask._id}).length>0)){
+		    if($scope.dropedUser){
+				console.log('$scope.dropedUser.tasks',$scope.dropedUser.tasks,$scope.selectedTask);
+				console.log(_.where($scope.dropedUser.tasks,{'_id': $scope.selectedTask._id}).length>0)
+			}
+	        if($scope.dropedUser && $scope.selectedTask /*&& !(_.where($scope.dropedUser.tasks,{'_id': $scope.selectedTask._id}).length>0)*/){
 				console.log('attention! trying to assign task')
 				//console.log('task '+ $scope.selectedTask._id +' to user '+ $scope.dropedUser.name);
 			    Tasks.assignTask({uid:$scope.dropedUser._id, taskId:$scope.selectedTask._id},function(res){
