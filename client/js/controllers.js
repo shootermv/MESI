@@ -106,17 +106,17 @@ angular.module('angular-client-side-auth')
         $scope.loading = false;
 		
 		$scope.$watch('unassignedTasks', function (newVal, oldVal) { 
-		    if(!$scope.selectedUser || !$scope.selectedTask)return;
+		    if(!$scope.selectedUser || !$scope.selectedProgrammerTask)return;
 		    if(newVal.length>oldVal.length){//some task dropped and will became unassigned
 
 			  console.log('attention! trying to unassign task')
-			  Tasks.unAssignTask({uid:$scope.selectedUser._id, taskId:$scope.selectedTask._id},function(res){
+			  Tasks.unAssignTask({uid:$scope.selectedUser._id, taskId:$scope.selectedProgrammerTask._id},function(res){
 					console.log('success with unassign task')
-					$scope.selectedTask=null;
+					$scope.selectedProgrammerTask=null;
 					$scope.selectedUser=null;
 	  
 			  }, function(err) {
-					$scope.selectedTask=null;
+					$scope.selectedProgrammerTask=null;
 					$scope.selectedUser=null;	
 					
 					$rootScope.error = "Failed to unassign task -";
@@ -129,11 +129,13 @@ angular.module('angular-client-side-auth')
 		
 		
 		$scope.$watch('users', function (newUsers, oldUsers) {
-		    if($scope.dropedUser){
+		    if($scope.dropedUser && $scope.selectedTask){
 				console.log('$scope.dropedUser.tasks',$scope.dropedUser.tasks,$scope.selectedTask);
 				console.log(_.where($scope.dropedUser.tasks,{'_id': $scope.selectedTask._id}).length>0)
+			}else{
+			   console.log('$scope.selectedTask -must be null ', $scope.selectedTask)
 			}
-	        if($scope.dropedUser && $scope.selectedTask /*&& !(_.where($scope.dropedUser.tasks,{'_id': $scope.selectedTask._id}).length>0)*/){
+	        if($scope.dropedUser && $scope.selectedTask ){
 				console.log('attention! trying to assign task')
 				//console.log('task '+ $scope.selectedTask._id +' to user '+ $scope.dropedUser.name);
 			    Tasks.assignTask({uid:$scope.dropedUser._id, taskId:$scope.selectedTask._id},function(res){
