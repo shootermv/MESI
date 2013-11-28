@@ -1,11 +1,9 @@
 # MESI - programming tasks management app
 
-Mesi is an application built with [AngularJS](http://angularjs.org/).
+Mesi is an application for a team leader who split the project to the tasks share them between the programmres.
+Each programmer can notify about his progress on the tasks.
 You can use it to manage your team of programmers.
-
-The seed contains AngularJS libraries, test libraries and a bunch of scripts all preconfigured for
-instant web development gratification. Just clone the repo (or download the zip/tarball), start up
-our (or yours) webserver and you are ready to develop and test your application.
+Mesi contains authentication implementation with Admin and User roles.
 
 The seed app doesn't do much, just shows how to wire two controllers and views together. You can
 check it out by opening app/index.html in your browser (might not work file `file://` scheme in
@@ -18,10 +16,12 @@ sandbox implementation varies between browsers, but quite often prevents things 
 etc to function properly when an html page is opened via `file://` scheme instead of `http://`._
 
 
-## How to use angular-seed
+## Stack
 
-Clone the angular-seed repository and start hacking...
-
+* Persistence store: [MongoDB](http://www.mongodb.org/)
+* Backend: [Node.js](http://nodejs.org/)
+* Awesome [AngularJS](http://www.angularjs.org/) on the client
+* CSS based on [Twitter's bootstrap](http://twitter.github.com/bootstrap/)
 
 ### Running the app during development
 
