@@ -1,6 +1,6 @@
 # MESI - programming tasks management app
 
-Mesi is an application for a team leader who split the project to the tasks share them between the programmres.
+Mesi is an application for a team leader who split the project to the tasks share them between the programmers.
 Each programmer can notify about his progress on the tasks.
 You can use it to manage your team of programmers.
 Mesi contains authentication implementation with Admin and User roles.
