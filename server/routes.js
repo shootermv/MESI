@@ -98,8 +98,13 @@ var routes = [
         httpMethod: 'GET',
         middleware: [TaskCtrl.index],
         accessLevel: accessLevels.user
-    },
-	
+    },	
+	{	
+		path: '/unassignedtask/:id',
+		httpMethod: 'DELETE',
+		middleware: [TaskCtrl.deleteUnassignedtask],
+		accessLevel: accessLevels.admin
+	},	
 	{	
 		path: '/ForAdmin',
 		httpMethod: 'GET',

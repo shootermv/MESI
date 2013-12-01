@@ -1,12 +1,14 @@
 div.hero-unit
     form(ng-submit="addTask(newtask)")
-        input.addtaskinput(ng-model="newtask.summary",placeholder="type here")
-    ul.droparea(btf-dragon="task in unassignedTasks") {{task.summary}}
+        input.addtaskinput(ng-model="newtask.summary",placeholder="type here")    
+    ul.droparea(btf-dragon="task in unassignedTasks")
+        span.unassigned {{task.summary}}
+            button.destroy(ng-click="removeUnassignedTask(task, $index)")	
 div.row
     div(class="span{{12/users.length}} tasksof",data-ng-repeat="user in users")
         h2 {{user.name}}
         ul.droparea(btf-dragon="programmerTask in user.tasks")
-            li(ng-class="{completed:programmerTask.status=='completed'}") {{programmerTask.summary}}
+            li(ng-class="{completed:programmerTask.status=='completed'}") {{programmerTask.summary}}			    
 hr		
 table.table.table-striped(data-ng-hide="loading")
     thead

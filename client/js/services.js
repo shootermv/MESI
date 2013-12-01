@@ -91,6 +91,9 @@ angular.module('angular-client-side-auth')
 			}catch(err){
 				console.log(err)
 			}
+		},
+		removeUnassignedTask:function(task, success, error){
+			$http({method:'DELETE', url:'/unassignedtask/'+task._id}).success(success).error(error);
 		}
     };
 })

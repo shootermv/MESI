@@ -87,7 +87,15 @@ angular.module('angular-client-side-auth')
     $scope.loading = true;
     $scope.userRoles = Auth.userRoles;
 	
+	$scope.removeUnassignedTask = function(task, index){
 	
+		Tasks.removeUnassignedTask(task, function(task){
+			//console.log('trying to remove');
+			$scope.unassignedTasks.splice(index,1)
+	    },function(err) {
+		    console.log('remove task failed');
+	    })		
+	};
 	
     $scope.addTask = function(newtask){
         Tasks.addTask(newtask, function(task){

@@ -59,6 +59,13 @@ module.exports = {
 	    });	
 		
 	},
+	deleteUnassignedtask: function(req, res) {
+	    //console.log('deleting task '+req.params.id)
+        var id=req.params.id;
+	    Task.findOne({_id:id}).remove( function(err, task){	    
+			res.end();
+	    })
+	},
 	unassigntask: function(req, res) {
 	    var taskId = req.query.taskId, userId = req.query.uid;
 		User.findOne({_id:userId},function(err , user){
