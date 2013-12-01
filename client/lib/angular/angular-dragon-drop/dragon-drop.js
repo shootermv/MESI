@@ -233,10 +233,13 @@ angular.module('btford.dragon-drop', []).
 
 			//MOSHE - must store selected task when draggin from users tasks
             var parentScope =null;
-            if(originElement.scope().programmerTask){ //dragging from some user to unassign
-				parentScope = originElement.parent().scope();
+            if(originScope.programmerTask){ //dragging from some user to unassign
+				parentScope = originElement.parent().parent().scope();				
 				parentScope.$parent.selectedUser = parentScope.user;
 				parentScope.$parent.selectedProgrammerTask = originScope.programmerTask;
+				
+				console.log('selectedProgrammerTask-'+parentScope.$parent.selectedProgrammerTask.summary);
+				console.log('parentScope.$parent.selectedUser-'+parentScope.$parent.selectedUser.name);
 			}else if(originElement.scope().task){//dragging to assign
 			    parentScope = originElement.parent().scope();
 			    parentScope.$parent.selectedTask = originElement.scope().task;

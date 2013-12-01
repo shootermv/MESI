@@ -90,7 +90,7 @@ angular.module('angular-client-side-auth')
 	$scope.removeUnassignedTask = function(task, index){
 	
 		Tasks.removeUnassignedTask(task, function(task){
-			//console.log('trying to remove');
+			console.log('success with remove unassigned task')
 			$scope.unassignedTasks.splice(index,1)
 	    },function(err) {
 		    console.log('remove task failed');
@@ -114,8 +114,10 @@ angular.module('angular-client-side-auth')
         $scope.loading = false;
 		
 		$scope.$watch('unassignedTasks', function (newVal, oldVal) { 
+		    //console.log('$scope.selectedUser'+$scope.selectedUser.name)
 		    if(!$scope.selectedUser || !$scope.selectedProgrammerTask)return;
-		    if(newVal.length>oldVal.length){//some task dropped and will became unassigned
+			
+		    if(newVal.length > oldVal.length){//some task dropped and will became unassigned
 
 			  console.log('attention! trying to unassign task')
 			  Tasks.unAssignTask({uid:$scope.selectedUser._id, taskId:$scope.selectedProgrammerTask._id},function(res){
@@ -140,7 +142,7 @@ angular.module('angular-client-side-auth')
 		    if($scope.dropedUser && $scope.selectedTask){
 				console.log('$scope.dropedUser.tasks',$scope.dropedUser.tasks,$scope.selectedTask);
 				console.log(_.where($scope.dropedUser.tasks,{'_id': $scope.selectedTask._id}).length>0)
-			}else{
+			}else{//starting to drag from use to unassign
 			   console.log('$scope.selectedTask -must be null ', $scope.selectedTask)
 			}
 	        if($scope.dropedUser && $scope.selectedTask ){
