@@ -66,8 +66,9 @@ ul.droparea{
   margin: auto 20px 10px;
 }
 .tasksof h2{margin-left:20px;}
- ul.droparea span{
-  display:block
+ ul.droparea span.unassigned{
+  display:block;
+  width:100%;
 }
 .statuspckr{
 	margin-left:10px;
@@ -108,4 +109,11 @@ span.unassigned:hover .destroy {
 }
 button.destroy:after {
 	content:'✖';
+}
+.drag-handler{
+	background:url(images/drag_handle.png);
+	width:10px;
+	height:15px;
+	display:inline-block;
+	cursor:pointer;
 }
