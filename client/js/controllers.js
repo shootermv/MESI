@@ -86,9 +86,12 @@ angular.module('angular-client-side-auth')
 ['$rootScope', '$scope', 'Users', 'Auth', 'Tasks', function($rootScope, $scope, Users, Auth, Tasks) {
     $scope.loading = true;
     $scope.userRoles = Auth.userRoles;
+	$scope.users = [];
+	$scope.unassignedTasks = [];
 	
-	$scope.removeUnassignedTask = function(task, index){
 	
+	
+	$scope.removeUnassignedTask = function(task, index){	
 		Tasks.removeUnassignedTask(task, function(task){
 			console.log('success with remove unassigned task')
 			$scope.unassignedTasks.splice(index,1)
@@ -107,69 +110,57 @@ angular.module('angular-client-side-auth')
 	};
 	
 	
-    Tasks.getAllForAdmin(function(res) {
+    Tasks.getAllForAdmin(function(res) {	
         $scope.users = res.users;
-		$scope.unassignedTasks = res.unassignedTasks;
-  
+		$scope.unassignedTasks = res.unassignedTasks;  
         $scope.loading = false;
 		
+		
+		
 		$scope.$watch('unassignedTasks', function (newVal, oldVal) { 
+		   
 		    //console.log('$scope.selectedUser'+$scope.selectedUser.name)
-		    if(!$scope.selectedUser || !$scope.selectedProgrammerTask)return;
-			
+		    if(!$scope.selectedUser || !$scope.selectedProgrammerTask)return;		
 		    if(newVal.length > oldVal.length){//some task dropped and will became unassigned
-
-			  console.log('attention! trying to unassign task-')
-			  Tasks.unAssignTask({uid:$scope.selectedUser._id, taskId:$scope.selectedProgrammerTask._id},function(res){
+			   
+			    console.log('attention! trying to unassign task-')
+			    Tasks.unAssignTask({uid:$scope.selectedUser._id, taskId:$scope.selectedProgrammerTask._id},function(res){
 					console.log('success with unassign task')
 					$scope.selectedProgrammerTask=null;
-					$scope.selectedUser=null;
-	  
-			  }, function(err) {
+					$scope.selectedUser=null;	  
+			    }, function(err) {
 					$scope.selectedProgrammerTask=null;
-					$scope.selectedUser=null;	
-					
+					$scope.selectedUser=null;						
 					$rootScope.error = "Failed to unassign task -";
 					$scope.loading = false;					  
-			  });			  			  
-			}
-			
-              			
+			    });			  			  
+			}else{
+                alert(JSON.stringify(oldVal)+' new:' +JSON.stringify(newVal))
+            }			
 		},true);
 		
 		
 		$scope.$watch('users', function (newUsers, oldUsers) {
-		    if($scope.dropedUser && $scope.selectedTask){
-				console.log('$scope.dropedUser.tasks',$scope.dropedUser.tasks,$scope.selectedTask);
-				console.log(_.where($scope.dropedUser.tasks,{'_id': $scope.selectedTask._id}).length>0)
-			}else{//starting to drag from use to unassign
-			   console.log('$scope.selectedTask -must be null ', $scope.selectedTask)
-			}
 	        if($scope.dropedUser && $scope.selectedTask ){
 				console.log('attention! trying to assign task')
 				//console.log('task '+ $scope.selectedTask._id +' to user '+ $scope.dropedUser.name);
 			    Tasks.assignTask({uid:$scope.dropedUser._id, taskId:$scope.selectedTask._id},function(res){
 					console.log('task assigned successfully to user ' +$scope.dropedUser.name)
 					$scope.selectedTask=null;
-					$scope.dropedUser=null;	
-	  
+					$scope.dropedUser=null;		  
 			    }, function(err) {
 					$scope.selectedTask=null;
 					$scope.dropedUser=null;				  
 					$rootScope.error = "Failed to assign task -";
 					$scope.loading = false;					  
-			    });				
-			
-			}
-			
+			    });							
+			}			
 		},true);
 
     }, function(err) {
         $rootScope.error = "Failed to fetch users.";
         $scope.loading = false;
     });
-	
-    
 
 }]);
 
