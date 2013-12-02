@@ -119,7 +119,7 @@ angular.module('angular-client-side-auth')
 			
 		    if(newVal.length > oldVal.length){//some task dropped and will became unassigned
 
-			  console.log('attention! trying to unassign task')
+			  console.log('attention! trying to unassign task-')
 			  Tasks.unAssignTask({uid:$scope.selectedUser._id, taskId:$scope.selectedProgrammerTask._id},function(res){
 					console.log('success with unassign task')
 					$scope.selectedProgrammerTask=null;

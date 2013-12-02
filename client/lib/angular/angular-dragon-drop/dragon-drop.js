@@ -23,6 +23,8 @@ angular.module('btford.dragon-drop', []).
       var x = ev.clientX - offsetX,
         y = ev.clientY - offsetY;
 
+        //RTL SUPPORT 
+		x = (angular.element($document[0].body).attr('dir')=='rtl')?(x-floaty[0].offsetWidth+22 ):x;
       floaty.css('left', x + 'px');
       floaty.css('top', y + 'px');
     };

@@ -78,11 +78,13 @@ module.exports = {
 					    console.log('task ref found!')
 					}
 				});
-				if(!index){
+				if(index!==null){
 					user.tasks.splice(index,1);
 					user.save(function(){
 						res.send({});
 					})
+				}else{
+					console.log('task ref NOT found among this user tasks!')
 				}
 		        //console.log('user tasks len:'+user.tasks.length)
 			}

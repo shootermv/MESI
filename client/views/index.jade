@@ -12,7 +12,7 @@ html(lang='en', data-ng-app='angular-client-side-auth')
             if (window.location.href.indexOf('#_=_') > 0) {
                 window.location = window.location.href.replace(/#.*/, '');
             }
-    body(data-ng-cloak)
+    body(data-ng-cloak,dir='rtl')
 
         .navbar(data-ng-controller="NavCtrl")
             .navbar-inner

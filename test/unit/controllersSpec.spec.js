@@ -4,17 +4,29 @@
 
 describe('controllers', function() {
   
-  beforeEach(module('angular-client-side-auth'));
-  /*
-    var mockBackend, Users, loader;
-	beforeEach(inject(function('$rootScope', '$scope', 'Users', 'Auth', 'Tasks') {
-		recipe = Recipe;
-		mockBackend = _$httpBackend_;
-		loader = MultiRecipeLoader;
-	}));  */
-  describe('AdminCtrl', function() {
-    it('should bring users', inject(function() {
-      expect(true).toEqual(true);
-    }));
-  });
+    beforeEach(module('angular-client-side-auth'));
+	
+	
+    function createLocals() {
+      return {
+        $scope: {},
+        $location: jasmine.createSpyObj('$location', ['path']),
+        i18nNotifications: jasmine.createSpyObj('i18nNotifications', ['pushForCurrentRoute', 'pushForNextRoute']),
+        user: {
+          $id: jasmine.createSpy('$id'),
+          $password: 'XXX'
+        }
+      };
+    }
+    function runController(locals) {
+      inject(function($controller) {
+        $controller('UsersEditCtrl', locals);
+      });
+    } 
+
+	describe('AdminCtrl', function() {
+		it('should bring users', inject(function() {
+		  expect(true).toEqual(true);
+		}));
+	});
 });
