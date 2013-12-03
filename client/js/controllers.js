@@ -47,8 +47,14 @@ angular.module('angular-client-side-auth')
 
 angular.module('angular-client-side-auth')
 .controller('HomeCtrl',
-['$rootScope', function($rootScope) {
-
+['$rootScope','Auth','$location', function($rootScope, Auth, $location) {
+				
+	if(Auth.user.role.title=='admin'){				   
+		$location.path('/admin');
+	}
+	else{
+		$location.path('/private');
+	}
 }]);
 
 angular.module('angular-client-side-auth')
