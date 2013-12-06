@@ -36,14 +36,31 @@ describe('controllers', function() {
         $controller('AdminCtrl', locals);
       });
     } 
-
+    
 	describe('AdminCtrl', function() {
-	
+		
 		it('Should bring users nad their tasks', inject(function() {
 		    var locals = createLocals();
-		    runController(locals);		  
+		    runController(locals);	
+
+
+          			
 		    expect(locals.$scope.users).toEqual([{name:'momo'}]);
 		}));
+		
+		it('should make a call to Tasks.getAllForAdmin', function (){
+			
+			
+		    var locals = createLocals();
+			//set up the spy.
+			spyOn(locals.Tasks, 'getAllForAdmin').andCallThrough();
+		    				
+			//make the call!
+			runController(locals);
+			
+			//assert!
+			expect(locals.Tasks.getAllForAdmin).toHaveBeenCalled();    
+		});	
 		
 		it('Should add new task', inject(function() {
 		    var locals = createLocals();
@@ -58,7 +75,7 @@ describe('controllers', function() {
 		    expect(locals.$scope.unassignedTasks).toEqual([{summary:"haha"}]);
 		}));
        
-	   /* Test 3: Testing a $watch() */
+	   // Test 3: Testing a $watch() 
 	   
 		it('should call Tasks.unAssignTasks when unassignedTasks is changed', function (){
 		    var locals = createLocals();
@@ -79,6 +96,7 @@ describe('controllers', function() {
 			expect(locals.Tasks.unAssignTask).toHaveBeenCalled();
 			
 		});
+		
 			
 	});
 	

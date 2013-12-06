@@ -2,10 +2,13 @@ div.hero-unit
     form(ng-submit="addTask(newtask)")
         input.addtaskinput(ng-model="newtask.summary",placeholder="type here")    
     ul.droparea(btf-dragon="task in unassignedTasks")
-        span.unassigned 
+        span.unassigned
             span.drag-handler
-            {{task.summary}}
+            span(ng-dblclick="editTask(task)",ng-hide="editedTask ==task") {{task.summary}}
+            form(ng-submit="doneEditing(editedTask)",ng-show="editedTask==task")
+                input.edit(ng-model="editedTask.summary",todo-blur="doneEditing(editedTask)")
             button.destroy(ng-click="removeUnassignedTask(task, $index)")	
+ 
 div.row
     div(class="span{{12/users.length}} tasksof",data-ng-repeat="user in users")
         h2 {{user.name}}

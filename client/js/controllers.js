@@ -95,8 +95,6 @@ angular.module('angular-client-side-auth')
 	$scope.users = [];
 	$scope.unassignedTasks = [];
 	
-	
-	
 	$scope.removeUnassignedTask = function(task, index){	
 		Tasks.removeUnassignedTask(task, function(task){
 			console.log('success with remove unassigned task')
@@ -115,6 +113,20 @@ angular.module('angular-client-side-auth')
 	    })
 	};
 	
+	$scope.editTask = function (task){
+	  $scope.editedTask = task;
+	  //console.log($scope.editedTask==task)
+	};
+	
+	$scope.doneEditing = function (task) {
+	   $scope.editedTask = null;
+ 
+	   Tasks.updateTaskSummary(task, function(task){
+	       console.log('editing done...')
+	   },function(err) {
+		   console.log('editing task failed')
+	   })
+	};	
 	
     Tasks.getAllForAdmin(function(res) {	
         $scope.users = res.users;

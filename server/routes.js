@@ -116,6 +116,12 @@ var routes = [
 		httpMethod: 'PUT',
 		middleware: [TaskCtrl.updatetask],
 		accessLevel: accessLevels.user    // User resource
+	},
+	{	
+		path: '/updatetaskSummary/:id',
+		httpMethod: 'PUT',
+		middleware: [TaskCtrl.updatetaskSummary],
+		accessLevel: accessLevels.user    // User resource
 	},	
 	{	
 		path: '/unAssignTask',

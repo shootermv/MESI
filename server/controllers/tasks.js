@@ -5,13 +5,8 @@ Task = mongoose.model('Task');
 User = mongoose.model('User');
 module.exports = {
     index: function(req, res) {
-       // res.json( [{'summary':'shlomo'}]);		
+   	
 	    console.log('getting tasks for user-'+req.user.id)
-		/*
-	   	Task.find(function(err, tasks){
-			res.send(tasks);
-	    });
-		*/
 		User.findOne({_id:req.user.id}).populate('tasks').exec(function(err,user){
             /*
 			Task.findOne({},'first',function(err, task){
@@ -32,7 +27,7 @@ module.exports = {
 			    _.each(u.tasks,function(usertask){
 				
 					if(task.id==usertask.id){
-					    console.log('task '+ task.summary +' assigned to user '+u.name);
+					    console.log('task '+ task.summary +' assigned to user '+u.name.toUpperCase());
 						notfound = false;
 					}
 				});
@@ -105,7 +100,10 @@ module.exports = {
 	},
 	addtask:function(req, res) {
 	    console.log('trying to add new task!')
-		var newtask= new Task({summary:req.body.summary, status:'new'})
+		var newtask= new Task({
+			summary:req.body.summary,
+			status:'new'
+		})
 		newtask.save(function(err){
 			if(!err)	     
 			  res.json(newtask); 
@@ -117,6 +115,7 @@ module.exports = {
 		Task.findOne({_id:taskid},function(err , foundtask){
 			 if(!err) {  
 				foundtask.status = thetask.status;
+				foundtask.changedate = new Date();
 				//foundtask.summary ='user screen - add task functionality';
 				foundtask.save(function(error){
 					if(!error){	
@@ -133,5 +132,29 @@ module.exports = {
                  console.log('task not found');
 			}			
 		});	
+	},
+	//for update summary - for Admin
+	updatetaskSummary:function(req, res) {
+	    var taskid = req.params.id;
+		var thetask= req.body;
+		Task.findOne({_id:taskid},function(err , foundtask){
+			 if(!err) {  
+				foundtask.summary = thetask.summary;
+				foundtask.save(function(error){
+					if(!error){	
+                        					
+						res.json(foundtask);
+						console.log('task saved with summary: '+thetask.summary)
+					} else{
+						console.log('some error occured during save summary of the task! '+error)
+					}
+								 
+				});
+			}
+			else{
+                 console.log('task not found');
+			}			
+		});	
 	}
+	
 };

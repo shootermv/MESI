@@ -117,3 +117,6 @@ button.destroy:after {
 	display:inline-block;
 	cursor:pointer;
 }
+.droparea form{
+	display:inline-block;
+}

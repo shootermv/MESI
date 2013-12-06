@@ -15,15 +15,15 @@ module.exports = {
             delete user.google;
             delete user.linkedin;
         });*/
-		User.find(function(err, users){
+		User.find({}).populate('role').exec(function(err, users){
 		    if(err)console.log('error durig user search...');
 			console.log('users found '+users.length);
-			var us=users.populate('role').exec(function(err, users){
+			
 			   console.log('users ',users.length)
 			   res.json(users);			
-			});
+		});
 			
-	    });
+	    
 		
         //res.json(users);
     }

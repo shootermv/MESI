@@ -5,6 +5,8 @@ var mongoose = require('mongoose')
 
 var TaskSchema = new Schema({
 	summary:String,	
-	status:String
+	status:String,
+	createdate:{ type : Date, default: Date.now },
+	changedate:Date	
 });	
 var Task = mongoose.model('Task',TaskSchema);

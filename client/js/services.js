@@ -55,13 +55,15 @@ angular.module('angular-client-side-auth')
 });
 
 angular.module('angular-client-side-auth')
-.factory('Users', function($http) {
+.factory('Users', function($http) {    
     return {
-        getAll: function(success, error) {
+        getAll: function(success, error) {             	
             $http.get('/users').success(success).error(error);
         }
     };
 });
+
+
 
 angular.module('angular-client-side-auth')
 .factory('Tasks', function($http) {
@@ -92,6 +94,14 @@ angular.module('angular-client-side-auth')
 				console.log(err)
 			}
 		},
+		updateTaskSummary:function(task, success, error){
+		    console.log('trying to  save status '+task.status);
+			try{
+			    $http({method:'PUT', url:'/updatetaskSummary/'+task._id, data:task}).success(success).error(error);
+			}catch(err){
+				console.log(err)
+			}
+		},		
 		removeUnassignedTask:function(task, success, error){
 			$http({method:'DELETE', url:'/unassignedtask/'+task._id}).success(success).error(error);
 		}
