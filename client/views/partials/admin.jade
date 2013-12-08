@@ -13,7 +13,7 @@ div.row
     div(class="span{{12/users.length}} tasksof",data-ng-repeat="user in users")
         h2 {{user.name}}
         ul.droparea(btf-dragon="programmerTask in user.tasks")
-            li(ng-class="{completed:programmerTask.status=='completed'}") 
+            li(ng-class="{completed:programmerTask.status.name=='completed'}") 
                 span.drag-handler
                 {{programmerTask.summary}}			    
 hr		

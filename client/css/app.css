@@ -66,9 +66,14 @@ ul.droparea{
   margin: auto 20px 10px;
 }
 .tasksof h2{margin-left:20px;}
- ul.droparea span.unassigned{
+ul.droparea span.unassigned{
   display:block;
   width:100%;
+}
+.tasksof li{
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 .statuspckr{
 	margin-left:10px;

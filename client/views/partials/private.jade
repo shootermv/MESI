@@ -1,4 +1,4 @@
 ul
 	li(ng-repeat="task in tasks")
 		span {{task.summary}}
-		status-picker.statuspckr(ng-model="task.status") {{task.status}}
+		status-picker.statuspckr(ng-model="task.status.name") {{task.status.name}}

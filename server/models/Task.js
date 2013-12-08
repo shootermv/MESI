@@ -3,9 +3,10 @@ var mongoose = require('mongoose')
 /*, async = require('async')
 , _ = require('underscore');*/
 
+
 var TaskSchema = new Schema({
 	summary:String,	
-	status:String,
+	status:{ name: String ,id:Number},
 	createdate:{ type : Date, default: Date.now },
 	changedate:Date	
 });	

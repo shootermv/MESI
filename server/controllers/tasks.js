@@ -14,7 +14,8 @@ module.exports = {
 				user.save();
 			});
 			*/	
-            console.log('user.tasks '+user.tasks.length)			
+			//console.log('user.tasks[0] summary is : '+user.tasks[0].summary)	
+            //console.log('user.tasks[0] status  is: '+user.tasks[0].status.name)			
 			res.send(user.tasks);
 		});
 	},
@@ -102,13 +103,15 @@ module.exports = {
 	    console.log('trying to add new task!')
 		var newtask= new Task({
 			summary:req.body.summary,
-			status:'new'
+			status:{name:'new',id:1}
 		})
 		newtask.save(function(err){
 			if(!err)	     
 			  res.json(newtask); 
 		});	
 	},
+	
+	//only user
 	updatetask:function(req, res) {
 	    var taskid = req.params.id;
 		var thetask= req.body;

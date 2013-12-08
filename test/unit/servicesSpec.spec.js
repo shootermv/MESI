@@ -4,7 +4,9 @@
 
 describe('services', function() {
     var svc, httpBackend;
+	
 	beforeEach(module('angular-client-side-auth'));	
+	
     describe('Users service', function() {
 		beforeEach(inject(function($injector, Users, $httpBackend) {
 			svc = Users;
@@ -23,10 +25,10 @@ describe('services', function() {
 				var result;
 				//create an object with a functio to spy on.
 				var test = {
-				  handler: function(data) {
-				        console.log('test.handler called')
+				    handler: function(data) {
+				       // console.log('test.handler called')
 						result = data
-				  }
+				    }
 				};
 				
 				//set up a spy for the callback handler.
@@ -42,4 +44,34 @@ describe('services', function() {
 				expect(result).toEqual(returnData);
 		});
     });
+	
+	describe('Tasks service', function() {
+		beforeEach(inject(function($injector, Tasks, $httpBackend) {
+			svc = Tasks;
+			httpBackend = $httpBackend;
+		}));
+		afterEach(function() {
+		    httpBackend.verifyNoOutstandingExpectation();
+		    httpBackend.verifyNoOutstandingRequest();
+	    });
+		it('should bring all the tasks', function() {
+				var returnData = [{ summary: 'some task here...' }];
+				httpBackend.expectGET('/tasks').respond(returnData);
+				var result;
+				//create an object with a functio to spy on.
+				var test = {
+				    handler: function(data) {				       
+						result = data
+				    }
+				};				
+				//make the call.
+			    svc.getUserTasks(test.handler);
+				
+				//flush the backend to "execute" the request to do the expectedGET assertion.
+				httpBackend.flush();
+				
+			    expect(result).toEqual(returnData);
+		});
+	});
+	
 });

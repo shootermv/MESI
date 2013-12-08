@@ -37,9 +37,9 @@ angular.module('angular-client-side-auth')
 }]);
 //statusPicker directive
 angular.module('angular-client-side-auth').directive('statusPicker', ['Tasks', function(Tasks) {
-        function setClass(el, status) {
-		    console.log('trying to set class to:'+status)
-		    switch(status){
+        function setClass(el, statusname) {
+		    console.log('trying to set class to:'+statusname)
+		    switch(statusname){
 				case 'new':
 					el.attr('class','statuspckr btn-danger');
 					break;					
@@ -52,9 +52,9 @@ angular.module('angular-client-side-auth').directive('statusPicker', ['Tasks', f
 			}			
 		}
 		function shiftStatus(scope){
-            scope.statuses	= ['new','active','completed'];	
+            scope.statuses	= [{name:'new',id:1},{name:'active',id:2},{name:'completed',id:3}];	
 			for(var i = 0 ; i < scope.statuses.length  ; i++){
-				if(scope.statuses[i]==scope.task.status){
+				if(scope.statuses[i].name==scope.task.status.name){
 					if((i+1) == scope.statuses.length)
 						scope.task.status  = scope.statuses[0];
 					else
@@ -66,13 +66,13 @@ angular.module('angular-client-side-auth').directive('statusPicker', ['Tasks', f
 		return {
 		    restrict: "E",
 			link: function(scope, element, attrs, controller) {
-                setClass(element, scope.task.status);			
+                setClass(element, scope.task.status.name);			
 				element.on('click', function(){	
                     scope.$apply(shiftStatus);
 					//lets save status
 					Tasks.updateTask(scope.task,
 					function(res){
-                        setClass(element, scope.task.status);
+                        setClass(element, scope.task.status.name);
 		  
 					},function(err) {
 			  

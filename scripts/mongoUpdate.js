@@ -18,7 +18,20 @@ Task.find({},function(err,dbtasks){
 
 	for(var i=0; i<dbtasks.length; i++) {
 		var task = dbtasks[i];
-		task.createdate = new  Date();
+		//task.createdate = new  Date();
+		
+		switch(task.status){
+		    case "new":
+				task.status = {name:"new",id:1}
+				break;
+		    case "active":
+				task.status = {name:"active",id:2}
+				break;	
+		    case "completed":
+				task.status = {name:"completed",id:3}
+				break;					
+		}
+		
 		task.save();
 	}
 
