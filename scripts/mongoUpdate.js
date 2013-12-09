@@ -13,14 +13,14 @@ var TaskSchema = new Schema({
 	changedate:Date
 });
 var Task  = mongoose.model('Task', TaskSchema);
-
+/*
 Task.find({},function(err,dbtasks){
 
 	for(var i=0; i<dbtasks.length; i++) {
 		var task = dbtasks[i];
 		//task.createdate = new  Date();
 		
-		switch(task.status){
+		switch(task.status.name){
 		    case "new":
 				task.status = {name:"new",id:1}
 				break;
@@ -38,4 +38,8 @@ Task.find({},function(err,dbtasks){
 
 	
 	console.log("Tasks update finished! Press Ctrl+C to exit.");
+})*/
+Task.update({"status.name":"active"}, {"status.id": "1"} , {upsert: false, multi:true}, function(err){
+	if(!err)console.log("Tasks update finished! Press Ctrl+C to exit.");
+	if(err)console.log('error:',err)
 })

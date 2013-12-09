@@ -28,11 +28,10 @@ module.exports = {
 			    _.each(u.tasks,function(usertask){
 				
 					if(task.id==usertask.id){
-					    console.log('task '+ task.summary +' assigned to user '+u.name.toUpperCase());
+					    //console.log('task '+ task.summary +' with status ['+task.status.name+'] assigned to user '+u.name.toUpperCase());
 						notfound = false;
 					}
-				});
-				//console.log('pppp '+u.name+' tasks-'+u.tasks.length)
+				});				
 			});
 			return notfound;
 		}
@@ -41,16 +40,30 @@ module.exports = {
 	    var result={ unassignedTasks:null, users:null };
 	   	Task.find(function(err, tasks){
 			result.unassignedTasks=tasks;
+			
+			//sort by the task status id  -{path:'tasks',options:{sort:{'status.id': 'ascending'}}}
+			
 			//not admin users
              User.find().populate('role').populate('tasks').exec(function(err, allUsers){
-			    //must filter admin from all users:
+			    //must filter admin from all other users(admin cannot get tasks):
 			    result.users  = _.filter(allUsers, function(usr){return usr.role.title== "user"});
 				//filter assgned tasks:
+
 				result.unassignedTasks = _.filter(result.unassignedTasks, function(tsk){
 				   return notFoundInAssiged(result.users, tsk)
+				});
+								
+				//print tasks of each user:
+				/*
+				_.each(result.users,function(u){
+				    console.log( u.name.toUpperCase() );
+					_.each(u.tasks,function(usertask){											
+						console.log('task '+ usertask.summary +' - ['+usertask.status.id+']');													
+					});				
 				});				
-				res.send(result);				
+				*/
 				
+				res.send(result);					
 			 });			 
 	    });	
 		

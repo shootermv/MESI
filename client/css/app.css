@@ -81,6 +81,10 @@ ul.droparea span.unassigned{
 li.completed {
 	text-decoration:line-through;
 }
+li.activetask{
+	font-weight:bold;
+	color:blue;
+}
 button.destroy {
 	display: none;
 	/*position: absolute;
