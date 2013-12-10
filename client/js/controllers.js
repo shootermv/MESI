@@ -81,9 +81,16 @@ angular.module('angular-client-side-auth')
 angular.module('angular-client-side-auth')
 .controller('PrivateCtrl',
 ['$rootScope', '$scope', 'Tasks', function($rootScope, $scope, Tasks) {
-    Tasks.getUserTasks(function(res){
+    /*Tasks.getUserTasks(function(res){
 		$scope.tasks= res;
-	});
+	});*/
+	
+	$scope.getUserTasks=function(){
+		Tasks.getUserTasks(function(res){
+			$scope.tasks= res;
+		});	
+	};
+	$scope.getUserTasks();
 }]);
 
 

@@ -2,10 +2,10 @@ var User
     , _ =               require('underscore')
     , passport =        require('passport')
     , LocalStrategy =   require('passport-local').Strategy
-    , TwitterStrategy = require('passport-twitter').Strategy
-    , FacebookStrategy = require('passport-facebook').Strategy
-    , GoogleStrategy = require('passport-google').Strategy
-    , LinkedInStrategy = require('passport-linkedin').Strategy
+   // , TwitterStrategy = require('passport-twitter').Strategy
+   // , FacebookStrategy = require('passport-facebook').Strategy
+   // , GoogleStrategy = require('passport-google').Strategy
+   // , LinkedInStrategy = require('passport-linkedin').Strategy
     , check =           require('validator').check
     , userRoles =       require('../../client/js/routingConfig').userRoles;
 	

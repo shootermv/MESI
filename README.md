@@ -1,7 +1,7 @@
 # MESI - programming tasks management app
 
-Mesi is an application for a team leader who split the project to the tasks share them between the programmers.
-Each programmer can notify about his progress on the tasks.
+Mesi is an application for a team leader who split the project to the tasks shares them among the programmers.
+Each programmer can notify about his progress on the tasks at real time.
 You can use it to manage your team of programmers.
 Mesi contains authentication implementation with Admin and User roles.
 
@@ -28,9 +28,9 @@ etc to function properly when an html page is opened via `file://` scheme instea
 You can pick one of these options:
 
 * serve this repository with your webserver
-* install node.js and run `scripts/web-server.js`
+* install node.js and run `server.js`
 
-Then navigate your browser to `http://localhost:<port>/app/index.html` to see the app running in
+Then navigate your browser to `http://localhost:<port>/` to see the app running in
 your browser.
 
 

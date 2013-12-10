@@ -12,7 +12,7 @@ div.hero-unit
 div.row
     div(class="span{{12/users.length}} tasksof",data-ng-repeat="user in users")
         h2 {{user.name}}
-        ul.droparea(btf-dragon="programmerTask in user.tasks | orderBy:'status.id':false")
+        ul.droparea(btf-dragon="programmerTask in user.tasks")
             li(ng-class="{completed:programmerTask.status.name=='completed',activetask:programmerTask.status.name=='active'}") 
                 span.drag-handler
                 {{programmerTask.summary}}			    

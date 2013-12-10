@@ -19,6 +19,25 @@ module.exports = {
 			res.send(user.tasks);
 		});
 	},
+	unactivatePrevActive: function(req, nextstatus, next) {
+	    if(nextstatus=='active'){
+			User.findOne({_id:req.user.id}).populate('tasks', null, {'status.name': 'active'}).exec(function(err,user){
+			    console.log('changing to old active status to NEW...')
+				Task.update({_id:user.tasks[0].id},{ $set: { status: {name:'new',id:2}}},{upsert:false,multi:false},function(err){
+					if(!err)
+					  console.log('status changed...');
+					else
+					  console.log('error ocurred');
+				
+				})
+				next();
+			});
+		}
+		else{
+			next();
+		}
+	
+	},
 	foradmin: function(req, res) {
 		function notFoundInAssiged(users, task){
 		    
@@ -128,26 +147,28 @@ module.exports = {
 	updatetask:function(req, res) {
 	    var taskid = req.params.id;
 		var thetask= req.body;
-		Task.findOne({_id:taskid},function(err , foundtask){
-			 if(!err) {  
-				foundtask.status = thetask.status;
-				foundtask.changedate = new Date();
-				//foundtask.summary ='user screen - add task functionality';
-				foundtask.save(function(error){
-					if(!error){	
-                        console.log('finally:'+foundtask.status)					
-						res.json(foundtask);
-						console.log('task saved! ')
-					} else{
-						console.log('some error occured during save of the task! '+error)
-					}
-								 
-				});
-			}
-			else{
-                 console.log('task not found');
-			}			
-		});	
+		//if status gonna change to 'active' - the old active must be changed back to "new"
+		console.log('current user-'+req.user.name);
+		module.exports.unactivatePrevActive(req, thetask.status.name, function(){											
+			Task.findOne({_id:taskid},function(err , foundtask){
+				 if(!err) {  
+					foundtask.status = thetask.status;
+					foundtask.changedate = new Date();
+					
+					foundtask.save(function(error){
+						if(!error){	
+							console.log('changing task status to: '+foundtask.status.name)					
+							res.json(foundtask);							
+						}else{
+							console.log('some error occured during save of the task! '+error)
+						}									 
+					});
+				}
+				else{
+					console.log('task not found');
+				}			
+			});
+		});			
 	},
 	//for update summary - for Admin
 	updatetaskSummary:function(req, res) {

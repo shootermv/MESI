@@ -73,7 +73,8 @@ angular.module('angular-client-side-auth').directive('statusPicker', ['Tasks', f
 					Tasks.updateTask(scope.task,
 					function(res){
                         setClass(element, scope.task.status.name);
-		  
+		                //must refresh al users task
+						scope.getUserTasks()
 					},function(err) {
 			  
 					});														
