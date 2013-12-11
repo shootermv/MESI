@@ -1,9 +1,11 @@
 # MESI - programming tasks management app
 
-Mesi is an application for a team leader who split the project to the tasks shares them among the programmers.
+Mesi is an application for a team leader who split the project to the tasks and shares them among the programmers.
 Each programmer can notify about his progress on the tasks at real time.
 You can use it to manage your team of programmers.
-Mesi contains authentication implementation with Admin and User roles.
+
+## How to use
+Mesi contains authentication implementation with Admin and User roles. Admin - for a tean leader and User - for  programmer.
 
 The seed app doesn't do much, just shows how to wire two controllers and views together. You can
 check it out by opening app/index.html in your browser (might not work file `file://` scheme in
