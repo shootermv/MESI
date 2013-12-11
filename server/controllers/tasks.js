@@ -21,17 +21,24 @@ module.exports = {
 	},
 	unactivatePrevActive: function(req, nextstatus, next) {
 	    if(nextstatus=='active'){
-			User.findOne({_id:req.user.id}).populate('tasks', null, {'status.name': 'active'}).exec(function(err,user){
+			User.findOne({_id:req.user.id}).populate('tasks', null, {'status.name': 'active'}).exec(function(err, user){
 			    console.log('changing to old active status to NEW...')
-				Task.update({_id:user.tasks[0].id},{ $set: { status: {name:'new',id:2}}},{upsert:false,multi:false},function(err){
-					if(!err)
-					  console.log('status changed...');
-					else
-					  console.log('error ocurred');
-				
-				})
-				next();
-			});
+				if(!user.tasks.length){
+					console.log('no previously active tasks found...');
+					next();
+				}
+				else{//there are previously active tasks
+					Task.update({_id:user.tasks[0].id},{ $set: { status: {name:'new',id:2}}},{upsert:false,multi:false},function(err){
+						if(!err){
+							console.log('old active status changed successfully...');
+							next();
+						}
+						else{
+							console.log('error ocurred');
+						}				
+					})
+				}
+			});//end of finding previously actvie tasks...
 		}
 		else{
 			next();
@@ -71,16 +78,21 @@ module.exports = {
 				result.unassignedTasks = _.filter(result.unassignedTasks, function(tsk){
 				   return notFoundInAssiged(result.users, tsk)
 				});
-								
+				
+				//must sort tasks of each user by status
+                console.log('sorting...')				
+				_.each(result.users,function(u){				
+				    u.tasks = _.sortBy(u.tasks, function(obj){ return +obj.status.id })
+				})
 				//print tasks of each user:
-				/*
+				
 				_.each(result.users,function(u){
 				    console.log( u.name.toUpperCase() );
 					_.each(u.tasks,function(usertask){											
 						console.log('task '+ usertask.summary +' - ['+usertask.status.id+']');													
 					});				
 				});				
-				*/
+				
 				
 				res.send(result);					
 			 });			 

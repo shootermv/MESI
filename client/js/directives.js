@@ -52,7 +52,7 @@ angular.module('angular-client-side-auth').directive('statusPicker', ['Tasks', f
 			}			
 		}
 		function shiftStatus(scope){
-            scope.statuses	= [{name:'new',id:1},{name:'active',id:2},{name:'completed',id:3}];	
+            scope.statuses	= [{name:'new',id:2},{name:'active',id:1},{name:'completed',id:3}];	
 			for(var i = 0 ; i < scope.statuses.length  ; i++){
 				if(scope.statuses[i].name==scope.task.status.name){
 					if((i+1) == scope.statuses.length)
