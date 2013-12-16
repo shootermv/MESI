@@ -12,7 +12,9 @@ Team leader can create tasks and drag them to programmer earea - to assign the t
 Programmers can noify their progress by changing the status of the task:
 
 `new`
+
 `active` - the task programmer is currently working on (will appear blue at Admin's dashboard)
+
 `completed`
 
 [Working Demo](http://mesi-tasks.herokuapp.com/)
