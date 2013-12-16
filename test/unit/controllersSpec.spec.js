@@ -17,12 +17,9 @@ describe('controllers', function() {
 			$scope:  $rootScope.$new(),
 			Users: {},
 			Auth: {}, 
-			Tasks:{		
-				getAllForAdmin:function(callback){
-				    
-					
-					callback({	users:[{name:'momo'}], unassignedTasks:[{summary:'taskkkk'}]});
-					
+			Tasks:{	//fake tasks service	
+				getAllForAdmin:function(callback){				    				
+					callback({	users:[{name:'momo'}], unassignedTasks:[{summary:'taskkkk'}]});					
 				},
 				addTask:function(tsk, callback, errcallack ){
 					callback(tsk);
@@ -48,8 +45,7 @@ describe('controllers', function() {
 		    expect(locals.$scope.users).toEqual([{name:'momo'}]);
 		}));
 		
-		it('should make a call to Tasks.getAllForAdmin', function (){
-			
+		it('should make a call to Tasks.getAllForAdmin', function (){			
 			
 		    var locals = createLocals();
 			//set up the spy.
@@ -75,8 +71,7 @@ describe('controllers', function() {
 		    expect(locals.$scope.unassignedTasks).toEqual([{summary:"haha"}]);
 		}));
        
-	   // Test 3: Testing a $watch() 
-	   
+	   // Test 3: Testing a $watch() 	   
 		it('should call Tasks.unAssignTasks when unassignedTasks is changed', function (){
 		    var locals = createLocals();
 		    runController(locals);

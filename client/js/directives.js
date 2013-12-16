@@ -38,7 +38,7 @@ angular.module('angular-client-side-auth')
 //statusPicker directive
 angular.module('angular-client-side-auth').directive('statusPicker', ['Tasks', function(Tasks) {
         function setClass(el, statusname) {
-		    console.log('trying to set class to:'+statusname)
+		    
 		    switch(statusname){
 				case 'new':
 					el.attr('class','statuspckr btn-danger');
@@ -68,7 +68,10 @@ angular.module('angular-client-side-auth').directive('statusPicker', ['Tasks', f
 			link: function(scope, element, attrs, controller) {
                 setClass(element, scope.task.status.name);			
 				element.on('click', function(){	
+				   
                     scope.$apply(shiftStatus);
+					
+					console.log(Tasks.updateTask)
 					//lets save status
 					Tasks.updateTask(scope.task,
 					function(res){
