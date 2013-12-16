@@ -6,7 +6,9 @@ describe('services', function() {
     var svc, httpBackend;
 	
 	beforeEach(module('angular-client-side-auth'));	
-	
+
+	describe('Auth service', function() {
+	});
     describe('Users service', function() {
 		beforeEach(inject(function($injector, Users, $httpBackend) {
 			svc = Users;

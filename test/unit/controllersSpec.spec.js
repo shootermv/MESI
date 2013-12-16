@@ -72,7 +72,7 @@ describe('controllers', function() {
 		}));
        
 	   // Test 3: Testing a $watch() 	   
-		it('should call Tasks.unAssignTasks when unassignedTasks is changed', function (){
+		it('should call Tasks.unAssignTasks when unassignedTasks collection is changed', function (){
 		    var locals = createLocals();
 		    runController(locals);
 			//fire watchers

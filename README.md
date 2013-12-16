@@ -5,19 +5,17 @@ Each programmer can notify about his progress on the tasks at real time.
 You can use it to manage your team of programmers.
 
 ## How to use
-Mesi contains authentication implementation with Admin and User roles. Admin - for a tean leader and User - for  programmer.
+Mesi contains authentication implementation with Admin and User roles.
+Admin - for a team leader and User - for  programmer.
 
-The seed app doesn't do much, just shows how to wire two controllers and views together. You can
-check it out by opening app/index.html in your browser (might not work file `file://` scheme in
-certain browsers, see note below).
+Team leader can create tasks and drag them to programmer earea - to assign the task to the programmer.
+Programmers can noify their progress by changing the status of the task:
+'new'
+'active' - the task programmer is currently working on (will appear blue at Admin's dashboard)
+'completed'
 
-_Note: While angular is client-side-only technology and it's possible to create angular webapps that
-don't require a backend server at all, we recommend hosting the project files using a local
-webserver during development to avoid issues with security restrictions (sandbox) in browsers. The
-sandbox implementation varies between browsers, but quite often prevents things like cookies, xhr,
-etc to function properly when an html page is opened via `file://` scheme instead of `http://`._
-
-
+[Working Demo](http://mesi-tasks.herokuapp.com/)
+ 
 ## Stack
 
 * Persistence store: [MongoDB](http://www.mongodb.org/)

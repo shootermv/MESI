@@ -71,7 +71,7 @@ angular.module('angular-client-side-auth').directive('statusPicker', ['Tasks', f
 				   
                     scope.$apply(shiftStatus);
 					
-					console.log(Tasks.updateTask)
+					
 					//lets save status
 					Tasks.updateTask(scope.task,
 					function(res){
