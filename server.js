@@ -5,7 +5,7 @@ var express =       require('express')
     , User =        require('./server/models/User.js')
 	, mongoose = require('mongoose');
 	
-mongoose.connect('mongodb://shootermv:Zzr6437355@ds061258.mongolab.com:61258/mydb');//('mongodb://localhost/myDB');
+mongoose.connect('mongodb://localhost/myDB');//('mongodb://shootermv:Zzr6437355@ds061258.mongolab.com:61258/mydb');
 
 var app = module.exports = express();
 

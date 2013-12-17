@@ -1,6 +1,7 @@
 div.hero-unit
-    form(ng-submit="addTask(newtask)")
-        input.addtaskinput(ng-model="newtask.summary",placeholder="type here")    
+    form(ng-submit="addTask(newtask)",name="form")
+        input.addtaskinput(ng-model="newtask.summary",placeholder="type here",name="summary",required)
+        span.alert-error(ng-show="form.summary.$error.required && form.summary.$dirty") field cannot be empty.		
     ul.droparea(btf-dragon="task in unassignedTasks")
         span.unassigned
             span.drag-handler

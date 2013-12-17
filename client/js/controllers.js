@@ -115,6 +115,7 @@ angular.module('angular-client-side-auth')
         Tasks.addTask(newtask, function(task){
 			$scope.unassignedTasks.push(task);
 			$scope.newtask='';
+			$scope.form.$setPristine();
 	    },function(err) {
 		    console.log('adding task failed')
 	    })

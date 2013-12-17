@@ -63,7 +63,8 @@ describe('controllers', function() {
 		    runController(locals);		
 			//set up.
 		    locals.$scope.unassignedTasks = [];
-			
+			//fake setPristine
+			locals.$scope.form={$setPristine : function(){}};
 			//make the call.
 			locals.$scope.addTask({summary:"haha"});
 			

@@ -8,6 +8,33 @@ describe('services', function() {
 	beforeEach(module('angular-client-side-auth'));	
 
 	describe('Auth service', function() {
+	    var authSvc,
+        scope,
+        cookieStoreSpy,
+		httpBackend;
+		
+		beforeEach(function () {
+			cookieStoreSpy = jasmine.createSpyObj('CookieStore', ['get','remove']);
+			cookieStoreSpy.get.andReturn({ name: "koko", role:{title:'admin',bitMask:4}});				 							
+			cookieStoreSpy.remove(function(key) {})
+			module(function($provide) {
+				$provide.value('$cookieStore', cookieStoreSpy);
+			});									
+		});	
+		beforeEach(inject(function($injector, Auth, $httpBackend) {
+		    httpBackend = $httpBackend;
+			authSvc = Auth;
+		
+		}));
+
+        
+		it('should bring some user in currentUser variable', function() {
+			httpBackend.expectPOST('/login').respond({});
+			httpBackend.expectPOST('/register').respond({});
+			httpBackend.expectPOST('/logout').respond({});
+			
+			expect(authSvc.user).toEqual({ name: "koko", role:{title:'admin',bitMask:4}});
+		})
 	});
     describe('Users service', function() {
 		beforeEach(inject(function($injector, Users, $httpBackend) {
