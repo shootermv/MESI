@@ -9,13 +9,11 @@ Mesi contains authentication implementation with Admin and User roles.
 Admin - for a team leader and User - for  programmer.
 
 Team leader can create tasks and drag them to programmer earea - to assign the task to the programmer.
-Programmers can noify their progress by changing the status of the task:
+Programmers can notify their progress by changing the status of the task (by clicking on status label):
 
-`new`
-
-`active` - the task programmer is currently working on (will appear blue at Admin's dashboard)
-
-`completed`
+* `new`
+* `active` - the task programmer is currently working on (will appear blue at Admin's dashboard)
+* `completed`
 
 [Working Demo](http://mesi-tasks.herokuapp.com/)
  
