@@ -44,8 +44,12 @@ describe('services', function() {
 	    afterEach(function() {
 		    httpBackend.verifyNoOutstandingExpectation();
 		    httpBackend.verifyNoOutstandingRequest();
-	    });		   
-				
+	    });
+		
+		it('should have a get function', function() {
+			expect(angular.isFunction(svc.getAll)).toBe(true);
+		});
+		
 		it('should bring all the users', function() {
 			   var returnData = { excited: true };				
 				//expectGET to make sure this is called once.

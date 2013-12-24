@@ -66,7 +66,7 @@ angular.module('angular-client-side-auth')
 
 
 angular.module('angular-client-side-auth')
-.factory('Tasks', function($http) {
+.factory('Tasks', function($http/*, Socket*/) {
     return {
         getAllForAdmin: function(success, error) {
             $http.get('/ForAdmin').success(success).error(error);						
@@ -106,4 +106,15 @@ angular.module('angular-client-side-auth')
 			$http({method:'DELETE', url:'/unassignedtask/'+task._id}).success(success).error(error);
 		}
     };
+})
+//socket
+angular.module('angular-client-side-auth')
+.factory('Socket', function($rootScope) {
+	var socket = io.connect('http://localhost:8000');
+    return {
+		emit:function(eventName, data, callback){
+			
+		}
+	};
+
 })

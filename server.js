@@ -4,6 +4,7 @@ var express =       require('express')
     , path =        require('path')
     , User =        require('./server/models/User.js')
 	, mongoose = require('mongoose');
+
 	
 mongoose.connect('mongodb://localhost/myDB');//('mongodb://shootermv:Zzr6437355@ds061258.mongolab.com:61258/mydb');
 
@@ -36,6 +37,10 @@ passport.deserializeUser(User.deserializeUser);
 require('./server/routes.js')(app);
 
 app.set('port', process.env.PORT || 8000);
-http.createServer(app).listen(app.get('port'), function(){
+var server = http.createServer(app).listen(app.get('port'), function(){
     console.log("Express server listening on port " + app.get('port'));
+});
+var  io = require('socket.io').listen(server);
+io.sockets.on('connection', function (socket) {
+	console.log('socket is connected now...')
 });

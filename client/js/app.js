@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('angular-client-side-auth', ['ngCookies', 'ngRoute', 'btford.dragon-drop'])
+angular.module('angular-client-side-auth', ['ngCookies', 'ngRoute', 'btford.dragon-drop','ngAnimate'])
 
     .config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 

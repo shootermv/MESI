@@ -36,7 +36,7 @@ angular.module('angular-client-side-auth')
     };
 }]);
 //statusPicker directive
-angular.module('angular-client-side-auth').directive('statusPicker', ['Tasks', function(Tasks) {
+angular.module('angular-client-side-auth').directive('statusPicker', ['Tasks','$rootScope', function(Tasks, $rootScope) {
         function setClass(el, statusname) {
 		    
 		    switch(statusname){
@@ -76,8 +76,12 @@ angular.module('angular-client-side-auth').directive('statusPicker', ['Tasks', f
 					Tasks.updateTask(scope.task,
 					function(res){
                         setClass(element, scope.task.status.name);
-		                //must refresh al users task
-						scope.getUserTasks()
+						//dispaly notification
+                        $rootScope.success='status updated successfully';
+
+		                //must refresh al users task		                
+						scope.getUserTasks();
+
 					},function(err) {
 			  
 					});														
@@ -108,3 +112,20 @@ angular.module('angular-client-side-auth').directive('activeNav', ['$location', 
     };
 
 }]);
+
+angular.module('angular-client-side-auth').directive('cssnotification', [ '$timeout', '$rootScope',function($timeout,$rootScope) {
+    return {
+	    restrict:'A',
+		link:function(scope, element, attrs) {
+		    
+		    $rootScope.$watch('success',function(newVal ,oldVal){
+			    
+				if(newVal){				   				   
+					$timeout(function(){
+						$rootScope.success = false;							
+					},1000);
+                }
+		    },true)
+		}  
+	}
+}]) 
