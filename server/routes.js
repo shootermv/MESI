@@ -171,7 +171,10 @@ var routes = [
     }
 ];
 
-module.exports = function(app) {
+module.exports = function(app, io) {
+   
+    TaskCtrl.init(io);
+
 
     _.each(routes, function(route) {
         route.middleware.unshift(ensureAuthorized);

@@ -80,23 +80,33 @@ angular.module('angular-client-side-auth')
 
 angular.module('angular-client-side-auth')
 .controller('PrivateCtrl',
-['$rootScope', '$scope', 'Tasks', function($rootScope, $scope, Tasks) {
+['$rootScope', '$scope', 'Tasks', 'Socket', function($rootScope, $scope, Tasks, Socket) {
     /*Tasks.getUserTasks(function(res){
 		$scope.tasks= res;
 	});*/
 	
+    Socket.on('newtask', function (message) {
+	  $scope.getUserTasks();
+	});
+    
+
+
+
 	$scope.getUserTasks=function(){
 		Tasks.getUserTasks(function(res){
 			$scope.tasks= res;
 		});	
 	};
 	$scope.getUserTasks();
+
+
+
 }]);
 
 
 angular.module('angular-client-side-auth')
 .controller('AdminCtrl',
-['$rootScope', '$scope', 'Users', 'Auth', 'Tasks', function($rootScope, $scope, Users, Auth, Tasks) {
+['$rootScope', '$scope', 'Users', 'Auth', 'Tasks', 'Socket',  function($rootScope, $scope, Users, Auth, Tasks, Socket) {
     $scope.loading = true;
     $scope.userRoles = Auth.userRoles;
 	$scope.users = [];
@@ -135,13 +145,47 @@ angular.module('angular-client-side-auth')
 		   console.log('editing task failed')
 	   })
 	};	
+
+
+	Socket.on('status', function (taskmsg) {
+	  
+	  	//alert(taskmsg.user.name);
+	  	//$scope.$apply(function(){	
+			  	//search for user:
+			  	var user=null;
+			  	angular.forEach($scope.users, function(_user, key) {
+		        	if(_user._id == taskmsg.user._id){
+		        		user = _user;
+		        	}
+		    	});
+		    	var user_task = null;
+		    	
+		    	if(user){
+		    		//console.log(user.name);
+		    		//search for task:
+				  	angular.forEach(user.tasks, function(usertask, key) {
+				  		if(taskmsg.task.status.name == 'active' && usertask.status.name =='active'){
+				  			usertask.status = {name:'new', id:'2'}
+				  		}
+			        	if(usertask._id == taskmsg.task._id){
+			        		user_task = usertask;
+			        	}
+			    	});  
+		            console.log('old-'+user_task.status.name);
+		            console.log('new-'+taskmsg.task.status.name);
+			    	if(user_task)  user_task.status = 	taskmsg.task.status;		
+		    	}
+		//});   
+
+	});
+
 	
     Tasks.getAllForAdmin(function(res) {	
         $scope.users = res.users;
 		$scope.unassignedTasks = res.unassignedTasks;  
         $scope.loading = false;
 		
-		
+
 		
 		$scope.$watch('unassignedTasks', function (newVal, oldVal) { 
 		   
@@ -171,7 +215,11 @@ angular.module('angular-client-side-auth')
 				console.log('attention! trying to assign task')
 				//console.log('task '+ $scope.selectedTask._id +' to user '+ $scope.dropedUser.name);
 			    Tasks.assignTask({uid:$scope.dropedUser._id, taskId:$scope.selectedTask._id},function(res){
-					console.log('task assigned successfully to user ' +$scope.dropedUser.name)
+					console.log('task assigned successfully to user ' +$scope.dropedUser.name);
+
+
+
+
 					$scope.selectedTask=null;
 					$scope.dropedUser=null;		  
 			    }, function(err) {

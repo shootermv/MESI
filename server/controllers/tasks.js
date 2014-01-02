@@ -3,10 +3,14 @@ var _ =           require('underscore')
     require('../models/Task');
 Task = mongoose.model('Task');
 User = mongoose.model('User');
-
+var io=null;
 
 
 module.exports = {
+	init:function(_io){
+       io =_io;
+        
+	},
     index: function(req, res) {
    	
 	    console.log('getting tasks for user-'+req.user.id)
@@ -141,6 +145,9 @@ module.exports = {
 			    console.log('assiging task!')
 				user.tasks.push(taskId);
 				user.save(function(){
+
+					//socket						
+					io.sockets.emit('newtask', {});
 					res.send({});
 				})			
 			}//end of !err		
@@ -172,7 +179,12 @@ module.exports = {
 					
 					foundtask.save(function(error){
 						if(!error){	
-							console.log('changing task status to: '+foundtask.status.name)					
+							console.log('changing task status to: '+foundtask.status.name);
+
+                            //socket						
+					        io.sockets.emit('status', {task:foundtask, user:req.user});                    
+
+
 							res.json(foundtask);							
 						}else{
 							console.log('some error occured during save of the task! '+error)

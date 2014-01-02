@@ -34,7 +34,7 @@ passport.use(User.localStrategy);
 passport.serializeUser(User.serializeUser);
 passport.deserializeUser(User.deserializeUser);
 
-require('./server/routes.js')(app);
+
 
 app.set('port', process.env.PORT || 8000);
 var server = http.createServer(app).listen(app.get('port'), function(){
@@ -44,3 +44,7 @@ var  io = require('socket.io').listen(server);
 io.sockets.on('connection', function (socket) {
 	console.log('socket is connected now...')
 });
+
+
+require('./server/routes.js')(app, io);
+

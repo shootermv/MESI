@@ -80,7 +80,7 @@ angular.module('angular-client-side-auth')
 		},
 		assignTask:function(data ,success, error){
 		    $http.get('/assignTask',{params:data}).success(success).error(error);	
-			//console.log('data-',data)
+			
 		},
 		addTask:function(newtask, success, error){
 		
@@ -112,8 +112,18 @@ angular.module('angular-client-side-auth')
 .factory('Socket', function($rootScope) {
 	var socket = io.connect('http://localhost:8000');
     return {
+        on: function (eventName, callback) {
+          socket.on(eventName, function () {
+            var args = arguments;
+            $rootScope.$apply(function () {
+              callback.apply(socket, args);
+            });
+          });
+        },        
 		emit:function(eventName, data, callback){
-			
+            $rootScope.$apply(function () {
+              callback.apply(socket, args);
+            });			
 		}
 	};
 

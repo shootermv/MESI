@@ -74,6 +74,10 @@ angular.module('angular-client-side-auth', ['ngCookies', 'ngRoute', 'btford.drag
 }])
 .run(['$rootScope', '$location', 'Auth', function ($rootScope, $location, Auth) {
 	
+    
+
+
+
 	$rootScope.$on("$routeChangeStart", function (event, next, current) {
 	    //console.log('route changed...'+next.access.title);	
 		$rootScope.error = null;
