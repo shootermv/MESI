@@ -81,26 +81,33 @@ angular.module('angular-client-side-auth')
 angular.module('angular-client-side-auth')
 .controller('PrivateCtrl',
 ['$rootScope', '$scope', 'Tasks', 'Socket', function($rootScope, $scope, Tasks, Socket) {
-    /*Tasks.getUserTasks(function(res){
-		$scope.tasks= res;
-	});*/
-	
+    
+	//when some task assigned by admin - user must immediately see it
     Socket.on('newtask', function (message) {
 	  $scope.getUserTasks();
 	});
-    
 
-
-
-	$scope.getUserTasks=function(){
+	$scope.getUserTasks = function(){
 		Tasks.getUserTasks(function(res){
 			$scope.tasks= res;
 		});	
 	};
+	
+	$scope.updateTaskStatus = function(task){
+		Tasks.updateTask(task,
+		function(res){			
+			//dispaly success notification
+			$rootScope.success='status updated successfully';
+
+			//must refresh al users task		                
+			$scope.getUserTasks();
+
+		},function(err) {
+  
+		});		
+	};
+	
 	$scope.getUserTasks();
-
-
-
 }]);
 
 
@@ -132,8 +139,7 @@ angular.module('angular-client-side-auth')
 	};
 	
 	$scope.editTask = function (task){
-	  $scope.editedTask = task;
-	  //console.log($scope.editedTask==task)
+	  $scope.editedTask = task;	  
 	};
 	
 	$scope.doneEditing = function (task) {
@@ -146,37 +152,31 @@ angular.module('angular-client-side-auth')
 	   })
 	};	
 
-
+    //when some user changes some task status - admin notified immediately
 	Socket.on('status', function (taskmsg) {
-	  
-	  	//alert(taskmsg.user.name);
-	  	//$scope.$apply(function(){	
-			  	//search for user:
-			  	var user=null;
-			  	angular.forEach($scope.users, function(_user, key) {
-		        	if(_user._id == taskmsg.user._id){
-		        		user = _user;
-		        	}
-		    	});
-		    	var user_task = null;
-		    	
-		    	if(user){
-		    		//console.log(user.name);
-		    		//search for task:
-				  	angular.forEach(user.tasks, function(usertask, key) {
-				  		if(taskmsg.task.status.name == 'active' && usertask.status.name =='active'){
-				  			usertask.status = {name:'new', id:'2'}
-				  		}
-			        	if(usertask._id == taskmsg.task._id){
-			        		user_task = usertask;
-			        	}
-			    	});  
-		            console.log('old-'+user_task.status.name);
-		            console.log('new-'+taskmsg.task.status.name);
-			    	if(user_task)  user_task.status = 	taskmsg.task.status;		
-		    	}
-		//});   
-
+		var user=null;
+		angular.forEach($scope.users, function(_user, key) {
+			if(_user._id == taskmsg.user._id){
+				user = _user;
+			}
+		});
+		var user_task = null;
+		
+		if(user){
+			//console.log(user.name);
+			//search for task:
+			angular.forEach(user.tasks, function(usertask, key) {
+				if(taskmsg.task.status.name == 'active' && usertask.status.name =='active'){
+					usertask.status = {name:'new', id:'2'}
+				}
+				if(usertask._id == taskmsg.task._id){
+					user_task = usertask;
+				}
+			});  
+			console.log('old-'+user_task.status.name);
+			console.log('new-'+taskmsg.task.status.name);
+			if(user_task)  user_task.status = 	taskmsg.task.status;		
+		}	  
 	});
 
 	

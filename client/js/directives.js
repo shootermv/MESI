@@ -68,10 +68,9 @@ angular.module('angular-client-side-auth').directive('statusPicker', ['Tasks','$
 			link: function(scope, element, attrs, controller) {
                 setClass(element, scope.task.status.name);			
 				element.on('click', function(){	
-				   
-                    scope.$apply(shiftStatus);
-					
-					
+				     
+					 /*
+                    scope.$apply(shiftStatus);									
 					//lets save status
 					Tasks.updateTask(scope.task,
 					function(res){
@@ -84,7 +83,12 @@ angular.module('angular-client-side-auth').directive('statusPicker', ['Tasks','$
 
 					},function(err) {
 			  
-					});														
+					});
+					*/
+					
+					shiftStatus(scope);
+					scope.updateTaskStatus(scope.task)
+					
 				});
 				
 			}

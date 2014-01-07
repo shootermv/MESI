@@ -8,7 +8,7 @@ describe('controllers', function() {
     beforeEach(module('angular-client-side-auth'));
 	beforeEach(inject(function($injector) {
 		$rootScope = $injector.get('$rootScope');
-	}));
+	})); 
 	//['$rootScope', '$scope', 'Users', 'Auth', 'Tasks', function($rootScope, $scope, Users, Auth, Tasks) {
 	
     function createLocals() {
@@ -25,6 +25,11 @@ describe('controllers', function() {
 					callback(tsk);
 				},
 				unAssignTask:jasmine.createSpy('unAssignTask')												
+			},
+			Socket:{
+				on:function(name,callback){
+				
+				}
 			}
         };
     }
@@ -95,5 +100,5 @@ describe('controllers', function() {
 		
 			
 	});
-	
+	//add Tests to private Controller
 });

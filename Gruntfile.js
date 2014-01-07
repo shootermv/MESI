@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
     // Load tasks
     grunt.registerTask('test-watch', ['karma:watch']);
-    grunt.registerTask('test-watch', ['karma:watch']); 
+    
     grunt.registerTask('default', ['watch']);
 	
 	grunt.loadNpmTasks('grunt-contrib-watch');
