@@ -2,10 +2,13 @@ module.exports = function(grunt) {
     // Load tasks
     grunt.registerTask('test-watch', ['karma:watch']);
     
-    grunt.registerTask('default', ['watch']);
-	
+    
+	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-karma');	  
+	
+	grunt.registerTask('default', ['watch']);
+	
 	
     var karmaConfig = function(configFile, customOptions) {
 		var options = { configFile: configFile, keepalive: true };
@@ -32,14 +35,26 @@ module.exports = function(grunt) {
 		},		
 		watch: {
 		  all: {
-			files: ['**/*.*'],		
+			files: ['**/*.html','**/*.js','**/*.less'],		
 			options: {
 			  livereload: {
 				port: 9000
 			  }
+			},
+            tasks: "less"
+		  }
+		},
+		less: {
+		  development: {
+			options: {
+			  paths: ["assets/css"]
+			},
+			files: {
+			  "client/css/app.css": "client/css/app.less"
 			}
 		  }
-		}
+		}		
+		 
     });
 	
 
