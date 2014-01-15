@@ -1,7 +1,6 @@
 'use strict';
 
-angular.module('angular-client-side-auth')
-.directive('accessLevel', ['Auth', function(Auth) {
+angular.module('Mesi').directive('accessLevel', ['Auth', function(Auth) {
     return {
         restrict: 'A',
         link: function($scope, element, attrs) {
@@ -35,8 +34,47 @@ angular.module('angular-client-side-auth')
         }
     };
 }]);
+
+angular.module('Mesi').directive('activeNav', ['$location', function($location) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            var nestedA = element.find('a')[0];
+            var path = nestedA.href;
+
+            scope.location = $location;
+            scope.$watch('location.absUrl()', function(newPath) {
+                if (path === newPath) {
+                    element.addClass('active');
+                } else {
+                    element.removeClass('active');
+                }
+            });
+        }
+
+    };
+
+}]);
+
+angular.module('Mesi').directive('cssnotification', [ '$timeout', '$rootScope',function($timeout, $rootScope) {
+
+    return {
+	    restrict:'A',
+		link:function(scope, element, attrs) {
+		    
+		    $rootScope.$watch('success',function(newVal ,oldVal){
+			    
+				if(newVal){				   				   
+					$timeout(function(){
+						$rootScope.success = false;							
+					},1000);
+                }
+		    },true)
+		}  
+	}
+}]);
 //statusPicker directive
-angular.module('angular-client-side-auth').directive('statusPicker', ['Tasks','$rootScope', function(Tasks, $rootScope) {
+angular.module('Mesi').directive('statusPicker', ['Tasks','$rootScope', function(Tasks, $rootScope) {
         function setClass(el, statusname) {
 		    
 		    switch(statusname){
@@ -95,41 +133,3 @@ angular.module('angular-client-side-auth').directive('statusPicker', ['Tasks','$
 		};
 
 }]);
-
-angular.module('angular-client-side-auth').directive('activeNav', ['$location', function($location) {
-    return {
-        restrict: 'A',
-        link: function(scope, element, attrs) {
-            var nestedA = element.find('a')[0];
-            var path = nestedA.href;
-
-            scope.location = $location;
-            scope.$watch('location.absUrl()', function(newPath) {
-                if (path === newPath) {
-                    element.addClass('active');
-                } else {
-                    element.removeClass('active');
-                }
-            });
-        }
-
-    };
-
-}]);
-
-angular.module('angular-client-side-auth').directive('cssnotification', [ '$timeout', '$rootScope',function($timeout,$rootScope) {
-    return {
-	    restrict:'A',
-		link:function(scope, element, attrs) {
-		    
-		    $rootScope.$watch('success',function(newVal ,oldVal){
-			    
-				if(newVal){				   				   
-					$timeout(function(){
-						$rootScope.success = false;							
-					},1000);
-                }
-		    },true)
-		}  
-	}
-}]) 

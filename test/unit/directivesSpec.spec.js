@@ -1,10 +1,13 @@
 'use strict';
 
 /* jasmine specs for services go here */
-
+//to add Test accessLevel directive
+//to add test activeNav directive
+//to add test cssnotification directive
+//to add test statusPicker directive
 describe('directives', function() {
     var scope, elem;
-	beforeEach(module('angular-client-side-auth'));
+	beforeEach(module('Mesi'));
 	
 	describe('status picker', function() {		
 	    it('should had a btn-danger class (red) if status is new',inject(function($compile, $rootScope, Tasks) {		

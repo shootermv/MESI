@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('angular-client-side-auth')
+angular.module('Mesi')
 .factory('Auth', function($http, $cookieStore){
 
     var accessLevels = routingConfig.accessLevels
@@ -54,7 +54,7 @@ angular.module('angular-client-side-auth')
     };
 });
 
-angular.module('angular-client-side-auth')
+angular.module('Mesi')
 .factory('Users', function($http) {    
     return {
         getAll: function(success, error) {             	
@@ -63,9 +63,7 @@ angular.module('angular-client-side-auth')
     };
 });
 
-
-
-angular.module('angular-client-side-auth')
+angular.module('Mesi')
 .factory('Tasks', function($http/*, Socket*/) {
     return {
         getAllForAdmin: function(success, error) {
@@ -108,7 +106,7 @@ angular.module('angular-client-side-auth')
     };
 })
 //socket
-angular.module('angular-client-side-auth')
+angular.module('Mesi')
 .factory('Socket', function($rootScope) {
 	var socket = io.connect('http://localhost:8000');
     return {

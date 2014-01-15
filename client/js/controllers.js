@@ -2,8 +2,8 @@
 
 /* Controllers */
 
-angular.module('angular-client-side-auth')
-.controller('NavCtrl', ['$rootScope', '$scope', '$location', 'Auth', function($rootScope, $scope, $location, Auth) {
+angular.module('Mesi').controller('NavCtrl',
+['$rootScope', '$scope', '$location', 'Auth', function($rootScope, $scope, $location, Auth) {
     $scope.user = Auth.user;
     $scope.userRoles = Auth.userRoles;
     $scope.accessLevels = Auth.accessLevels;
@@ -17,8 +17,7 @@ angular.module('angular-client-side-auth')
     };
 }]);
 
-angular.module('angular-client-side-auth')
-.controller('LoginCtrl',
+angular.module('Mesi').controller('LoginCtrl',
 ['$rootScope', '$scope', '$location', '$window', 'Auth', function($rootScope, $scope, $location, $window, Auth) {
 
     $scope.rememberme = true;
@@ -45,8 +44,7 @@ angular.module('angular-client-side-auth')
     };
 }]);
 
-angular.module('angular-client-side-auth')
-.controller('HomeCtrl',
+angular.module('Mesi').controller('HomeCtrl',
 ['$rootScope','Auth','$location', function($rootScope, Auth, $location) {
 				
 	if(Auth.user.role.title=='admin'){				   
@@ -57,8 +55,7 @@ angular.module('angular-client-side-auth')
 	}
 }]);
 
-angular.module('angular-client-side-auth')
-.controller('RegisterCtrl',
+angular.module('Mesi').controller('RegisterCtrl',
 ['$rootScope', '$scope', '$location', 'Auth', function($rootScope, $scope, $location, Auth) {
     $scope.role = Auth.userRoles.user;
     $scope.userRoles = Auth.userRoles;
@@ -78,8 +75,7 @@ angular.module('angular-client-side-auth')
     };
 }]);
 
-angular.module('angular-client-side-auth')
-.controller('PrivateCtrl',
+angular.module('Mesi').controller('PrivateCtrl',
 ['$rootScope', '$scope', 'Tasks', 'Socket', function($rootScope, $scope, Tasks, Socket) {
     
 	//when some task assigned by admin - user must immediately see it
@@ -96,7 +92,7 @@ angular.module('angular-client-side-auth')
 	$scope.updateTaskStatus = function(task){
 		Tasks.updateTask(task,
 		function(res){			
-			//dispaly success notification
+			//display success notification
 			$rootScope.success='status updated successfully';
 
 			//must refresh al users task		                
@@ -110,9 +106,7 @@ angular.module('angular-client-side-auth')
 	$scope.getUserTasks();
 }]);
 
-
-angular.module('angular-client-side-auth')
-.controller('AdminCtrl',
+angular.module('Mesi').controller('AdminCtrl',
 ['$rootScope', '$scope', 'Users', 'Auth', 'Tasks', 'Socket',  function($rootScope, $scope, Users, Auth, Tasks, Socket) {
     $scope.loading = true;
     $scope.userRoles = Auth.userRoles;

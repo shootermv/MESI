@@ -2,10 +2,15 @@
 
 /* jasmine specs for services go here */
 
+//to add Test for Auth   service
+//to add Test for Users  service - V
+//to add Test for Tasks  service - V
+//to add Test for Socket service - V
+
 describe('services', function() {
     var svc, httpBackend;
 	
-	beforeEach(module('angular-client-side-auth'));	
+	beforeEach(module('Mesi'));	
 
 	describe('Auth service', function() {
 	    var authSvc,
@@ -14,6 +19,7 @@ describe('services', function() {
 		httpBackend;
 		
 		beforeEach(function () {
+		    //cookie mock
 			cookieStoreSpy = jasmine.createSpyObj('CookieStore', ['get','remove']);
 			cookieStoreSpy.get.andReturn({ name: "koko", role:{title:'admin',bitMask:4}});				 							
 			cookieStoreSpy.remove(function(key) {})
@@ -36,6 +42,7 @@ describe('services', function() {
 			expect(authSvc.user).toEqual({ name: "koko", role:{title:'admin',bitMask:4}});
 		})
 	});
+	
     describe('Users service', function() {
 		beforeEach(inject(function($injector, Users, $httpBackend) {
 			svc = Users;
@@ -106,5 +113,17 @@ describe('services', function() {
 			    expect(result).toEqual(returnData);
 		});
 	});
-	
+
+	describe('Socket service', function() {
+	    var $rootScope;
+		beforeEach(inject(function($rootScope) {
+			$rootScope = $rootScope.$new();
+		}));	
+		afterEach(function() {
+			httpBackend.verifyNoOutstandingExpectation();
+			httpBackend.verifyNoOutstandingRequest();
+	    });
+		it('should verify "ON" and ""', function() {
+		})
+	})
 });

@@ -19,9 +19,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/fnakstad/angular-client-side-auth"
+    "url": "https://github.com/fnakstad/Mesi"
   },
-  "subdomain": "angular-client-side-auth",
+  "subdomain": "Mesi",
   "scripts": {
     "start": "node server.js",
     "test": "grunt test"
