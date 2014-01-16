@@ -129,7 +129,6 @@ fetch the changes and merge them into your project with git.
       e2e-test.bat      --> runs end-to-end tests with Karma (windows)
       test.bat          --> autotests unit tests with Karma (windows)
       test.sh           --> autotests unit tests with Karma (*nix)
-      web-server.js     --> simple development webserver based on node.js
 
     test/               --> test source files and libraries
       e2e/              -->
