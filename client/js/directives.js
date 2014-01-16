@@ -9,23 +9,25 @@ angular.module('Mesi').directive('accessLevel', ['Auth', function(Auth) {
                 , accessLevel;
 
             $scope.user = Auth.user;
-            $scope.$watch('user', function(user) {
+            $scope.$watch('user', function(user) {	 
+ 			
                 if(user.role)
                     userRole = user.role;
                 updateCSS();
             }, true);
-
-            attrs.$observe('accessLevel', function(al) {			    
+            //gets access level from the attr
+            attrs.$observe('accessLevel', function(al) {               		
                 if(al) accessLevel = $scope.$eval(al);
                 updateCSS();
             });
 
             function updateCSS() {
-			 
+			     console.log('prevDisp....',prevDisp )
                 if(userRole && accessLevel) {
-                    if(!Auth.authorize(accessLevel, userRole)){
+                    if(!Auth.authorize(accessLevel, userRole)){					    
                         element.css('display', 'none');
-                    }else{
+                    }else{				
+                        					
                         element.css('display', prevDisp);
 						//if(userRole.title == 'user' && accessLevel==)
 					}

@@ -1,10 +1,11 @@
 'use strict';
 
 /* jasmine specs for services go here */
-//to add Test accessLevel directive
+//to add test statusPicker directive - V
+//to add Test accessLevel directive - V
 //to add test activeNav directive
 //to add test cssnotification directive
-//to add test statusPicker directive
+
 describe('directives', function() {
     var scope, elem;
 	beforeEach(module('Mesi'));
@@ -17,13 +18,10 @@ describe('directives', function() {
 			});
 		    	
 		    scope = $rootScope.$new();
+			//mocking the methods of the controller
 	        scope.getUserTasks =function(){}
-			scope.updateTaskStatus =function(task){
-			
-			
-			}
-			
-			
+			scope.updateTaskStatus =function(task){}								
+						
 			
 		    //get an element representation
 		    elem = angular.element("<status-picker></status-picker>");
@@ -39,7 +37,7 @@ describe('directives', function() {
 		}));
 		
 		
-	    it('if status is new, after clicking it should became "active"',inject(function($compile, $rootScope, Tasks ) {
+	    it('if status is new, after clicking button it should became "active" and then "completed"',inject(function($compile, $rootScope, Tasks ) {
 			
 			spyOn(Tasks, 'updateTask').andCallFake(function(args,callback,errcallback) {
 				 callback({summary:'blabla',status:{name:'completed',id:3}});	
@@ -72,6 +70,61 @@ describe('directives', function() {
 	    
 	});
 	
-
+	describe('accessLevel', function() {		
+        beforeEach(function() {
+		
+		    var mockAuth = {
+				user :{ name:'', role:{bitMask: 1, title: "public"}},
+				authorize:function(accessLevel, role){
+					return accessLevel.bitMask & role.bitMask;
+				}
+			}
+			
+			var accessLevels = {
+				"public":{"bitMask":7,"title":"*"},
+				"anon":{"bitMask":1,"title":"public"},
+				"user":{"bitMask":6,"title":"admin"},//user & admin
+				"admin":{"bitMask":4,"title":"admin"},
+				"useronly":{"bitMask":2,"title":"user"}
+			};
+							
+		    module(function($provide) {
+			    $provide.value('Auth', mockAuth);
+				$provide.value('accessLevels', accessLevels);				
+		    });
+		})
 	
+		it('when user is public and access is public - the menu must be visible',inject(function($compile, $rootScope, accessLevels){
+		
+
+		    scope = $rootScope.$new();
+			scope.accessLevels = accessLevels;
+
+		    var elem = $compile("<li data-access-level='accessLevels.anon'>some text here</li>")(scope);
+			
+			//fire watch
+			scope.$apply();
+						
+			expect(elem.css('display')).toEqual('');	
+		}));
+		
+	
+		it('when user is public and access is user - the menu must NOT be visible',inject(function($compile, $rootScope, accessLevels){		
+
+		    scope = $rootScope.$new();
+			scope.accessLevels = accessLevels;
+
+		    var elem = $compile("<li data-access-level='accessLevels.user'>some text here</li>")(scope);
+			
+			//fire watch
+			scope.$apply();
+						
+			expect(elem.css('display')).toEqual('none');	
+		}))		
+    });
+
+	describe('activeNav', function() {
+
+
+	})
 });
