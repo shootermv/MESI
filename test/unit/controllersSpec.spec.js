@@ -105,10 +105,8 @@ describe('Controllers', function() {
 			});							
 		});
 
-    });
-	
-	
-    //Private
+    });	
+	//Private
 	describe('NavCtrl', function() {
 			var $rootScope, $httpBackend, $controller, NavCtrl, $scope, $location, Auth;
 			
@@ -152,12 +150,12 @@ describe('Controllers', function() {
 			   expect($location.path).toHaveBeenCalledWith('/login');
 			})
 		});
- 		
+ 	//Login	
 	describe('LoginCtrl', function() {
 	    var $rootScope, $scope, $httpBackend, $controller, $location, $window, Auth;
 		
 		beforeEach(inject(function($injector) {
-			$httpBackend = $injector.get('$httpBackend');
+			//$httpBackend = $injector.get('$httpBackend');
 			$rootScope = $injector.get('$rootScope');
 			$scope = $rootScope.$new();
 			$controller = $injector.get('$controller');	
@@ -169,8 +167,7 @@ describe('Controllers', function() {
 				user: {name : 'Shlomo'},
 				userRoles:[],
 				accessLevels:[{}],
-				login : function(params, callback){
-					console.log('callback');
+				login : function(params, callback){					
 					callback({role:{title:'admin'}});
 				}
 			};
@@ -188,12 +185,38 @@ describe('Controllers', function() {
 		}));
 		
 		it('should redirect to /admin if user is admin',function(){
-			  // expect($scope.user).toEqual({name:'Shlomo'});
-			  // expect($scope.userRoles).toEqual([]);
-			  // expect($scope.accessLevels).toEqual([{}]);
 			   
 			   $scope.login({});
 			   expect($location.path).toHaveBeenCalledWith('/admin');			
 		});
 	})
+    //Home
+   describe('HomeCtrl',function(){
+	    var $rootScope, $controller, $location, Auth;
+		
+		beforeEach(inject(function($injector) {
+			$rootScope = $injector.get('$rootScope');		
+			$controller = $injector.get('$controller');	
+			$location = jasmine.createSpyObj('$location',['path']);	
+			
+			Auth = {
+				user: {name : 'Shlomo',role:{title:'admin'}}
+			};			
+             //init the controller:
+			$controller('HomeCtrl',{  
+				'$rootScope':$rootScope,
+				'Auth':Auth,
+				'$location':$location
+			});
+		}));
+		
+		it('should redirect to /admin if user is admin',function(){
+
+			   expect($location.path).toHaveBeenCalledWith('/admin');			
+		});		
+		
+   });	
+	
+	
+	
 });

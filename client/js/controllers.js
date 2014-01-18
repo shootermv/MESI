@@ -9,8 +9,7 @@ angular.module('Mesi').controller('NavCtrl',
     $scope.accessLevels = Auth.accessLevels;
 
     $scope.logout = function() {
-        Auth.logout(function() {
-		    console.log('uiui')
+        Auth.logout(function() {		    
             $location.path('/login');
         }, function() {
             $rootScope.error = "Failed to logout";
