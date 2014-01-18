@@ -110,17 +110,57 @@ describe('Controllers', function() {
 	
     //Private
 	describe('NavCtrl', function() {
-	    var $rootScope;
-		beforeEach(inject(function($injector) {
-			$rootScope = $injector.get('$rootScope');
-		}));
+			var $rootScope, $httpBackend, $controller, NavCtrl, $scope, $location, Auth;
+			
+			beforeEach(inject(function($injector) {
+				$httpBackend = $injector.get('$httpBackend');
+				$rootScope = $injector.get('$rootScope');
+				$scope = $rootScope.$new();
+				$controller = $injector.get('$controller');
+				
+				$location = jasmine.createSpyObj('$location',['path']);
+				//Auth = jasmine.createSpyObject('Auth');
+				
+				Auth ={
+					user: {name : 'Shlomo'},
+					userRoles:[],
+					accessLevels:[{}],
+					logout : function(callback){
+						console.log('callback');
+						callback();
+					}
+				};
+				
+				//spyOn(Auth, 'logout').re;
+				
+				NavCtrl = $controller('NavCtrl', {
+					'$rootScope' : $rootScope,
+					'$scope' : $scope,
+					'$location':$location,
+					'Auth':Auth
+				});
+				
+			}));
+		
+		
+			it('should',function(){
+			
+			   expect($scope.user).toEqual({name:'Shlomo'});
+			   expect($scope.userRoles).toEqual([]);
+			   expect($scope.accessLevels).toEqual([{}]);
+			   
+			   $scope.logout();
+			   expect($location.path).toHaveBeenCalledWith('/login');
+			})
+		});
  		
+		/*
 		function createLocals() {
 		    return {
 				$rootScope: $rootScope,
 				$scope:  $rootScope.$new(),
 				$location:{path:function(){}},
-			    Auth:{}
+			    Auth:authMock
 		    }
 		}
 		
@@ -131,11 +171,29 @@ describe('Controllers', function() {
 		} 
 	   
 	   
-		it('Should check if logout is a function', function() {
+		it('Should check if logout is a function and other variables are defined', function() {
 			var locals = createLocals();
-			runController(locals);	
-            console.log(locals.$scope.logout)			
-			expect(angular.isFunction(locals.$scope.logout)).toBe(true)
+			runController(locals);	  
+			            
+            expect(locals.$scope.user).toBeDefined(); 
+			expect(locals.$scope.userRoles).toBeDefined();
+			expect(locals.$scope.accessLevels.length).toEqual(1);
+			expect(angular.isFunction(locals.$scope.logout)).toBe(true);
 		});
+		
+		it('checking that logout causes the request to fire', function() {
+			var locals = createLocals();
+			runController(locals);
+			console.log(' locals.$scope.logout-', locals.$scope.logout)
+            locals.$scope.logout()			
+	      
+			expect(true).toBe(true);
+		});		
 	});
+	
+	
+	describe('NavCtrl', function() {
+	
+	
+	})*/
 });

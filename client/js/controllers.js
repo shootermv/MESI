@@ -10,6 +10,7 @@ angular.module('Mesi').controller('NavCtrl',
 
     $scope.logout = function() {
         Auth.logout(function() {
+		    console.log('uiui')
             $location.path('/login');
         }, function() {
             $rootScope.error = "Failed to logout";

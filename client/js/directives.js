@@ -22,7 +22,7 @@ angular.module('Mesi').directive('accessLevel', ['Auth', function(Auth) {
             });
 
             function updateCSS() {
-			     console.log('prevDisp....',prevDisp )
+			    
                 if(userRole && accessLevel) {
                     if(!Auth.authorize(accessLevel, userRole)){					    
                         element.css('display', 'none');
@@ -43,9 +43,9 @@ angular.module('Mesi').directive('activeNav', ['$location', function($location) 
         link: function(scope, element, attrs) {
             var nestedA = element.find('a')[0];
             var path = nestedA.href;
-
+            
             scope.location = $location;
-            scope.$watch('location.absUrl()', function(newPath) {
+            scope.$watch('location.absUrl()', function(newPath) {				
                 if (path === newPath) {
                     element.addClass('active');
                 } else {
@@ -107,25 +107,7 @@ angular.module('Mesi').directive('statusPicker', ['Tasks','$rootScope', function
 		    restrict: "E",
 			link: function(scope, element, attrs, controller) {
                 setClass(element, scope.task.status.name);			
-				element.on('click', function(){	
-				     
-					 /*
-                    scope.$apply(shiftStatus);									
-					//lets save status
-					Tasks.updateTask(scope.task,
-					function(res){
-                        setClass(element, scope.task.status.name);
-						//dispaly notification
-                        $rootScope.success='status updated successfully';
-
-		                //must refresh al users task		                
-						scope.getUserTasks();
-
-					},function(err) {
-			  
-					});
-					*/
-					
+				element.on('click', function(){						
 					shiftStatus(scope);
 					scope.updateTaskStatus(scope.task)
 					

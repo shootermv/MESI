@@ -3,7 +3,7 @@
 /* jasmine specs for services go here */
 //to add test statusPicker directive - V
 //to add Test accessLevel directive - V
-//to add test activeNav directive
+//to add test activeNav directive - V
 //to add test cssnotification directive
 
 describe('directives', function() {
@@ -109,7 +109,7 @@ describe('directives', function() {
 		}));
 		
 	
-		it('when user is public and access is user - the menu must NOT be visible',inject(function($compile, $rootScope, accessLevels){		
+		it('when user is public and access is user - the menu must be hidden',inject(function($compile, $rootScope, accessLevels){		
 
 		    scope = $rootScope.$new();
 			scope.accessLevels = accessLevels;
@@ -124,7 +124,32 @@ describe('directives', function() {
     });
 
 	describe('activeNav', function() {
-
-
+	    var scope, location, compile;
+		beforeEach(inject(function($compile, $rootScope, $location) {
+			scope = $rootScope.$new();
+            location = $location
+			compile = $compile;
+		}));
+		it('when location is same as "href" of link - the link must be decorated with "active" class',function(){
+		    location.path('someurl');
+		
+		    var elem = compile("<li data-active-nav ><a href='http://server/someurl'>somelink</a></li>")(scope);
+			
+			//fire watch
+			scope.$apply();            		
+			expect(elem.hasClass('active')).toBe(true);
+		});
+		
+		it('when location is different from "href" of link - the "active" class must be removed',function(){
+		    location.path('some_different_url');
+		    //initially  decorated with 'active'
+		    var elem = compile("<li data-active-nav class='active'><a href='http://server/someurl'>somelink</a></li>")(scope);
+			
+			//fire watch
+			scope.$apply();            		
+			expect(elem.hasClass('active')).toBe(false);
+		})		
 	})
+
+	
 });
