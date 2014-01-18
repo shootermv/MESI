@@ -4,7 +4,7 @@
 
 	//add Tests to Admin Controller       - V	
 	//add Tests to NavCtrl Controller     - V
-	//add Tests to LoginCtrl Controller
+	//add Tests to LoginCtrl Controller   - V
 	//add Tests to HomeCtrl Controller
 	//add Tests to RegisterCtrl Controller
 	//add Tests to PrivateCtrl Controller
@@ -121,12 +121,11 @@ describe('Controllers', function() {
 				$location = jasmine.createSpyObj('$location',['path']);
 				//Auth = jasmine.createSpyObject('Auth');
 				
-				Auth ={
+				Auth = {
 					user: {name : 'Shlomo'},
 					userRoles:[],
 					accessLevels:[{}],
-					logout : function(callback){
-						console.log('callback');
+					logout : function(callback){						
 						callback();
 					}
 				};
@@ -143,7 +142,7 @@ describe('Controllers', function() {
 			}));
 		
 		
-			it('should',function(){
+			it('when logout pressed should redirect to logout ',function(){
 			
 			   expect($scope.user).toEqual({name:'Shlomo'});
 			   expect($scope.userRoles).toEqual([]);
@@ -154,5 +153,47 @@ describe('Controllers', function() {
 			})
 		});
  		
-
+	describe('LoginCtrl', function() {
+	    var $rootScope, $scope, $httpBackend, $controller, $location, $window, Auth;
+		
+		beforeEach(inject(function($injector) {
+			$httpBackend = $injector.get('$httpBackend');
+			$rootScope = $injector.get('$rootScope');
+			$scope = $rootScope.$new();
+			$controller = $injector.get('$controller');	
+            $location = jasmine.createSpyObj('$location',['path']);	
+			$window = jasmine.createSpyObj('$window',['location']);	
+			
+			
+			Auth = {
+				user: {name : 'Shlomo'},
+				userRoles:[],
+				accessLevels:[{}],
+				login : function(params, callback){
+					console.log('callback');
+					callback({role:{title:'admin'}});
+				}
+			};
+							
+		
+            //init the controller:
+			$controller('LoginCtrl',{
+			  '$rootScope':$rootScope,
+			  '$scope':$scope,
+			  '$location':$location,
+			  '$window':$window,
+			  'Auth':Auth
+			});
+			
+		}));
+		
+		it('should redirect to /admin if user is admin',function(){
+			  // expect($scope.user).toEqual({name:'Shlomo'});
+			  // expect($scope.userRoles).toEqual([]);
+			  // expect($scope.accessLevels).toEqual([{}]);
+			   
+			   $scope.login({});
+			   expect($location.path).toHaveBeenCalledWith('/admin');			
+		});
+	})
 });
