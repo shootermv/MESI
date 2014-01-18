@@ -3,7 +3,7 @@
 /* jasmine specs for services go here */
 
 	//add Tests to Admin Controller       - V	
-	//add Tests to NavCtrl Controller
+	//add Tests to NavCtrl Controller     - V
 	//add Tests to LoginCtrl Controller
 	//add Tests to HomeCtrl Controller
 	//add Tests to RegisterCtrl Controller
@@ -154,46 +154,5 @@ describe('Controllers', function() {
 			})
 		});
  		
-		/*
-		function createLocals() {
-		    return {
-				$rootScope: $rootScope,
-				$scope:  $rootScope.$new(),
-				$location:{path:function(){}},
-			    Auth:authMock
-		    }
-		}
-		
-		function runController(locals) {
-		  inject(function($controller) {
-			$controller('NavCtrl', locals);
-		  });
-		} 
-	   
-	   
-		it('Should check if logout is a function and other variables are defined', function() {
-			var locals = createLocals();
-			runController(locals);	  
-			            
-            expect(locals.$scope.user).toBeDefined(); 
-			expect(locals.$scope.userRoles).toBeDefined();
-			expect(locals.$scope.accessLevels.length).toEqual(1);
-			expect(angular.isFunction(locals.$scope.logout)).toBe(true);
-		});
-		
-		it('checking that logout causes the request to fire', function() {
-			var locals = createLocals();
-			runController(locals);
-			console.log(' locals.$scope.logout-', locals.$scope.logout)
-            locals.$scope.logout()			
-	      
-			expect(true).toBe(true);
-		});		
-	});
-	
-	
-	describe('NavCtrl', function() {
-	
-	
-	})*/
+
 });
