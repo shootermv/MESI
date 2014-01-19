@@ -93,7 +93,8 @@ angular.module('Mesi').controller('PrivateCtrl',
 		Tasks.updateTask(task,
 		function(res){			
 			//display success notification
-			$rootScope.success='status updated successfully';
+			$rootScope.success = true;
+			$rootScope.successmsg = 'status updated successfully';
 
 			//must refresh al users task		                
 			$scope.getUserTasks();

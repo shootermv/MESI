@@ -1,5 +1,5 @@
 'use strict';
-
+//accessLevel
 angular.module('Mesi').directive('accessLevel', ['Auth', function(Auth) {
     return {
         restrict: 'A',
@@ -36,7 +36,7 @@ angular.module('Mesi').directive('accessLevel', ['Auth', function(Auth) {
         }
     };
 }]);
-
+//activenav
 angular.module('Mesi').directive('activeNav', ['$location', function($location) {
     return {
         restrict: 'A',
@@ -57,17 +57,17 @@ angular.module('Mesi').directive('activeNav', ['$location', function($location) 
     };
 
 }]);
-
+//cssnotification
 angular.module('Mesi').directive('cssnotification', [ '$timeout', '$rootScope',function($timeout, $rootScope) {
 
     return {
 	    restrict:'A',
 		link:function(scope, element, attrs) {
-		    
-		    $rootScope.$watch('success',function(newVal ,oldVal){
-			    
+		     
+		    $rootScope.$watch('success',function(newVal ,oldVal){			    
 				if(newVal){				   				   
 					$timeout(function(){
+					  
 						$rootScope.success = false;							
 					},1000);
                 }

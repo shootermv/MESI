@@ -6,7 +6,7 @@
 	//add Tests to NavCtrl Controller     - V
 	//add Tests to LoginCtrl Controller   - V
 	//add Tests to HomeCtrl Controller    - V
-	//add Tests to RegisterCtrl Controller
+	//add Tests to RegisterCtrl Controller- V
 	//add Tests to PrivateCtrl Controller
 
 describe('Controllers', function() {	
@@ -189,7 +189,7 @@ describe('Controllers', function() {
 		});
 	})
     //Home
-    describe('HomeCtrl',function(){
+    describe('HomeCtrl', function(){
 	    var $rootScope, $controller, $location, Auth;
 		
 		beforeEach(inject(function($injector) {
@@ -215,7 +215,7 @@ describe('Controllers', function() {
 		
    });	
 	//Register
-	describe('RegisterCtrl',function(){
+	describe('RegisterCtrl', function(){
 		var $rootScope, $scope, $location, Auth, $controller;
 		beforeEach(inject(function($injector) {
 			$rootScope = $injector.get('$rootScope');
@@ -249,5 +249,8 @@ describe('Controllers', function() {
 			expect($location.path).toHaveBeenCalledWith('/');				
 		});				
 	})
+	//Private
+	describe('PrivateCtrl', function(){
 	
+	})
 });

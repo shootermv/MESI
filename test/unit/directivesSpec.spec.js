@@ -151,5 +151,44 @@ describe('directives', function() {
 		})		
 	})
 
+	describe('cssnotification', function() {
+	    var scope, rootScope, compile, timeout;
+		beforeEach(inject(function($compile, $timeout, $rootScope) {
+		    rootScope = $rootScope;
+			scope = $rootScope.$new();       
+			compile = $compile;
+			timeout = $timeout;
+			
+		}));
 	
+		it('Should be visible after rootScope.success became true', function() {	
+		    
+            var elem = compile('<div data-ng-bind="successmsg" ng-show="success" cssnotification></div>')(scope);	
+			rootScope.success = false;
+			//'ng-hide' class means the element is hidden
+			scope.$digest(); 			
+			expect(elem.hasClass('ng-hide')).toBe(true);
+			
+			
+			//lets check if it shows up
+			rootScope.success = true;
+			rootScope.$digest(); 
+			expect(elem.hasClass('ng-hide')).toBe(false);
+			
+			
+			//lets check if it become hidden after 1 secs					
+			timeout.flush();			
+			expect(elem.hasClass('ng-hide')).toBe(true);
+		});
+		/*
+		it('Text should be taken from $rootScope.successmsg', function() {	
+            var elem = compile('<div data-ng-bind="successmsg" ng-show="success" cssnotification></div>')(scope);	
+			rootScope.success = true;
+			rootScope.successmsg = 'ha ha';
+			//'ng-hide' class means the element is hidden
+			scope.$digest(); 			
+			expect(elem.text()).toEqual('ha ha');
+        })
+		*/	
+	})
 });

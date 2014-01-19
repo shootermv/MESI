@@ -2,10 +2,10 @@
 
 /* jasmine specs for services go here */
 
-//to add Test for Auth   service
+//to add Test for Auth   service - V
 //to add Test for Users  service - V
 //to add Test for Tasks  service - V
-//to add Test for Socket service - V
+//to add Test for Socket service - 
 
 describe('services', function() {
     var svc, httpBackend;
