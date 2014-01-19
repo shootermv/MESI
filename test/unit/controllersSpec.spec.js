@@ -5,7 +5,7 @@
 	//add Tests to Admin Controller       - V	
 	//add Tests to NavCtrl Controller     - V
 	//add Tests to LoginCtrl Controller   - V
-	//add Tests to HomeCtrl Controller
+	//add Tests to HomeCtrl Controller    - V
 	//add Tests to RegisterCtrl Controller
 	//add Tests to PrivateCtrl Controller
 
@@ -113,12 +113,9 @@ describe('Controllers', function() {
 			beforeEach(inject(function($injector) {
 				$httpBackend = $injector.get('$httpBackend');
 				$rootScope = $injector.get('$rootScope');
-				$scope = $rootScope.$new();
-				$controller = $injector.get('$controller');
-				
+				$scope = $rootScope.$new();								
 				$location = jasmine.createSpyObj('$location',['path']);
-				//Auth = jasmine.createSpyObject('Auth');
-				
+								
 				Auth = {
 					user: {name : 'Shlomo'},
 					userRoles:[],
@@ -128,8 +125,8 @@ describe('Controllers', function() {
 					}
 				};
 				
-				//spyOn(Auth, 'logout').re;
-				
+				//init of controller;
+				$controller = $injector.get('$controller');
 				NavCtrl = $controller('NavCtrl', {
 					'$rootScope' : $rootScope,
 					'$scope' : $scope,
@@ -157,8 +154,7 @@ describe('Controllers', function() {
 		beforeEach(inject(function($injector) {
 			//$httpBackend = $injector.get('$httpBackend');
 			$rootScope = $injector.get('$rootScope');
-			$scope = $rootScope.$new();
-			$controller = $injector.get('$controller');	
+			$scope = $rootScope.$new();			
             $location = jasmine.createSpyObj('$location',['path']);	
 			$window = jasmine.createSpyObj('$window',['location']);	
 			
@@ -172,8 +168,10 @@ describe('Controllers', function() {
 				}
 			};
 							
-		
+		 
             //init the controller:
+			$controller = $injector.get('$controller');	
+			
 			$controller('LoginCtrl',{
 			  '$rootScope':$rootScope,
 			  '$scope':$scope,
@@ -191,7 +189,7 @@ describe('Controllers', function() {
 		});
 	})
     //Home
-   describe('HomeCtrl',function(){
+    describe('HomeCtrl',function(){
 	    var $rootScope, $controller, $location, Auth;
 		
 		beforeEach(inject(function($injector) {
@@ -216,7 +214,40 @@ describe('Controllers', function() {
 		});		
 		
    });	
-	
-	
+	//Register
+	describe('RegisterCtrl',function(){
+		var $rootScope, $scope, $location, Auth, $controller;
+		beforeEach(inject(function($injector) {
+			$rootScope = $injector.get('$rootScope');
+			$scope = $rootScope.$new();						
+			$location = jasmine.createSpyObj('$location',['path']);	
+			
+			Auth = {
+				user: {name : 'Shlomo',role:{title:'admin'}},
+				userRoles:{user: {name : 'Shlomo'}},
+				accessLevels:[{}],
+				register : function(params, callback){						
+					callback();
+				}
+			};
+			
+            //init the controller:
+		    $controller = $injector.get('$controller');	
+			$controller('RegisterCtrl',{  
+				'$rootScope':$rootScope,
+				'$scope':$scope,
+				'$location':$location,
+				'Auth':Auth				
+			});		
+		}));
+		it('should redirect to /admin if user is admin',function(){
+			//expect($scope.role).toEqual({name : 'Shlomo'});
+			expect($scope.userRoles).toEqual({user:{name : 'Shlomo'}});
+			
+			   
+			$scope.register();		
+			expect($location.path).toHaveBeenCalledWith('/');				
+		});				
+	})
 	
 });
