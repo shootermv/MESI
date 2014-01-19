@@ -7,7 +7,7 @@
 	//add Tests to LoginCtrl Controller   - V
 	//add Tests to HomeCtrl Controller    - V
 	//add Tests to RegisterCtrl Controller- V
-	//add Tests to PrivateCtrl Controller
+	//add Tests to PrivateCtrl Controller - V
 
 describe('Controllers', function() {	
 	beforeEach(module('Mesi'));
@@ -251,6 +251,46 @@ describe('Controllers', function() {
 	})
 	//Private
 	describe('PrivateCtrl', function(){
-	
+			var $rootScope, $scope, Tasks, Socket, 
+			$httpBackend, $controller, PrivateCtrl; 
+			 
+			beforeEach(inject(function($injector, Tasks) {
+				
+				$rootScope = $injector.get('$rootScope');
+				$scope = $rootScope.$new();								
+				/*Tasks = {	
+					getUserTasks : function(callback){						
+						callback();
+					}
+				};*/
+				
+				Socket = {
+					on:function(eventname, callback){						
+						callback({});
+					}
+				};
+				
+                $httpBackend = $injector.get('$httpBackend');
+				$httpBackend.when('GET','/tasks').respond([{summary:'task 1'},{summary:'task 2'}]);
+				
+				//init of controller;
+				$controller = $injector.get('$controller');
+				PrivateCtrl = $controller('PrivateCtrl', {
+					'$rootScope' : $rootScope,
+					'$scope' : $scope,
+					'Tasks':Tasks,
+					'Socket':Socket
+				});
+				
+			}));
+			afterEach(function() {
+				$httpBackend.verifyNoOutstandingExpectation();
+				$httpBackend.verifyNoOutstandingRequest();
+			});			
+            it('Should bring users and their tasks', function() {
+                expect($scope.tasks).toBeUndefined();
+				$httpBackend.flush();
+				expect($scope.tasks.length).toEqual(2);
+			})
 	})
 });

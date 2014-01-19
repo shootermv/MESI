@@ -78,13 +78,11 @@ angular.module('Mesi').controller('RegisterCtrl',
 angular.module('Mesi').controller('PrivateCtrl',
 ['$rootScope', '$scope', 'Tasks', 'Socket', function($rootScope, $scope, Tasks, Socket) {
     
-	//when some task assigned by admin - user must immediately see it
-    Socket.on('newtask', function (message) {
-	  $scope.getUserTasks();
-	});
+    $scope.tasks;
 
 	$scope.getUserTasks = function(){
 		Tasks.getUserTasks(function(res){
+		    console.log('success!!!')
 			$scope.tasks= res;
 		});	
 	};
@@ -103,6 +101,12 @@ angular.module('Mesi').controller('PrivateCtrl',
   
 		});		
 	};
+
+	//when some task assigned by admin - user must immediately see it
+    Socket.on('newtask', function (message) {
+	  $scope.getUserTasks();
+	});
+
 	
 	$scope.getUserTasks();
 }]);

@@ -70,6 +70,7 @@ angular.module('Mesi')
             $http.get('/ForAdmin').success(success).error(error);						
         },
 		getUserTasks: function(success, error) {
+		    console.log('i')
 			$http.get('/tasks').success(success).error(error);	
 		},
 		unAssignTask:function(data ,success, error){
