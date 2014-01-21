@@ -10,15 +10,14 @@ module.exports = function(config){
 		    JASMINE_ADAPTER,
 
 			'client/lib/angular/angular/angular.min.js',
-			'client/lib/angular/**/*.js',  
+			'client/lib/angular/**/*.js',  		
 			'test/vendor/angular/angular-mocks.js',
 			'client/js/app.js',
 			'client/js/controllers.js',
 			'client/js/directives.js',
 			'client/js/filters.js',
 			'client/js/routingConfig.js',
-			'client/js/services.js',
-			
+			'client/js/services.js',			
 			'test/unit/*.spec.js'
 
 		   

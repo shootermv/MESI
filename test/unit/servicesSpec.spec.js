@@ -5,7 +5,7 @@
 //to add Test for Auth   service - V
 //to add Test for Users  service - V
 //to add Test for Tasks  service - V
-//to add Test for Socket service - 
+//to add Test for Socket service - V
 
 describe('services', function() {
     var svc, httpBackend;
@@ -115,15 +115,35 @@ describe('services', function() {
 	});
 
 	describe('Socket service', function() {
-	    var $rootScope;
-		beforeEach(inject(function($rootScope) {
+	    var $rootScope, svc, ioSpy;
+		window.io = {
+		                connect:function(){ 
+							return { 
+							  on:function(eventname ,callback){
+								   callback('koko');
+							  }
+							} 
+					    }
+					};
+		
+
+		beforeEach(inject(function($rootScope,  Socket) {
+				
 			$rootScope = $rootScope.$new();
+			svc = Socket;
+			
+			
 		}));	
 		afterEach(function() {
 			httpBackend.verifyNoOutstandingExpectation();
 			httpBackend.verifyNoOutstandingRequest();
 	    });
-		it('should verify "ON" and ""', function() {
+		it('should respond to "ON"', function() {
+		   var result;
+		   svc.on('shlomo',function(somevalue){
+			 result = somevalue
+		   });
+		   expect(result).toEqual('koko')			
 		})
 	})
 });
