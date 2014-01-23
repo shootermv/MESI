@@ -38,8 +38,8 @@ html(lang='en', data-ng-app='Mesi')
             .alert.alert-error(data-ng-bind="error", data-ng-show="error")
             .alert.alert-success.animate-show-hide(data-ng-bind="successmsg", data-ng-show="success", cssnotification)
             div(data-ng-view='ng-view')
-            
-
+        audio#sound           
+            source(src="{{'/sound/ice-block-drop-01.mp3'}}")
         script(src='lib/underscore/underscore-min.js')
         script(src='lib/angular/angular/angular.min.js')
         script(src='lib/angular/angular-cookies/angular-cookies.min.js')

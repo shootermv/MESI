@@ -35,7 +35,7 @@ module.exports = function(grunt) {
 		},		
 		watch: {
 		  all: {
-			files: ['**/*.html','**/*.js','**/*.less'],		
+			files: ['**/*.html','**/*.js','**/*.less','**/*.jade'],		
 			options: {
 			  livereload: {
 				port: 9000

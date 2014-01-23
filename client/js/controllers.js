@@ -105,6 +105,10 @@ angular.module('Mesi').controller('PrivateCtrl',
 	//when some task assigned by admin - user must immediately see it
     Socket.on('newtask', function (message) {
 	  $scope.getUserTasks();
+	  //play sound
+		var audio = document.getElementById("sound");
+		audio.load();
+		audio.play();
 	});
 
 	
