@@ -6,7 +6,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-karma');	  
-	
+	grunt.loadNpmTasks('grunt-ngmin');	
 	grunt.registerTask('default', ['watch']);
 	
 	
@@ -53,8 +53,22 @@ module.exports = function(grunt) {
 			  "client/css/app.css": "client/css/app.less"
 			}
 		  }
-		}		
-		 
+		},		
+		ngmin: {
+		  controllers: {
+			src: ['client/js/controllers.js'],
+			dest: 'client/dist/controllers.js'
+		  }/*,
+		  directives: {
+			expand: true,
+			cwd: 'test/src',
+			src: ['directives/.js'],
+			dest: 'test/generated'
+		  }*/
+		}
+
+
+		
     });
 	
 

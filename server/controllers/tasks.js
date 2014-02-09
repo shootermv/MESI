@@ -3,6 +3,7 @@ var _ =           require('underscore')
     require('../models/Task');
 Task = mongoose.model('Task');
 User = mongoose.model('User');
+Role = mongoose.model('Role');
 var io=null;
 
 
@@ -75,6 +76,17 @@ module.exports = {
 			result.unassignedTasks=tasks;
 			
 			//sort by the task status id  -{path:'tasks',options:{sort:{'status.id': 'ascending'}}}
+			/*
+			Role.findOne({title:'user'}, function(err, role){			
+				User.find({role:role._id}).populate('role').exec(function(err, u){
+				   if(err)
+					  console.log('error-',err);
+				   else{
+					  console.log('users in role "user":',u.length);
+				   }			   
+				});
+			
+			});*/
 			
 			//not admin users
              User.find().populate('role').populate('tasks').exec(function(err, allUsers){
@@ -90,16 +102,17 @@ module.exports = {
                 console.log('sorting...')				
 				_.each(result.users,function(u){				
 				    u.tasks = _.sortBy(u.tasks, function(obj){ return +obj.status.id })
+					u.tasks = u.tasks.slice(0,10);
 				})
 				//print tasks of each user:
-				
+				/*
 				_.each(result.users,function(u){
 				    console.log( u.name.toUpperCase() );
 					_.each(u.tasks,function(usertask){											
 						console.log('task '+ usertask.summary +' - ['+usertask.status.id+']');													
 					});				
 				});				
-				
+				*/
 				
 				res.send(result);					
 			 });			 
