@@ -1,4 +1,4 @@
-div.hero-unit
+div.well
     form(ng-submit="addTask(newtask)",name="form")
         input.addtaskinput(ng-model="newtask.summary",placeholder="type here",name="summary",required)
         span.alert-error(ng-show="form.summary.$error.required && form.summary.$dirty") field cannot be empty.		
@@ -11,12 +11,13 @@ div.hero-unit
             button.destroy(ng-click="removeUnassignedTask(task, $index)")	
  
 div.row
-    div(class="span{{12/users.length}} tasksof",data-ng-repeat="user in users")
-        h2 {{user.name}}
-        ul.droparea(btf-dragon="programmerTask in user.tasks | orderBy:'status.id'")
-            li(ng-class="{completed:programmerTask.status.name=='completed',activetask:programmerTask.status.name=='active'}") 
-                span.drag-handler
-                {{programmerTask.summary}}			    
+    div(class="col-md-{{12/users.length}} tasksof",data-ng-repeat="user in users")
+        .well
+            h2 {{user.name}}
+            ul.droparea(btf-dragon="programmerTask in user.tasks | orderBy:'status.id'")
+                li(ng-class="{completed:programmerTask.status.name=='completed',activetask:programmerTask.status.name=='active'}") 
+                   span.drag-handler
+                   {{programmerTask.summary}}			    
 hr		
 table.table.table-striped(data-ng-hide="loading")
     thead

@@ -76,16 +76,18 @@ angular.module('Mesi').controller('RegisterCtrl',
 }]);
 
 angular.module('Mesi').controller('PrivateCtrl',
-['$rootScope', '$scope', 'Tasks', 'Socket', function($rootScope, $scope, Tasks, Socket) {
+['$rootScope', '$scope', 'Tasks', 'TasksRes', 'Socket', function($rootScope, $scope, Tasks, TasksRes, Socket) {
     
     $scope.tasks;
-
+    
 	$scope.getUserTasks = function(){
 		Tasks.getUserTasks(function(res){
 		    console.log('success!!!')
 			$scope.tasks= res;
 		});	
 	};
+	
+	$scope.tasks = TasksRes;
 	
 	$scope.updateTaskStatus = function(task){
 		Tasks.updateTask(task,
@@ -112,15 +114,16 @@ angular.module('Mesi').controller('PrivateCtrl',
 	});
 
 	
-	$scope.getUserTasks();
+	//$scope.getUserTasks();
 }]);
 
 angular.module('Mesi').controller('AdminCtrl',
-['$rootScope', '$scope', 'Users', 'Auth', 'Tasks', 'Socket',  function($rootScope, $scope, Users, Auth, Tasks, Socket) {
+['$rootScope', '$scope', 'Users', 'Auth', 'Tasks', 'Socket', 'TasksRes', function($rootScope, $scope, Users, Auth, Tasks, Socket, TasksRes) {
     $scope.loading = true;
     $scope.userRoles = Auth.userRoles;
 	$scope.users = [];
 	$scope.unassignedTasks = [];
+	
 	
 	$scope.removeUnassignedTask = function(task, index){	
 		Tasks.removeUnassignedTask(task, function(task){
@@ -182,62 +185,52 @@ angular.module('Mesi').controller('AdminCtrl',
 		}	  
 	});
 
+
 	
-    Tasks.getAllForAdmin(function(res) {	
-        $scope.users = res.users;
-		$scope.unassignedTasks = res.unassignedTasks;  
-        $scope.loading = false;
-		
+	$scope.users = TasksRes.users;
+	$scope.unassignedTasks = TasksRes.unassignedTasks;  
+	$scope.loading = false;
+	
 
-		
-		$scope.$watch('unassignedTasks', function (newVal, oldVal) { 
+	
+	$scope.$watch('unassignedTasks', function (newVal, oldVal) { 	   
+		//console.log('$scope.selectedUser'+$scope.selectedUser.name)
+		if(!$scope.selectedUser || !$scope.selectedProgrammerTask)return;		
+		if(newVal.length > oldVal.length){//some task dropped and will became unassigned
 		   
-		    //console.log('$scope.selectedUser'+$scope.selectedUser.name)
-		    if(!$scope.selectedUser || !$scope.selectedProgrammerTask)return;		
-		    if(newVal.length > oldVal.length){//some task dropped and will became unassigned
-			   
-			    console.log('attention! trying to unassign task-')
-			    Tasks.unAssignTask({uid:$scope.selectedUser._id, taskId:$scope.selectedProgrammerTask._id},function(res){
-					console.log('success with unassign task')
-					$scope.selectedProgrammerTask=null;
-					$scope.selectedUser=null;	  
-			    }, function(err) {
-					$scope.selectedProgrammerTask=null;
-					$scope.selectedUser=null;						
-					$rootScope.error = "Failed to unassign task -";
-					$scope.loading = false;					  
-			    });			  			  
-			}else{
-                alert(JSON.stringify(oldVal)+' new:' +JSON.stringify(newVal))
-            }			
-		},true);
-		
-		
-		$scope.$watch('users', function (newUsers, oldUsers) {
-	        if($scope.dropedUser && $scope.selectedTask ){
-				console.log('attention! trying to assign task')
-				//console.log('task '+ $scope.selectedTask._id +' to user '+ $scope.dropedUser.name);
-			    Tasks.assignTask({uid:$scope.dropedUser._id, taskId:$scope.selectedTask._id},function(res){
-					console.log('task assigned successfully to user ' +$scope.dropedUser.name);
-
-
-
-
-					$scope.selectedTask=null;
-					$scope.dropedUser=null;		  
-			    }, function(err) {
-					$scope.selectedTask=null;
-					$scope.dropedUser=null;				  
-					$rootScope.error = "Failed to assign task -";
-					$scope.loading = false;					  
-			    });							
-			}			
-		},true);
-
-    }, function(err) {
-        $rootScope.error = "Failed to fetch users.";
-        $scope.loading = false;
-    });
-
+			console.log('attention! trying to unassign task-')
+			Tasks.unAssignTask({uid:$scope.selectedUser._id, taskId:$scope.selectedProgrammerTask._id},function(res){
+				console.log('success with unassign task')
+				$scope.selectedProgrammerTask=null;
+				$scope.selectedUser=null;	  
+			}, function(err) {
+				$scope.selectedProgrammerTask=null;
+				$scope.selectedUser=null;						
+				$rootScope.error = "Failed to unassign task -";
+				$scope.loading = false;					  
+			});			  			  
+		}else{
+			alert(JSON.stringify(oldVal)+' new:' +JSON.stringify(newVal))
+		}			
+	},true);
+	
+	
+	$scope.$watch('users', function (newUsers, oldUsers) {
+		if($scope.dropedUser && $scope.selectedTask ){
+			console.log('attention! trying to assign task')
+			//console.log('task '+ $scope.selectedTask._id +' to user '+ $scope.dropedUser.name);
+			Tasks.assignTask({uid:$scope.dropedUser._id, taskId:$scope.selectedTask._id},function(res){
+				console.log('task assigned successfully to user ' +$scope.dropedUser.name);
+				$scope.selectedTask=null;
+				$scope.dropedUser=null;		  
+			}, function(err) {
+				$scope.selectedTask=null;
+				$scope.dropedUser=null;				  
+				$rootScope.error = "Failed to assign task -";
+				$scope.loading = false;					  
+			});							
+		}			
+	},true);	
+			
 }]);
 

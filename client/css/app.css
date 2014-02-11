@@ -9,6 +9,7 @@
 body {
   font-size: 1em;
   /*direction:rtl;*/
+  padding-top:50px;
 }
 #cover {
   position: absolute;
@@ -55,8 +56,8 @@ body {
   opacity: 1;
 }
 .tasksof {
-  background-color: #eeeeee;
-  -webkit-border-radius: 6px;
+  padding:0;
+  
 }
 .hero-unit {
   margin-bottom: 30px;
@@ -146,4 +147,40 @@ button.destroy:after {
 .animate-show-hide.ng-hide-add,
 .animate-show-hide.ng-hide-remove.ng-hide-remove-active {
   opacity: 1;
+}
+.hide{display:none;}
+#loader-outer{
+	width: 54px;
+	height: 54px;
+	margin: 0px auto;
+	overflow: hidden;
+	background-image:url( images/loader.png);
+	background-repeat: no-repeat;
+}
+#loader-inner{
+	width: 29px; 
+	height: 29px; margin: 11px 14px;
+	background-image:url( images/loader.png);
+	background-repeat: no-repeat;
+	background-position: -54px 0px;
+}
+.disqus-loader{
+	animation:disqus-embed-spinner .7s infinite linear;
+	-webkit-animation:disqus-embed-spinner .7s infinite linear;
+}
+@keyframes disqus-embed-spinner{
+	0%{
+		transform:rotate(0deg)
+	}
+	100%{
+		transform:rotate(360deg)
+	}
+}
+@-webkit-keyframes disqus-embed-spinner{
+	0%{
+		-webkit-transform:rotate(0deg)
+	}
+	100%{
+		-webkit-transform:rotate(360deg)
+	}
 }

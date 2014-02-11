@@ -28,13 +28,31 @@ angular.module('Mesi', ['ngCookies', 'ngRoute', 'btford.dragon-drop','ngAnimate'
         {
             templateUrl:    'private',
             controller:     'PrivateCtrl',
-            access:         access.user
+            access:         access.user,
+			resolve: {
+				TasksRes:['Tasks', '$q', function(Tasks, $q){  
+					var delay = $q.defer();
+					Tasks.getUserTasks(function(res){
+						delay.resolve(res);
+					});
+					return  delay.promise ;				 
+				}]			
+			}
         });
     $routeProvider.when('/admin',
         {
             templateUrl:    'admin',
             controller:     'AdminCtrl',
-            access:         access.admin
+            access:         access.admin,
+			resolve: {			
+				TasksRes:['Tasks', '$q', function(Tasks, $q){  
+					var delay = $q.defer();
+					Tasks.getAllForAdmin(function(res){
+						delay.resolve(res);
+					});
+					return  delay.promise ;				 
+				 }]
+			}
         });
     $routeProvider.when('/404',
         {
@@ -80,7 +98,7 @@ angular.module('Mesi', ['ngCookies', 'ngRoute', 'btford.dragon-drop','ngAnimate'
 
 	$rootScope.$on("$routeChangeStart", function (event, next, current) {
 	    //console.log('route changed...'+next.access.title);	
-		$rootScope.error = null;
+		$rootScope.error = null;		
 		
 		if (!Auth.authorize(next.access)) {
 			if(Auth.isLoggedIn()){

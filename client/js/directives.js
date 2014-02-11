@@ -66,8 +66,7 @@ angular.module('Mesi').directive('cssnotification', [ '$timeout', '$rootScope',f
 		     
 		    $rootScope.$watch('success',function(newVal ,oldVal){			    
 				if(newVal){				   				   
-					$timeout(function(){
-					  
+					$timeout(function(){					
 						$rootScope.success = false;							
 					},1000);
                 }
@@ -116,4 +115,21 @@ angular.module('Mesi').directive('statusPicker', ['Tasks','$rootScope', function
 			}
 		};
 
+}]);
+
+angular.module('Mesi').directive('loader', ['$rootScope', function($rootScope) {
+	return {
+		restrict: "E",
+		templateUrl:'loader',
+		link: function(scope, element, attrs) {
+		  element.addClass('hide');
+     
+		  $rootScope.$on('$routeChangeStart', function() {
+			element.removeClass('hide');
+		  });
+		  $rootScope.$on('$routeChangeSuccess', function() {		   
+			element.addClass('hide');
+		  });
+		}		 
+    }
 }]);

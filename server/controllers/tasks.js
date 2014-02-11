@@ -114,7 +114,8 @@ module.exports = {
 				});				
 				*/
 				
-				res.send(result);					
+				res.send(result);
+                					
 			 });			 
 	    });	
 		
