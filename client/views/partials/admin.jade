@@ -1,4 +1,5 @@
 div.well
+    .alert.alert-info drag the tasks to the programmers
     form(ng-submit="addTask(newtask)",name="form")
         input.addtaskinput(ng-model="newtask.summary",placeholder="type here",name="summary",required)
         span.alert-error(ng-show="form.summary.$error.required && form.summary.$dirty") field cannot be empty.		
@@ -15,7 +16,7 @@ div.row
         .well
             h2 {{user.name}}
             ul.droparea(btf-dragon="programmerTask in user.tasks | orderBy:'status.id'")
-                li(ng-class="{completed:programmerTask.status.name=='completed',activetask:programmerTask.status.name=='active'}") 
+                li(ng-class="{completed:programmerTask.status.name=='completed','label-success':programmerTask.status.name=='active'}") 
                    span.drag-handler
                    {{programmerTask.summary}}			    
 hr		
