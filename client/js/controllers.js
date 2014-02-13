@@ -233,4 +233,3 @@ angular.module('Mesi').controller('AdminCtrl',
 	},true);	
 			
 }]);
-

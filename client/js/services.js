@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('Mesi')
-.factory('Auth', function($http, $cookieStore){
+.factory('Auth',['$http', '$cookieStore', function($http, $cookieStore){
 
     var accessLevels = routingConfig.accessLevels
         , userRoles = routingConfig.userRoles
@@ -52,19 +52,19 @@ angular.module('Mesi')
         userRoles: userRoles,
         user: currentUser
     };
-});
+}]);
 
 angular.module('Mesi')
-.factory('Users', function($http) {    
+.factory('Users',[ '$http', function($http) {    
     return {
         getAll: function(success, error) {             	
             $http.get('/users').success(success).error(error);
         }
     };
-});
+}]);
 
 angular.module('Mesi')
-.factory('Tasks', function($http/*, Socket*/) {
+.factory('Tasks',[ '$http', function($http/*, Socket*/) {
     return {
         getAllForAdmin: function(success, error) {
             $http.get('/ForAdmin').success(success).error(error);						
@@ -105,10 +105,10 @@ angular.module('Mesi')
 			$http({method:'DELETE', url:'/unassignedtask/'+task._id}).success(success).error(error);
 		}
     };
-})
+}]);
 //socket
 angular.module('Mesi')
-.factory('Socket', function($rootScope) {
+.factory('Socket', ['$rootScope', function($rootScope) {
 	var socket = io.connect('http://localhost:8000');
     return {
         on: function (eventName, callback) {
@@ -126,4 +126,4 @@ angular.module('Mesi')
 		}
 	};
 
-})
+}]);

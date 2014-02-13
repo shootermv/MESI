@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('Mesi', ['ngCookies', 'ngRoute', 'btford.dragon-drop','ngAnimate'])
+angular.module('Mesi', ['ngCookies', 'ngRoute', 'btford.dragon-drop', 'ngAnimate'])
 
-    .config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
+    .config(['$routeProvider', '$locationProvider', '$httpProvider',  function ($routeProvider, $locationProvider, $httpProvider) {
 
     var access = routingConfig.accessLevels;
 
@@ -30,13 +30,13 @@ angular.module('Mesi', ['ngCookies', 'ngRoute', 'btford.dragon-drop','ngAnimate'
             controller:     'PrivateCtrl',
             access:         access.user,
 			resolve: {
-				TasksRes:['Tasks', '$q', function(Tasks, $q){  
-					var delay = $q.defer();
-					Tasks.getUserTasks(function(res){
-						delay.resolve(res);
-					});
-					return  delay.promise ;				 
-				}]			
+			TasksRes:['Tasks', '$q', function(Tasks, $q){
+				var delay = $q.defer();
+				Tasks.getUserTasks(function(res){
+					delay.resolve(res);
+				});
+				return  delay.promise ;				 
+			}]			
 			}
         });
     $routeProvider.when('/admin',
