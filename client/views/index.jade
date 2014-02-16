@@ -15,6 +15,12 @@ html(lang='en', data-ng-app='Mesi')
 
         .navbar.navbar-default.navbar-fixed-top(data-ng-controller="NavCtrl")
             .container
+                .navbar-header
+                    a.navbar-brand(href="../") Mesi
+                    button.navbar-toggle(type="button",data-toggle="collapse",data-target="#navbar-main")
+                       span.icon-bar
+                       span.icon-bar
+                       span.icon-bar				
                 .navbar-collapse.collapse
                     ul.nav.navbar-nav
                         li(data-access-level='accessLevels.anon', active-nav)
