@@ -1,5 +1,5 @@
 .alert.alert-info click on the status to change it
-ul
-	li(ng-repeat="task in tasks | orderBy:'status.id':false")
+ul.list-group
+	li.list-group-item(ng-repeat="task in tasks | orderBy:'status.id':false")
 		span {{task.summary}}
 		status-picker.statuspckr(ng-model="task.status.name") {{task.status.name}}
