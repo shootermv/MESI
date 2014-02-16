@@ -17,11 +17,11 @@ html(lang='en', data-ng-app='Mesi')
             .container
                 .navbar-header
                     a.navbar-brand(href="../") Mesi
-                    button.navbar-toggle(type="button",data-toggle="collapse",data-target="#navbar-main")
+                    button.navbar-toggle(type="button",data-toggle="collapse",data-target="#navbar-main",ng-click="open =!open")
                        span.icon-bar
                        span.icon-bar
                        span.icon-bar				
-                .navbar-collapse.collapse
+                #navbar-main.navbar-collapse.collapse(ng-class="{ in: open }")
                     ul.nav.navbar-nav
                         li(data-access-level='accessLevels.anon', active-nav)
                             a(href='/login') Log in
@@ -34,7 +34,7 @@ html(lang='en', data-ng-app='Mesi')
                         li(data-access-level='accessLevels.user')
                             a(href="", data-ng-click="logout()")
                                 | Log out
-                    div#userInfo.pull-right(data-access-level='accessLevels.user')
+                    div#userInfo.pull-right.hidden-xs(data-access-level='accessLevels.user')
                         | Welcome&nbsp;
                         strong {{ user.name }}&nbsp;
                         span.label(data-ng-class='{"label-info": user.role.title == userRoles.user.title, "label-success": user.role.title == userRoles.admin.title}') {{ user.role.title }}
