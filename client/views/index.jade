@@ -24,15 +24,15 @@ html(lang='en', data-ng-app='Mesi')
                 #navbar-main.navbar-collapse.collapse(ng-class="{ in: open }")
                     ul.nav.navbar-nav
                         li(data-access-level='accessLevels.anon', active-nav)
-                            a(href='/login') Log in
+                            a(href='/login',data-ng-click="open =!open") Log in
                         li(data-access-level='accessLevels.anon', active-nav)
-                            a(href='/register') Register
+                            a(href='/register',data-ng-click="open =!open") Register
                         li(data-access-level='accessLevels.useronly', active-nav)
                             a(href='/private') Tasks
                         li(data-access-level='accessLevels.admin', active-nav)
-                            a(href='/admin') Admin
+                            a(href='/admin',data-ng-click="open =!open") Admin
                         li(data-access-level='accessLevels.user')
-                            a(href="", data-ng-click="logout()")
+                            a(href="", data-ng-click="open =!open;logout()")
                                 | Log out
                     div#userInfo.pull-right.hidden-xs(data-access-level='accessLevels.user')
                         | Welcome&nbsp;

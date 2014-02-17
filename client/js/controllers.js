@@ -179,9 +179,18 @@ angular.module('Mesi').controller('AdminCtrl',
 					user_task = usertask;
 				}
 			});  
-			console.log('old-'+user_task.status.name);
-			console.log('new-'+taskmsg.task.status.name);
-			if(user_task)  user_task.status = 	taskmsg.task.status;		
+
+			if(user_task){
+				console.log('old-'+user_task.status.name);
+				console.log('new-'+taskmsg.task.status.name);  	
+				
+				user_task.status = 	taskmsg.task.status;	
+
+				//play sound
+				var audio = document.getElementById("sound");
+				audio.load();
+				audio.play();
+			}		
 		}	  
 	});
 
