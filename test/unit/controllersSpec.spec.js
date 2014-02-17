@@ -20,7 +20,7 @@ describe('Controllers', function() {
 		beforeEach(inject(function($injector) {
 			$rootScope = $injector.get('$rootScope');
 		})); 
-				
+			
 		function createLocals() {
 		  return {
 				$rootScope: $rootScope,
@@ -40,6 +40,10 @@ describe('Controllers', function() {
 					on:function(name,callback){
 					
 					}
+				},
+				TasksRes:{
+					users:[{name:'momo'}],
+					unassignedTasks:[{summary:'taskkkk'}]
 				}
 			};
 		}
@@ -49,6 +53,7 @@ describe('Controllers', function() {
 			$controller('AdminCtrl', locals);
 		  });
 		} 
+		
 		
 		describe('AdminCtrl', function() {
 		    //initialization of controller
@@ -63,13 +68,14 @@ describe('Controllers', function() {
 				
 				var locals = createLocals();
 				//set up the spy.
-				spyOn(locals.Tasks, 'getAllForAdmin').andCallThrough();
+				//spyOn(locals.Tasks, 'getAllForAdmin').andCallThrough();
 				//make call
 				runController(locals);				
 				//assert!
-				expect(locals.Tasks.getAllForAdmin).toHaveBeenCalled();    
+				//expect(locals.Tasks.getAllForAdmin).toHaveBeenCalled();
+                 expect(locals.$scope.unassignedTasks).toEqual([{summary:'taskkkk'}]) 				
 			});	
-
+            
 			//checks add task form
 			it('the "add task" form should add new task', inject(function() {
 				var locals = createLocals();
@@ -102,7 +108,8 @@ describe('Controllers', function() {
 				
 				//assert
 				expect(locals.Tasks.unAssignTask).toHaveBeenCalled();				
-			});							
+			});	
+									
 		});
 
     });	
@@ -136,8 +143,8 @@ describe('Controllers', function() {
 				
 			}));
 		
-		
-			it('when logout pressed should redirect to logout ',function(){
+		    
+			it('after logout pressed should redirect to logout ',function(){
 			
 			   expect($scope.user).toEqual({name:'Shlomo'});
 			   expect($scope.userRoles).toEqual([]);
@@ -146,6 +153,7 @@ describe('Controllers', function() {
 			   $scope.logout();
 			   expect($location.path).toHaveBeenCalledWith('/login');
 			})
+			
 		});
  	//Login	
 	describe('LoginCtrl', function() {
@@ -182,8 +190,7 @@ describe('Controllers', function() {
 			
 		}));
 		
-		it('should redirect to /admin if user is admin',function(){
-			   
+		it('should redirect to /admin if user is admin',function(){			   
 			   $scope.login({});
 			   expect($location.path).toHaveBeenCalledWith('/admin');			
 		});
@@ -209,7 +216,6 @@ describe('Controllers', function() {
 		}));
 		
 		it('should redirect to /admin if user is admin',function(){
-
 			   expect($location.path).toHaveBeenCalledWith('/admin');			
 		});		
 		
@@ -240,8 +246,7 @@ describe('Controllers', function() {
 				'Auth':Auth				
 			});		
 		}));
-		it('should redirect to /admin if user is admin',function(){
-			//expect($scope.role).toEqual({name : 'Shlomo'});
+		it('should redirect to /admin if user is admin',function(){		
 			expect($scope.userRoles).toEqual({user:{name : 'Shlomo'}});
 			
 			   
@@ -249,6 +254,7 @@ describe('Controllers', function() {
 			expect($location.path).toHaveBeenCalledWith('/');				
 		});				
 	})
+	
 	//Private
 	describe('PrivateCtrl', function(){
 			var $rootScope, $scope, Tasks, Socket, 
@@ -258,11 +264,7 @@ describe('Controllers', function() {
 				
 				$rootScope = $injector.get('$rootScope');
 				$scope = $rootScope.$new();								
-				/*Tasks = {	
-					getUserTasks : function(callback){						
-						callback();
-					}
-				};*/
+
 				
 				Socket = {
 					on:function(eventname, callback){						
@@ -286,11 +288,13 @@ describe('Controllers', function() {
 			afterEach(function() {
 				$httpBackend.verifyNoOutstandingExpectation();
 				$httpBackend.verifyNoOutstandingRequest();
-			});			
+			});
+			/*
             it('Should bring users and their tasks', function() {
                 expect($scope.tasks).toBeUndefined();
 				$httpBackend.flush();
 				expect($scope.tasks.length).toEqual(2);
-			})
+			})*/
+			
 	})
 });

@@ -123,6 +123,11 @@ angular.module('Mesi').controller('AdminCtrl',
     $scope.userRoles = Auth.userRoles;
 	$scope.users = [];
 	$scope.unassignedTasks = [];
+
+	
+	$scope.users = TasksRes.users;
+	$scope.unassignedTasks = TasksRes.unassignedTasks;  
+	$scope.loading = false;
 	
 	
 	$scope.removeUnassignedTask = function(task, index){	
@@ -193,12 +198,6 @@ angular.module('Mesi').controller('AdminCtrl',
 			}		
 		}	  
 	});
-
-
-	
-	$scope.users = TasksRes.users;
-	$scope.unassignedTasks = TasksRes.unassignedTasks;  
-	$scope.loading = false;
 	
 
 	
