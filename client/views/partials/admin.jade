@@ -9,7 +9,7 @@ div.well
             span(ng-dblclick="editTask(task)",ng-hide="editedTask ==task") {{task.summary}}
             form(ng-submit="doneEditing(editedTask)",ng-show="editedTask==task")
                 input.edit(ng-model="editedTask.summary",todo-blur="doneEditing(editedTask)")
-            button.destroy(ng-click="removeUnassignedTask(task, $index)")	
+            span.glyphicon.glyphicon-remove.destroy(ng-click="removeUnassignedTask(task, $index)")	
  
 div.row
     div(class="col-md-{{12/users.length}} tasksof",data-ng-repeat="user in users")

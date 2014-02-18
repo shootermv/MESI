@@ -86,7 +86,7 @@ li.activetask{
 	font-weight:bold;
 	color:blue;
 }
-button.destroy {
+span.destroy {
 	display: none;
 	/*position: absolute;
 	top: 0;
@@ -97,7 +97,7 @@ button.destroy {
 	width: 20px;
 	height: 20px;	
 	font-size: 15px;
-	color: #a88a8a;
+	
 	-webkit-transition: all 0.2s;
 	-moz-transition: all 0.2s;
 	-ms-transition: all 0.2s;
@@ -105,21 +105,21 @@ button.destroy {
 	transition: all 0.2s;
 }
 
-button.destroy:hover {
+span.destroy:hover {
 	text-shadow: 0 0 1px #000,
 				 0 0 10px rgba(199, 107, 107, 0.8);
-/*	-webkit-transform: scale(1.3);
+	-webkit-transform: scale(1.3);
 	-moz-transform: scale(1.3);
 	-ms-transform: scale(1.3);
 	-o-transform: scale(1.3);
-	transform: scale(1.3);*/
+	transform: scale(1.3);
 }
-span.unassigned:hover .destroy {
+.unassigned:hover span.destroy {
 	display: inline-block;
+	margin:-2px 0 0 3px;
+	cursor:pointer;
 }
-button.destroy:after {
-	content:'✖';
-}
+
 .drag-handler{
 	background:url(images/drag_handle.png);
 	width:10px;
