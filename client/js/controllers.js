@@ -222,6 +222,28 @@ angular.module('Mesi').controller('AdminCtrl',
 		}			
 	},true);
 	
+    $scope.assignTask = function(user, task){
+		$scope.selectedTask = task;
+		$scope.dropedUser = user;
+		
+		//find index of task in unassigned tasks
+		var index;
+		for(var i=0 ; i < $scope.unassignedTasks.length ; i++ ){
+			if($scope.unassignedTasks[i]._id === task._id ){
+				index = i;
+			}
+		}
+		//find user in users array:
+		for(var i=0 ; i < $scope.users.length ; i++ ){
+			//remove the task from unassigned tasks
+			$scope.unassignedTasks.splice(index,1);
+			//assign the task
+		    if($scope.users[i]._id === user._id ){
+				$scope.users[i].tasks.push(task);//will trigger watch of "users"
+			}		
+		}
+
+	}
 	
 	$scope.$watch('users', function (newUsers, oldUsers) {
 		if($scope.dropedUser && $scope.selectedTask ){

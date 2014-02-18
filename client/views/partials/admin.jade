@@ -6,6 +6,11 @@ div.well
     ul.droparea(btf-dragon="task in unassignedTasks")
         span.unassigned
             span.drag-handler
+            span.pull-left.visible-xs.dropdown
+                .dropdown-toggle.glyphicon.glyphicon-pencil
+                ul.dropdown-menu
+                    li(ng-repeat="user in users")
+                        a(ng-click="assignTask(user, task)") {{user.name}}   
             span(ng-dblclick="editTask(task)",ng-hide="editedTask ==task") {{task.summary}}
             form(ng-submit="doneEditing(editedTask)",ng-show="editedTask==task")
                 input.edit(ng-model="editedTask.summary",todo-blur="doneEditing(editedTask)")
