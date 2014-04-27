@@ -186,6 +186,8 @@ module.exports = {
                 return done(null, user);
             }			
 			*/
+			
+			
 			User.findOne({ name: username }).populate('role').exec(function (err, user) {
 				if (err) {    
                      console.log('error occurred during authentication...');			

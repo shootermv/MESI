@@ -7,3 +7,6 @@ C:\mongodb\bin\mongodump --dbpath c:/mongodb/data/db/ --out c:/data/backup16.01.
 //RESTORE
 //cd c:\
 C:\mongodb\bin\mongorestore --dbpath  c:\DB c:\data\backup16.01.2014
+
+//IMPPORT
+C:\mongodb\bin\mongorestore --db skyhatch --dbpath  c:/DB c:/data/backup16.01.2014/skyhatch

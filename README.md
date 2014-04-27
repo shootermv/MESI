@@ -145,6 +145,6 @@ fetch the changes and merge them into your project with git.
         filtersSpec.js          --> specs for filters
         servicesSpec.js         --> specs for services
 
-## Contact
+### Health
 
-For more information on AngularJS please check out http://angularjs.org/
+https://www.codeship.io/projects/4bc89c10-b00d-0131-a029-52deea7632c1/status

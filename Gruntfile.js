@@ -17,22 +17,12 @@ module.exports = function(grunt) {
     };
 
     grunt.initConfig({
-        /*
-		karma: {
-		  unit: { options: karmaConfig('test/config/unit.js') },
-		  watch: { options: karmaConfig('test/config/unit.js', { singleRun:false, autoWatch: true}) }
-		},
-		*/
-		karma: {
-		    unit: {
-			   configFile: 'test/config/unit.js',
-		    },
-		    watch: {
-				configFile: 'test/config/unit.js', 
-			    singleRun:false,
-			    autoWatch: true
-			}		  
-		},		
+	  karma: {
+		   unit: {
+			configFile: 'test/config/unit.js',
+			autoWatch: true
+		   }
+	   },		
 		watch: {
 		  all: {
 			files: ['**/*.html','**/*.js','**/*.less','**/*.jade'],		
