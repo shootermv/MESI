@@ -14,7 +14,7 @@ div.well
             span(ng-dblclick="editTask(task)",ng-hide="editedTask ==task") {{task.summary}}
             form(ng-submit="doneEditing(editedTask)",ng-show="editedTask==task")
                 input.edit(ng-model="editedTask.summary",todo-blur="doneEditing(editedTask)")
-            span.glyphicon.glyphicon-remove.destroy(ng-click="removeUnassignedTask(task, $index)")	
+            span.glyphicon.glyphicon-remove.destroy(ng-click="removeUnassignedTask(task, $index)")
  
 div.row
     div(class="col-md-{{12/users.length}} tasksof",data-ng-repeat="user in users")
@@ -23,7 +23,7 @@ div.row
             ul.droparea(btf-dragon="programmerTask in user.tasks | orderBy:'status.id'")
                 li(ng-class="{completed:programmerTask.status.name=='completed','label-success':programmerTask.status.name=='active'}") 
                    span.drag-handler
-                   {{programmerTask.summary}}			    
+                   {{programmerTask.summary}}		    
 hr		
 table.table.table-striped(data-ng-hide="loading")
     thead

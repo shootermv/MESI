@@ -75,25 +75,13 @@ module.exports = {
 	   	Task.find(function(err, tasks){
 			result.unassignedTasks=tasks;
 			
-			//sort by the task status id  -{path:'tasks',options:{sort:{'status.id': 'ascending'}}}
-			/*
-			Role.findOne({title:'user'}, function(err, role){			
-				User.find({role:role._id}).populate('role').exec(function(err, u){
-				   if(err)
-					  console.log('error-',err);
-				   else{
-					  console.log('users in role "user":',u.length);
-				   }			   
-				});
-			
-			});*/
 			
 			//not admin users
              User.find().populate('role').populate('tasks').exec(function(err, allUsers){
 			    //must filter admin from all other users(admin cannot get tasks):
+				
 			    result.users  = _.filter(allUsers, function(usr){return usr.role.title== "user"});
 				//filter assgned tasks:
-
 				result.unassignedTasks = _.filter(result.unassignedTasks, function(tsk){
 				   return notFoundInAssiged(result.users, tsk)
 				});
@@ -101,9 +89,14 @@ module.exports = {
 				//must sort tasks of each user by status
                 console.log('sorting...')				
 				_.each(result.users,function(u){				
-				    u.tasks = _.sortBy(u.tasks, function(obj){ return +obj.status.id })
+				    _.sortBy(u.tasks, function(obj){
+						return +obj.status.id;
+					});
+					console.log('---fff---',u.tasks[0]);					
 					u.tasks = u.tasks.slice(0,10);
-				})
+				});
+				
+				console.log('-------',result.users[0].tasks[0]);
 				//print tasks of each user:
 				/*
 				_.each(result.users,function(u){
