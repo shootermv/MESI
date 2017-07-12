@@ -1,13 +1,11 @@
 module.exports = function(config){
     config.set({
-		//frameworks:["jasmine"],
+		frameworks:["jasmine"],
 		// base path, that will be used to resolve files and exclude
 		basePath : '../../',
 
 		// list of files / patterns to load in the browser
 		files : [
-		    JASMINE,
-		    JASMINE_ADAPTER,
 
 			'client/lib/angular/angular/angular.min.js',
 			'client/lib/angular/**/*.js',  		
@@ -27,15 +25,16 @@ module.exports = function(config){
 		// possible values: 'dots' || 'progress'
 		reporters : 'progress',
 
-		// these are default values, just to show available options
-
+		plugins: [
+		'karma-phantomjs-launcher',
+		'karma-jasmine'
+		],
 		// web server port
 		port : 8089,
 
 		// cli runner port
 		runnerPort : 9109,
 
-		urlRoot : '/__test/',
 
 		// enable / disable colors in the output (reporters and logs)
 		colors : true,
@@ -57,7 +56,7 @@ module.exports = function(config){
 		// - Opera
 		// - Safari
 		// - PhantomJS
-		browsers : ['Chrome'],
+		browsers : ['PhantomJS'],
 
 		// Continuous Integration mode
 		// if true, it capture browsers, run tests and exit
