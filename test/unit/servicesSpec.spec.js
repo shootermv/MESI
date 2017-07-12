@@ -8,38 +8,36 @@
 //to add Test for Socket service - V
 
 describe('services', function() {
-    var svc, httpBackend;
-	
-	beforeEach(module('Mesi'));	
+    var svc, httpBackend, cookieStoreSpy;
+		
+	//cookie mock
+	cookieStoreSpy = jasmine.createSpyObj('CookieStore', ['get','remove']);
+	cookieStoreSpy.get.and.returnValue({ name: "koko", role:{title:'admin',bitMask:4}});				 							
+	cookieStoreSpy.remove(function(key) {}) 	
+
+
+	beforeEach(module('Mesi'));
+	beforeEach(module(function($provide) {
+		$provide.value('$cookieStore', cookieStoreSpy);
+	}));	
 
 	describe('Auth service', function() {
 	    var authSvc,
         scope,
-        cookieStoreSpy,
 		httpBackend;
 		
-		beforeEach(function () {
-		    //cookie mock
-			cookieStoreSpy = jasmine.createSpyObj('CookieStore', ['get','remove']);
-			cookieStoreSpy.get.andReturn({ name: "koko", role:{title:'admin',bitMask:4}});				 							
-			cookieStoreSpy.remove(function(key) {})
-			module(function($provide) {
-				$provide.value('$cookieStore', cookieStoreSpy);
-			});									
-		});	
+												
 		beforeEach(inject(function($injector, Auth, $httpBackend) {
 		    httpBackend = $httpBackend;
 			authSvc = Auth;
-		
+			httpBackend.expectPOST('/login').respond({});
+			httpBackend.expectPOST('/register').respond({});
+			httpBackend.expectPOST('/logout').respond({});	
 		}));
 
         
 		it('should bring some user in currentUser variable', function() {
-			httpBackend.expectPOST('/login').respond({});
-			httpBackend.expectPOST('/register').respond({});
-			httpBackend.expectPOST('/logout').respond({});
-			
-			expect(authSvc.user).toEqual({ name: "koko", role:{title:'admin',bitMask:4}});
+			expect(angular.equals(authSvc.user.name, "koko")).toBe(true);
 		})
 	});
 	

@@ -7,13 +7,21 @@
 //to add test cssnotification directive
 
 describe('directives', function() {
-    var scope, elem;
+     
 	beforeEach(module('Mesi'));
-	
-	describe('status picker', function() {		
-	    it('should had a btn-danger class (red) if status is new',inject(function($compile, $rootScope, Tasks) {		
+
+	describe('status picker', function() {	
+		var scope, location, $compile, Tasks, elem, $rootScope;
+		beforeEach(inject(function(_$compile_, _$rootScope_, $location, _Tasks_) {
+				$rootScope = _$rootScope_
+				location = $location
+				$compile = _$compile_;
+				Tasks = _Tasks_;
+		}));		
+		
+		it('should had a btn-danger class (red) if status is new',function() {		
 			
-			spyOn(Tasks, 'updateTask').andCallFake(function(args,callback,errcallback) {
+			spyOn(Tasks, 'updateTask').and.callFake(function(args,callback,errcallback) {
 				 callback({summary:'blabla',status:{name:'completed',id:3}});	
 			});
 		    	
@@ -34,12 +42,12 @@ describe('directives', function() {
 	 
 		    //expect the background-color css property to be desirabe one
 		    expect(elem.attr("class")).toEqual('statuspckr btn-danger');
-		}));
+		});
 		
 		
-	    it('if status is new, after clicking button it should became "active" and then "completed"',inject(function($compile, $rootScope, Tasks ) {
+	    it('if status is new, after clicking button it should became "active" and then "completed"',function( ) {
 			
-			spyOn(Tasks, 'updateTask').andCallFake(function(args,callback,errcallback) {
+			spyOn(Tasks, 'updateTask').and.callFake(function(args,callback,errcallback) {
 				 callback({summary:'blabla',status:{name:'completed',id:3}});	
 			});
 			
@@ -50,7 +58,7 @@ describe('directives', function() {
 		
 			}	
 			
-		    var mySpy = spyOn(scope, 'updateTaskStatus').andCallThrough();
+		    var mySpy = spyOn(scope, 'updateTaskStatus').and.callThrough();
 			
 			
 	        scope.getUserTasks =function(){}
@@ -63,38 +71,44 @@ describe('directives', function() {
 		    $compile(elem)(scope);	
 
             elem[0].click();			
-            expect(mySpy.mostRecentCall.args[0]).toEqual({status:{name:'active',id:1}});
+            expect(mySpy.calls.mostRecent().args[0]).toEqual({status:{name:'active',id:1}});
             elem[0].click();			
-            expect(mySpy.mostRecentCall.args[0]).toEqual({status:{name:'completed',id:3}});			
-		}));		
+            expect(mySpy.calls.mostRecent().args[0]).toEqual({status:{name:'completed',id:3}});			
+		});		
 	    
 	});
 	
-	describe('accessLevel', function() {		
-        beforeEach(function() {
-		
-		    var mockAuth = {
-				user :{ name:'', role:{bitMask: 1, title: "public"}},
-				authorize:function(accessLevel, role){
-					return accessLevel.bitMask & role.bitMask;
-				}
+	describe('accessLevel', function() {	
+		var scope, location, $compile, Tasks, elem, $rootScope;
+		var mockAuth = {
+			user :{ name:'', role:{bitMask: 1, title: "public"}},
+			authorize:function(accessLevel, role){
+				return accessLevel.bitMask & role.bitMask;
 			}
-			
-			var accessLevels = {
-				"public":{"bitMask":7,"title":"*"},
-				"anon":{"bitMask":1,"title":"public"},
-				"user":{"bitMask":6,"title":"admin"},//user & admin
-				"admin":{"bitMask":4,"title":"admin"},
-				"useronly":{"bitMask":2,"title":"user"}
-			};
-							
-		    module(function($provide) {
-			    $provide.value('Auth', mockAuth);
-				$provide.value('accessLevels', accessLevels);				
-		    });
-		})
+		}
+		
+		var accessLevels = {
+			"public":{"bitMask":7,"title":"*"},
+			"anon":{"bitMask":1,"title":"public"},
+			"user":{"bitMask":6,"title":"admin"},//user & admin
+			"admin":{"bitMask":4,"title":"admin"},
+			"useronly":{"bitMask":2,"title":"user"}
+		};
+						
+		beforeEach(module(function($provide) {
+			$provide.value('Auth', mockAuth);
+			$provide.value('accessLevels', accessLevels);				
+		}));
+		
+		
+		beforeEach(inject(function(_$compile_, _$rootScope_, $location, _Tasks_) {
+				$rootScope = _$rootScope_
+				location = $location
+				$compile = _$compile_;
+				Tasks = _Tasks_;	
+		}))
 	
-		it('when user is public and access is public - the menu must be visible',inject(function($compile, $rootScope, accessLevels){
+		it('when user is public and access is public - the menu must be visible',function(){
 		
 
 		    scope = $rootScope.$new();
@@ -106,10 +120,10 @@ describe('directives', function() {
 			scope.$apply();
 						
 			expect(elem.css('display')).toEqual('');	
-		}));
+		});
 		
 	
-		it('when user is public and access is user - the menu must be hidden',inject(function($compile, $rootScope, accessLevels){		
+		it('when user is public and access is user - the menu must be hidden',function(){	
 
 		    scope = $rootScope.$new();
 			scope.accessLevels = accessLevels;
@@ -120,7 +134,7 @@ describe('directives', function() {
 			scope.$apply();
 						
 			expect(elem.css('display')).toEqual('none');	
-		}))		
+		})	
     });
 
 	describe('activeNav', function() {

@@ -14,11 +14,12 @@ describe('Controllers', function() {
 	
 	//Admin
     describe('Admin', function() {
-		var $rootScope, Tasks;
+		var $rootScope, Tasks, $controller;
 	  
 		
 		beforeEach(inject(function($injector) {
 			$rootScope = $injector.get('$rootScope');
+			$controller = $injector.get('$controller');
 		})); 
 			
 		function createLocals() {
@@ -48,20 +49,17 @@ describe('Controllers', function() {
 			};
 		}
        
-		function runController(locals) {
-		  inject(function($controller) {
-			$controller('AdminCtrl', locals);
-		  });
+		function runController(locals) {		
+			$controller('AdminCtrl', locals);		  
 		} 
 		
 		
 		describe('AdminCtrl', function() {
 		    //initialization of controller
-			fit('Should bring users and their tasks', function() {
-				//var locals = createLocals();
-				//runController(locals);							
-				//expect(locals.$scope.users).toEqual([{name:'momo'}]);
-				expect(true).toBe(true)
+			it('Should bring users and their tasks', function() {
+				var locals = createLocals();
+				runController(locals);							
+				expect(locals.$scope.users).toEqual([{name:'momo'}]);
 			});
 			
 			//initialization of controller
