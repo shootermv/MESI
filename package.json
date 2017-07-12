@@ -30,7 +30,7 @@
   "scripts": {
     "postinstall": "cd client && npm install && node_modules/.bin/grunt",
     "start": "node server.js",
-    "test": "karma start test/config/unit.js --single-run"
+    "test": "node_modules/.bin/karma start test/config/unit.js --single-run"
   },
   "engines": {
     "node": "8.1.2",
