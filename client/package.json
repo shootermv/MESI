@@ -14,12 +14,7 @@
   },
   "subdomain": "Mesi",
   "scripts": {
-    "start": "node server.js",
-    "test": "grunt test"
-  },
-  "engines": {
-    "node": "0.8.x",
-    "npm": "1.2.x"
+    "start": "node server.js"
   },
   "devDependencies": {}
 }
