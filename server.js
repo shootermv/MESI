@@ -5,7 +5,7 @@ var express = require('express')
     , User = require('./server/models/User.js')
     , mongoose = require('mongoose');
 
-//connect
+
 var conn = process.env.MONGODB_URI || 'mongodb://localhost/myDB';
 mongoose.connect(conn);
 
