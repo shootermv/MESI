@@ -1,13 +1,13 @@
-var express =       require('express')
-    , http =        require('http')
-    , passport =    require('passport')
-    , path =        require('path')
-    , User =        require('./server/models/User.js')
-	, mongoose = require('mongoose');
+var express = require('express')
+    , http = require('http')
+    , passport = require('passport')
+    , path = require('path')
+    , User = require('./server/models/User.js')
+    , mongoose = require('mongoose');
 
-	
 
-//mongoose.connect('mongodb://localhost/myDB');
+var conn = process.env.MONGODB_URI || 'mongodb://localhost/myDB';
+mongoose.connect(conn);
 
 var app = module.exports = express();
 
@@ -38,12 +38,12 @@ passport.deserializeUser(User.deserializeUser);
 
 
 app.set('port', process.env.PORT || 8000);
-var server = http.createServer(app).listen(app.get('port'), function(){
+var server = http.createServer(app).listen(app.get('port'), function () {
     console.log("Express server listening on port " + app.get('port'));
 });
-var  io = require('socket.io').listen(server);
+var io = require('socket.io').listen(server);
 io.sockets.on('connection', function (socket) {
-	console.log('socket is connected now...')
+    console.log('socket is connected now...')
 });
 
 
