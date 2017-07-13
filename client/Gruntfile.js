@@ -6,41 +6,47 @@ module.exports = function(grunt) {
 	
     grunt.initConfig({
 	    distdir: 'dist',
-		pkg: grunt.file.readJSON('package.json'),
-		src: {
-			less:['less/*.less'],
-            js: ['js/**/*.js']		
-		},
-		copy: {
-		  assets: {
-			files: [{ dest: '<%= distdir %>/css/images/', src : '**', expand: true, cwd: 'css/images/' }]
-		  }
-		},		
-		uglify: {
-		  dist:{
-			src:['<%= src.js %>'],
-			dest:'<%= distdir %>/js/<%= pkg.name %>.min.js'
-		  }
-		},		
-		recess: {
-		  build: {
-			files: {
-			  '<%= distdir %>/css/<%= pkg.name %>.css':
-			  ['<%= src.less %>'] 
-			},
-			options: {
-			  compile: true
-			}
+		  pkg: grunt.file.readJSON('package.json'),
+		  src: {
+			  less:['less/*.less'],
+        js: ['js/**/*.js']		
 		  },
-		  min: {
-			files: {
-			  '<%= distdir %>/css/<%= pkg.name %>.min.css': ['<%= src.less %>']
-			},
-			options: {
-			  compress: true
-			}
+			copy: {
+				assets: {
+				  files: [{ 
+						dest: '<%= distdir %>/css/images/', 
+						src : '**', expand: true, cwd: 'css/images/'
+					},{ 
+						dest: '<%= distdir %>/fonts/', 
+						src : '**', expand: true, cwd: 'fonts/'
+					}]
+				}
+			},		
+			uglify: {
+				dist:{
+					src:['<%= src.js %>'],
+					dest:'<%= distdir %>/js/<%= pkg.name %>.min.js'
+				}
+			},		
+			recess: {
+				build: {
+					files: {
+						'<%= distdir %>/css/<%= pkg.name %>.css':
+						['<%= src.less %>'] 
+					},
+					options: {
+						compile: true
+					}
+				},
+				min: {
+					files: {
+						'<%= distdir %>/css/<%= pkg.name %>.min.css': ['<%= src.less %>']
+					},
+					options: {
+						compress: true
+					}
+				}
 		  }
-		}
     });
 	
     grunt.registerTask('default',['recess:min','uglify','copy'])
