@@ -8,7 +8,7 @@
 //to add Test for Socket service - V
 
 describe('services', function () {
-	var svc, httpBackend, cookieStoreSpy;
+	var svc, httpBackend, cookieStoreSpy, usersSvc;
 
 	//cookie mock
 	cookieStoreSpy = jasmine.createSpyObj('CookieStore', ['get', 'remove']);
@@ -43,7 +43,7 @@ describe('services', function () {
 
 	describe('Users service', function () {
 		beforeEach(inject(function ($injector, Users, $httpBackend) {
-			svc = Users;
+			usersSvc = Users;
 			httpBackend = $httpBackend
 		}));
 		afterEach(function () {
@@ -52,10 +52,10 @@ describe('services', function () {
 		});
 
 		fit('should have a get function', function () {
-			expect(angular.isFunction(svc.getAll)).toBe(true);
+			expect(angular.isFunction(usersSvc.getAll)).toBe(true);
 		});
 
-		it('should bring all the users', function () {
+		fit('should bring all the users', function () {
 			var returnData = { excited: true };
 			//expectGET to make sure this is called once.
 
@@ -72,7 +72,7 @@ describe('services', function () {
 			//spyOn(test, 'handler');
 
 			//make the call.
-			svc.getAll(test.handler);
+			usersSvc.getAll(test.handler, function (er) { });
 
 			//flush the backend to "execute" the request to do the expectedGET assertion.
 			httpBackend.flush();
@@ -91,7 +91,7 @@ describe('services', function () {
 			httpBackend.verifyNoOutstandingExpectation();
 			httpBackend.verifyNoOutstandingRequest();
 		});
-		it('should bring all the tasks', function () {
+		fit('should bring all the tasks', function () {
 			var returnData = [{ summary: 'some task here...' }];
 			httpBackend.expectGET('/tasks').respond(returnData);
 			var result;
@@ -102,7 +102,7 @@ describe('services', function () {
 				}
 			};
 			//make the call.
-			svc.getUserTasks(test.handler);
+			svc.getUserTasks(test.handler, function (er) { });
 
 			//flush the backend to "execute" the request to do the expectedGET assertion.
 			httpBackend.flush();
@@ -135,7 +135,7 @@ describe('services', function () {
 			httpBackend.verifyNoOutstandingExpectation();
 			httpBackend.verifyNoOutstandingRequest();
 		});
-		it('should respond to "ON"', function () {
+		fit('should respond to "ON"', function () {
 			var result;
 			svc.on('shlomo', function (somevalue) {
 				result = somevalue

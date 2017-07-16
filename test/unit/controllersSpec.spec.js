@@ -56,14 +56,14 @@ fdescribe('Controllers', function () {
 
 		describe('AdminCtrl', function () {
 			//initialization of controller
-			it('Should bring users and their tasks', function () {
+			fit('Should bring users and their tasks', function () {
 				var locals = createLocals();
 				runController(locals);
 				expect(locals.$scope.users).toEqual([{ name: 'momo' }]);
 			});
 
 			//initialization of controller
-			it('Initially should make a call to Tasks.getAllForAdmin', function () {
+			fit('Initially should make a call to Tasks.getAllForAdmin', function () {
 
 				var locals = createLocals();
 				//set up the spy.
@@ -76,7 +76,7 @@ fdescribe('Controllers', function () {
 			});
 
 			//checks add task form
-			it('the "add task" form should add new task', inject(function () {
+			fit('the "add task" form should add new task', inject(function () {
 				var locals = createLocals();
 				runController(locals);
 				//set up.
@@ -90,7 +90,7 @@ fdescribe('Controllers', function () {
 			}));
 
 			// Test 3: Testing a $watch() 	   
-			it('should call Tasks.unAssignTasks when unassignedTasks collection is changed', function () {
+			fit('should call Tasks.unAssignTasks when unassignedTasks collection is changed', function () {
 				var locals = createLocals();
 				runController(locals);
 				//fire watchers
@@ -143,7 +143,7 @@ fdescribe('Controllers', function () {
 		}));
 
 
-		it('after logout pressed should redirect to logout ', function () {
+		fit('after logout pressed should redirect to logout ', function () {
 
 			expect($scope.user).toEqual({ name: 'Shlomo' });
 			expect($scope.userRoles).toEqual([]);
@@ -189,7 +189,7 @@ fdescribe('Controllers', function () {
 
 		}));
 
-		it('should redirect to /admin if user is admin', function () {
+		fit('should redirect to /admin if user is admin', function () {
 			$scope.login({});
 			expect($location.path).toHaveBeenCalledWith('/admin');
 		});
@@ -245,7 +245,7 @@ fdescribe('Controllers', function () {
 				'Auth': Auth
 			});
 		}));
-		it('should redirect to /admin if user is admin', function () {
+		fit('should redirect to /admin if user is admin', function () {
 			expect($scope.userRoles).toEqual({ user: { name: 'Shlomo' } });
 
 
