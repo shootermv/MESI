@@ -10,7 +10,7 @@ module.exports = function (config) {
 			'client/dist/vendors/angular/angular-cookies/*.js',
 			'client/dist/vendors/angular/angular-route/*.js',
 			'client/dist/vendors/angular/angular-animate/*.js',
-			'client/lib/angular/angular-dragon-drop/dragon-drop.js',
+			'client/dist/vendors/dragon-drop/*.js',
 			'client/dist/vendors/angular/angular-mocks/angular-mocks.js',
 			'client/js/app.js',
 			'client/js/controllers.js',
