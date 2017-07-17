@@ -29,6 +29,16 @@ module.exports = function (grunt) {
 					cwd: 'node_modules/angular-mocks',
 					dest: '<%= distdir %>/vendors/angular/angular-mocks',
 					src: 'angular-mocks.js',
+				}, {
+					expand: true,
+					cwd: 'node_modules/underscore',
+					dest: '<%= distdir %>/vendors/underscore',
+					src: '*min.js',
+				}, {
+					expand: true,
+					cwd: 'node_modules/dragon-drop/dist',
+					dest: '<%= distdir %>/vendors/dragon-drop',
+					src: '*min.js',
 				}]
 			}
 		},

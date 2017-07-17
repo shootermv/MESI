@@ -5,8 +5,7 @@ html(lang='en', data-ng-app='Mesi')
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Mesi - tasks manager
         base(href="/")
-        link(rel='stylesheet', href='/dist/css/mesi.min.css')        
-        script(src="//localhost:9000/livereload.js")
+        link(rel='stylesheet', href='/dist/css/mesi.min.css')
         // This is needed because Facebook login redirects add #_=_ at the end of the URL
         script(type="text/javascript").
             if (window.location.href.indexOf('#_=_') > 0) {
@@ -48,12 +47,12 @@ html(lang='en', data-ng-app='Mesi')
                 .row(data-ng-view='ng-view')            
             audio#sound           
                 source(src="{{'/sound/ice-block-drop-01.mp3'}}")
-        script(src='lib/underscore/underscore-min.js')
+        script(src='dist/vendors/underscore-min.js')
         script(src='dist/vendors/angular/angular/angular.min.js')
         script(src='dist/vendors/angular/angular-cookies/angular-cookies.min.js')
         script(src='dist/vendors/angular/angular-route/angular-route.min.js')
         script(src='dist/vendors/angular/angular-animate/angular-animate.min.js')
-        script(src='lib/angular/angular-dragon-drop/dragon-drop.js')
+        script(src='dist/vendors/dragon-drop/dragon-drop.js')
         script(src='/socket.io/socket.io.js')
         script(src='/js/routingConfig.js')
         script(src='/js/app.js')
