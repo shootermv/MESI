@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Mesi', ['ngCookies', 'ngRoute', 'btford.dragon-drop', 'ngAnimate'])
+angular.module('Mesi', ['ngCookies', 'ngRoute', 'dragon-drop', 'ngAnimate'])
 
     .config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 

@@ -13,7 +13,7 @@
     "grunt-contrib-copy": "^0.8.2",
     "grunt-contrib-uglify": "^0.9.2",
     "grunt-recess": "^1.0.1",
-    "dragon-drop": "^1.0.6",    
+    "dragon-drop": "^1.0.6",
     "underscore": "^1.8.3"
   },
   "repository": {

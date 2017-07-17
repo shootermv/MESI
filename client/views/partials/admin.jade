@@ -3,7 +3,7 @@ div.well
     form(ng-submit="addTask(newtask)",name="form")
         input.addtaskinput(ng-model="newtask.summary",placeholder="type here",name="summary",required)
         span.alert-error(ng-show="form.summary.$error.required && form.summary.$dirty") field cannot be empty.		
-    ul.droparea(btf-dragon="task in unassignedTasks")
+    ul.droparea(data-dragon="task in unassignedTasks")
         span.unassigned
             span.drag-handler
             span.pull-left.visible-xs.dropdown
@@ -20,7 +20,7 @@ div.row
     div(class="col-md-{{12/users.length}} tasksof",data-ng-repeat="user in users")
         .well
             h2 {{user.name}}
-            ul.droparea(btf-dragon="programmerTask in user.tasks | orderBy:'status.id'")
+            ul.droparea(data-dragon="programmerTask in user.tasks | orderBy:'status.id'")
                 li(ng-class="{completed:programmerTask.status.name=='completed','label-success':programmerTask.status.name=='active'}") 
                    span.drag-handler
                    {{programmerTask.summary}}		    
