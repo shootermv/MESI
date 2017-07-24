@@ -12,7 +12,7 @@
     "karma-cli": "^1.0.1",
     "karma-jasmine": "^1.1.0",
     "karma-phantomjs-launcher": "^1.0.4",
-    "mongoose": "latest",
+    "mongoose": "^4.11.4",
     "passport": "*",
     "passport-facebook": "~0.1.5",
     "passport-google": "~0.3.0",
