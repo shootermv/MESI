@@ -27,10 +27,11 @@ Programmers can notify their progress by changing the status of the task (by cli
 * Awesome [AngularJS](http://www.angularjs.org/) on the client
 * CSS based on [Twitter's bootstrap](http://twitter.github.com/bootstrap/)
 
-### Running the app during development
-
+### Setup Develop Environment
+* (You should have node and Mongodb nistalled and running)
 * run npm install
-* and run `node server.js`
+* (to inistialize the DB) run `node server/initDB`
+* run  `npm start`
 
 Then navigate your browser to `http://localhost:8000/` to see the app running in
 your browser.
@@ -40,3 +41,4 @@ your browser.
 ### Running unit tests
 
 * run `npm test` for get karma tests running 
+

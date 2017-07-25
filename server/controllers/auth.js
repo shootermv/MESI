@@ -1,7 +1,7 @@
 var passport =  require('passport')
     , mongoose = require('mongoose')
     , _User = require('../models/User.js')
-    ,  modelUser =   mongoose.model('User');
+    , modelUser =   mongoose.model('User');
 module.exports = {
     register: function(req, res, next) {
         try {
@@ -35,15 +35,14 @@ module.exports = {
     },
 
     login: function(req, res, next) {
-	    console.log('login was sended...');
+	    console.log('... trying to authenticate ...');
         passport.authenticate('local', function(err, user) {
-
             if(err){ 
-				console.log('auth error 1'); 
+				console.log('auth error: ',err); 
 				return next(err);
 			}
             if(!user){ 
-			    console.log('no users  auth error')
+			    console.log('no users auth error')
 				return res.send(400); 
 			}
 
