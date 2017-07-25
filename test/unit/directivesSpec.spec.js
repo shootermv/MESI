@@ -83,8 +83,11 @@ describe('directives', function () {
 		var scope, location, $compile, Tasks, elem, $rootScope;
 		var mockAuth = {
 			user: { name: '', role: { bitMask: 1, title: "public" } },
-			authorize: function (accessLevel, role) {
-				return accessLevel.bitMask & role.bitMask;
+			authorize: function () {
+				return false;
+			},
+			isLoggedIn: function () {
+				return false;
 			}
 		}
 
@@ -95,13 +98,13 @@ describe('directives', function () {
 			"admin": { "bitMask": 4, "title": "admin" },
 			"useronly": { "bitMask": 2, "title": "user" }
 		};
-
+		beforeEach(module('Mesi'));
 		beforeEach(module(function ($provide) {
 			$provide.value('Auth', mockAuth);
 			$provide.value('accessLevels', accessLevels);
 		}));
 
-		beforeEach(module('Mesi'));
+
 
 		beforeEach(inject(function (_$compile_, _$rootScope_, $location, _Tasks_) {
 			$rootScope = _$rootScope_
@@ -112,11 +115,11 @@ describe('directives', function () {
 
 		fit('when user is public and access is public - the menu must be visible', function () {
 
-
+			spyOn(mockAuth, 'authorize').and.returnValue(true)
 			scope = $rootScope.$new();
 			scope.accessLevels = accessLevels;
 
-			var elem = $compile("<li data-access-level='accessLevels.anon'>some text here</li>")(scope);
+			var elem = $compile("<li data-access-level='accessLevels.public'>some text here</li>")(scope);
 
 			//fire watch
 			scope.$apply();
@@ -140,25 +143,33 @@ describe('directives', function () {
 	});
 
 	describe('activeNav', function () {
-		var scope, location, compile;
+		var scope, location, compile, auth;
 		beforeEach(module('Mesi'));
+		beforeEach(module(function ($provide) {
+			$provide.value('Auth', {
+				authorize: function () { },
+				isLoggedIn: function () { }
+			});
+		}));
+
+
+
 		beforeEach(inject(function ($compile, $rootScope, $location) {
 			scope = $rootScope.$new();
 			location = $location
 			compile = $compile;
 		}));
 
-		it('when location is same as "href" of link - the link must be decorated with "active" class', function () {
+		fit('when location is same as "href" of link - the link must be decorated with "active" class', function () {
 			location.path('someurl');
-
-			var elem = compile("<li data-active-nav ><a href='http://server/someurl'>somelink</a></li>")(scope);
+			var elem = compile("<li data-active-nav ><a href='/someurl'>somelink</a></li>")(scope);
 
 			//fire watch
 			scope.$apply();
 			expect(elem.hasClass('active')).toBe(true);
 		});
 
-		it('when location is different from "href" of link - the "active" class must be removed', function () {
+		fit('when location is different from "href" of link - the "active" class must be removed', function () {
 			location.path('some_different_url');
 			//initially  decorated with 'active'
 			var elem = compile("<li data-active-nav class='active'><a href='http://server/someurl'>somelink</a></li>")(scope);

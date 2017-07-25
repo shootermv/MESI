@@ -45,8 +45,9 @@ angular.module('Mesi').directive('activeNav', ['$location', function ($location)
             var path = nestedA.href.substr(nestedA.href.lastIndexOf("/"));
 
             scope.location = $location;
-            scope.$watch('location.absUrl()', function (newPath) {
-                if (newPath.indexOf(path)>-1) {
+            scope.$watch('location.absUrl()', function (oldPath, newPath) {
+                console.log(path, newPath)
+                if (newPath.indexOf(path) > -1) {
                     element.addClass('active');
                 } else {
                     element.removeClass('active');
