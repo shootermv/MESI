@@ -42,11 +42,11 @@ angular.module('Mesi').directive('activeNav', ['$location', function ($location)
         restrict: 'A',
         link: function (scope, element, attrs) {
             var nestedA = element.find('a')[0];
-            var path = nestedA.href;
+            var path = nestedA.href.substr(nestedA.href.lastIndexOf("/"));
 
             scope.location = $location;
             scope.$watch('location.absUrl()', function (newPath) {
-                if (path === newPath) {
+                if (newPath.indexOf(path)>-1) {
                     element.addClass('active');
                 } else {
                     element.removeClass('active');
