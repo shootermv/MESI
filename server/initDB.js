@@ -25,6 +25,13 @@ adminRole.save().then(function (adminRole) {
 }).then(function () {
     return userRole.save();
 }).then(function (userRole) {
-    return new User({ name: 'shlomo', password: '12345', role: userRole._id }).save();
+    return new User({ name: 'shlomo', password: '12345', role: userRole._id }).save();   
+}).then(function (user) {
+    return new User({ name: 'Matt', password: '12345', role: user.role }).save();   
+}).then(function (user) {
+    return new User({ name: 'Yoav', password: '12345', role: user.role }).save();   
+}).then(function () {
+    console.log('3 users and 2 roles created successfully...');
+    console.log('exiting...');
     process.exit(0);
 })
