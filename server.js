@@ -6,7 +6,7 @@ var express = require('express')
     , mongoose = require('mongoose');
 
 //testing automated deploy
-var conn = process.env.MONGODB_URI || 'mongodb://localhost/myDB';
+var conn = process.env.MONGODB_URI || 'mongodb://localhost/mydb';
 mongoose.connect(conn);
 
 var app = module.exports = express();
