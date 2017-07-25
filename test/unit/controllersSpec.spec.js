@@ -214,7 +214,7 @@ fdescribe('Controllers', function () {
 			});
 		}));
 
-		it('should redirect to /admin if user is admin', function () {
+		fit('should redirect to /admin if user is admin', function () {
 			expect($location.path).toHaveBeenCalledWith('/admin');
 		});
 
