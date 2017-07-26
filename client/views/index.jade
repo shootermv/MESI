@@ -41,7 +41,7 @@ html(lang='en', data-ng-app='Mesi')
                         span.label(data-ng-class='{"label-info": user.role.title == userRoles.user.title, "label-success": user.role.title == userRoles.admin.title}') {{ user.role.title }}
 
         .container
-            .alert.alert-error(data-ng-bind="error", data-ng-show="error")
+            .alert.alert-danger(data-ng-bind="error", data-ng-show="error")
             .alert.alert-success.animate-show-hide(data-ng-bind="successmsg", data-ng-show="success", cssnotification)
             loader
             .page-header
