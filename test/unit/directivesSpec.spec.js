@@ -20,7 +20,7 @@ describe('directives', function () {
 			Tasks = _Tasks_;
 		}));
 
-		fit('should had a btn-danger class (red) if status is new', function () {
+		it('should had a btn-danger class (red) if status is new', function () {
 
 			spyOn(Tasks, 'updateTask').and.callFake(function (args, callback, errcallback) {
 				callback({ summary: 'blabla', status: { name: 'completed', id: 3 } });
@@ -46,7 +46,7 @@ describe('directives', function () {
 		});
 
 
-		fit('if status is new, after clicking button it should became "active" and then "completed"', function () {
+		it('if status is new, after clicking button it should became "active" and then "completed"', function () {
 
 			spyOn(Tasks, 'updateTask').and.callFake(function (args, callback, errcallback) {
 				callback({ summary: 'blabla', status: { name: 'completed', id: 3 } });
@@ -113,7 +113,7 @@ describe('directives', function () {
 			Tasks = _Tasks_;
 		}))
 
-		fit('when user is public and access is public - the menu must be visible', function () {
+		it('when user is public and access is public - the menu must be visible', function () {
 
 			spyOn(mockAuth, 'authorize').and.returnValue(true)
 			scope = $rootScope.$new();
@@ -128,7 +128,7 @@ describe('directives', function () {
 		});
 
 
-		fit('when user is public and access is user - the menu must be hidden', function () {
+		it('when user is public and access is user - the menu must be hidden', function () {
 
 			scope = $rootScope.$new();
 			scope.accessLevels = accessLevels;
@@ -160,7 +160,7 @@ describe('directives', function () {
 			compile = $compile;
 		}));
 
-		fit('when location is same as "href" of link - the link must be decorated with "active" class', function () {
+		it('when location is same as "href" of link - the link must be decorated with "active" class', function () {
 			location.path('someurl');
 			var elem = compile("<li data-active-nav ><a href='/someurl'>somelink</a></li>")(scope);
 
@@ -169,7 +169,7 @@ describe('directives', function () {
 			expect(elem.hasClass('active')).toBe(true);
 		});
 
-		fit('when location is different from "href" of link - the "active" class must be removed', function () {
+		it('when location is different from "href" of link - the "active" class must be removed', function () {
 			location.path('some_different_url');
 			//initially  decorated with 'active'
 			var elem = compile("<li data-active-nav class='active'><a href='http://server/someurl'>somelink</a></li>")(scope);
@@ -189,7 +189,7 @@ describe('directives', function () {
 			timeout = $timeout;
 		}));
 
-		fit('Should be visible after rootScope.success became true', function () {
+		it('Should be visible after rootScope.success became true', function () {
 
 			var elem = compile('<div data-ng-bind="successmsg" ng-show="success" cssnotification></div>')(scope);
 			rootScope.success = false;

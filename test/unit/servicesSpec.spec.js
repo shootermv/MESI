@@ -36,7 +36,7 @@ describe('services', function () {
 		}));
 
 
-		fit('should bring some user in currentUser variable', function () {
+		it('should bring some user in currentUser variable', function () {
 			expect(angular.equals(authSvc.user.name, "koko")).toBe(true);
 		})
 	});
@@ -51,11 +51,11 @@ describe('services', function () {
 			httpBackend.verifyNoOutstandingRequest();
 		});
 
-		fit('should have a get function', function () {
+		it('should have a get function', function () {
 			expect(angular.isFunction(usersSvc.getAll)).toBe(true);
 		});
 
-		fit('should bring all the users', function () {
+		it('should bring all the users', function () {
 			var returnData = { excited: true };
 			//expectGET to make sure this is called once.
 
@@ -91,7 +91,7 @@ describe('services', function () {
 			httpBackend.verifyNoOutstandingExpectation();
 			httpBackend.verifyNoOutstandingRequest();
 		});
-		fit('should bring all the tasks', function () {
+		it('should bring all the tasks', function () {
 			var returnData = [{ summary: 'some task here...' }];
 			httpBackend.expectGET('/tasks').respond(returnData);
 			var result;
@@ -135,7 +135,7 @@ describe('services', function () {
 			httpBackend.verifyNoOutstandingExpectation();
 			httpBackend.verifyNoOutstandingRequest();
 		});
-		fit('should respond to "ON"', function () {
+		it('should respond to "ON"', function () {
 			var result;
 			svc.on('shlomo', function (somevalue) {
 				result = somevalue

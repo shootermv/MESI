@@ -9,7 +9,7 @@
 //add Tests to RegisterCtrl Controller- V
 //add Tests to PrivateCtrl Controller - V
 
-fdescribe('Controllers', function () {
+describe('Controllers', function () {
 	beforeEach(module('Mesi'));
 
 	//Admin
@@ -56,14 +56,14 @@ fdescribe('Controllers', function () {
 
 		describe('AdminCtrl', function () {
 			//initialization of controller
-			fit('Should bring users and their tasks', function () {
+			it('Should bring users and their tasks', function () {
 				var locals = createLocals();
 				runController(locals);
 				expect(locals.$scope.users).toEqual([{ name: 'momo' }]);
 			});
 
 			//initialization of controller
-			fit('Initially should make a call to Tasks.getAllForAdmin', function () {
+			it('Initially should make a call to Tasks.getAllForAdmin', function () {
 
 				var locals = createLocals();
 				//set up the spy.
@@ -76,7 +76,7 @@ fdescribe('Controllers', function () {
 			});
 
 			//checks add task form
-			fit('the "add task" form should add new task', inject(function () {
+			it('the "add task" form should add new task', inject(function () {
 				var locals = createLocals();
 				runController(locals);
 				//set up.
@@ -90,7 +90,7 @@ fdescribe('Controllers', function () {
 			}));
 
 			// Test 3: Testing a $watch() 	   
-			fit('should call Tasks.unAssignTasks when unassignedTasks collection is changed', function () {
+			it('should call Tasks.unAssignTasks when unassignedTasks collection is changed', function () {
 				var locals = createLocals();
 				runController(locals);
 				//fire watchers
@@ -143,7 +143,7 @@ fdescribe('Controllers', function () {
 		}));
 
 
-		fit('after logout pressed should redirect to logout ', function () {
+		it('after logout pressed should redirect to logout ', function () {
 
 			expect($scope.user).toEqual({ name: 'Shlomo' });
 			expect($scope.userRoles).toEqual([]);
@@ -189,7 +189,7 @@ fdescribe('Controllers', function () {
 
 		}));
 
-		fit('should redirect to /admin if user is admin', function () {
+		it('should redirect to /admin if user is admin', function () {
 			$scope.login({});
 			expect($location.path).toHaveBeenCalledWith('/admin');
 		});
@@ -214,7 +214,7 @@ fdescribe('Controllers', function () {
 			});
 		}));
 
-		fit('should redirect to /admin if user is admin', function () {
+		it('should redirect to /admin if user is admin', function () {
 			expect($location.path).toHaveBeenCalledWith('/admin');
 		});
 
@@ -245,7 +245,7 @@ fdescribe('Controllers', function () {
 				'Auth': Auth
 			});
 		}));
-		fit('should redirect to /admin if user is admin', function () {
+		it('should redirect to /admin if user is admin', function () {
 			expect($scope.userRoles).toEqual({ user: { name: 'Shlomo' } });
 
 
