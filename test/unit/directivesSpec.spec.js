@@ -144,25 +144,28 @@ describe('directives', function () {
 
 	describe('activeNav', function () {
 		var scope, location, compile, auth;
+		var mockAuth = {
+			user: { name: '', role: { bitMask: 1, title: "public" } },
+			authorize: function () {
+				return true;
+			},
+			isLoggedIn: function () {
+				return true;
+			}
+		}		
 		beforeEach(module('Mesi'));
 		beforeEach(module(function ($provide) {
-			$provide.value('Auth', {
-				authorize: function () { },
-				isLoggedIn: function () { }
-			});
+			$provide.value('Auth', mockAuth);
 		}));
-
-
-
 		beforeEach(inject(function ($compile, $rootScope, $location) {
 			scope = $rootScope.$new();
 			location = $location
-			compile = $compile;
+			compile = $compile;		
 		}));
 
 		it('when location is same as "href" of link - the link must be decorated with "active" class', function () {
-			location.path('someurl');
-			var elem = compile("<li data-active-nav ><a href='/someurl'>somelink</a></li>")(scope);
+			spyOn(location,'absUrl').and.callFake(function(){ return '/someurl';});
+			var elem = compile("<li data-active-nav  ng-class=\"{'active':isCurrentUrl('/someurl')}\"><a href='/someurl'>somelink</a></li>")(scope);
 
 			//fire watch
 			scope.$apply();
@@ -170,9 +173,9 @@ describe('directives', function () {
 		});
 
 		it('when location is different from "href" of link - the "active" class must be removed', function () {
-			location.path('some_different_url');
+			spyOn(location,'absUrl').and.callFake(function(){ return '/some_different_url';});
 			//initially  decorated with 'active'
-			var elem = compile("<li data-active-nav class='active'><a href='http://server/someurl'>somelink</a></li>")(scope);
+			var elem = compile("<li data-active-nav ng-class=\"{'active':isCurrentUrl('/someurl')}\"><a href='http://server/someurl'>somelink</a></li>")(scope);
 
 			//fire watch
 			scope.$apply();
