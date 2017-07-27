@@ -26,6 +26,11 @@ module.exports = function (grunt) {
 					src: 'angular*/*.min.js',
 				}, {
 					expand: true,
+					cwd: 'node_modules/',
+					dest: '<%= distdir %>/vendors/underscore/',
+					src: 'underscore/*min.js',
+				}, {
+					expand: true,
 					cwd: 'node_modules/angular-mocks',
 					dest: '<%= distdir %>/vendors/angular/angular-mocks',
 					src: 'angular-mocks.js',
