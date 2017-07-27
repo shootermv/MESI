@@ -27,7 +27,7 @@ module.exports = function (grunt) {
 				}, {
 					expand: true,
 					cwd: 'node_modules/',
-					dest: '<%= distdir %>/vendors/underscore/',
+					dest: '<%= distdir %>/vendors/',
 					src: 'underscore/*min.js',
 				}, {
 					expand: true,
