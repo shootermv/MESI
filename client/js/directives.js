@@ -37,34 +37,24 @@ angular.module('Mesi').directive('accessLevel', ['Auth', function (Auth) {
     };
 }]);
 //activenav
-angular.module('Mesi').directive('activeNav', ['$location', function ($location) {
+angular.module('Mesi').directive('activeNav',  function () {
     return {
         restrict: 'A',
-        link: function (scope, element, attrs) {
-            var nestedA = element.find('a')[0];
-            var path = nestedA.href.substr(nestedA.href.lastIndexOf("/"));
-
-            scope.location = $location;
-            scope.$watch('location.absUrl()', function (oldPath, newPath) {
-                console.log(path, newPath)
-                if (newPath.indexOf(path) > -1) {
-                    element.addClass('active');
-                } else {
-                    element.removeClass('active');
-                }
-            });
-        }
-
+        controller:['$scope', '$location', function($scope, $location) {
+          $scope.isCurrentUrl = function(href) {
+            var path = href.substr(href.lastIndexOf("/"));            
+            return $location.absUrl().indexOf(path)>-1;
+          } 
+        }]
     };
 
-}]);
+})
 //cssnotification
 angular.module('Mesi').directive('cssnotification', ['$timeout', '$rootScope', function ($timeout, $rootScope) {
 
     return {
         restrict: 'A',
         link: function (scope, element, attrs) {
-
             $rootScope.$watch('success', function (newVal, oldVal) {
                 if (newVal) {
                     $timeout(function () {
