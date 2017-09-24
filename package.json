@@ -29,7 +29,7 @@
   },
   "subdomain": "Mesi",
   "scripts": {
-    "postinstall": "cd client && npm install && node_modules/.bin/grunt",
+    "postinstall": "cd client && npm install && node_modules/.bin/grunt prod",
     "start": "node server.js",
     "test": "./node_modules/.bin/karma start test/config/unit.js --single-run"
   },

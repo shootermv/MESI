@@ -38,12 +38,15 @@ module.exports = function (grunt) {
 			}
 		},
 		uglify: {
-			dist: {
+			dev: {
 				src: ['<%= src.js %>'],
 				options: {
-					sourceMap: true,
-					sourceMapName: '<%= distdir %>/js/<%= pkg.name %>.js.map'
+					sourceMap: true
 				},
+				dest: '<%= distdir %>/js/<%= pkg.name %>.min.js'
+			},
+			prod: {
+				src: ['<%= src.js %>'],
 				dest: '<%= distdir %>/js/<%= pkg.name %>.min.js'
 			}
 		},
@@ -68,5 +71,6 @@ module.exports = function (grunt) {
 		}
 	});
 
-	grunt.registerTask('default', ['recess:min', 'uglify', 'copy'])
+	grunt.registerTask('default', ['recess:min', 'uglify', 'copy']);
+	grunt.registerTask('prod', ['recess:min', 'uglify:prod', 'copy'])
 };
