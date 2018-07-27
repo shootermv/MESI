@@ -3,6 +3,7 @@ var express = require('express')
     , passport = require('passport')
     , path = require('path')
     , User = require('./server/models/User.js')
+    , cors = require('cors')
     , mongoose = require('mongoose');
 
 //testing automated deploy
@@ -18,6 +19,7 @@ app.use(express.cookieParser());
 app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.static(path.join(__dirname, 'client')));
+app.use(cors());
 
 app.use(express.cookieSession(
     {
