@@ -1,6 +1,6 @@
 # MESI - Project Management Tool
 [![Build Status](https://travis-ci.org/shootermv/MESI.svg?branch=master)](https://travis-ci.org/shootermv/MESI.svg?branch=master)  
-Example application built with nodejs + angularjs + mongodb .
+Example application built for demonstration purposes with nodejs + angularjs + mongodb .
 
 [demo](http://mesi-tasks.herokuapp.com/)
 
