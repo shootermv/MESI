@@ -1,4 +1,4 @@
-# MESI - Project Management Application
+# MESI - Project Management Tool
 [![Build Status](https://travis-ci.org/shootermv/MESI.svg?branch=master)](https://travis-ci.org/shootermv/MESI.svg?branch=master)  
 Example application built with nodejs + angularjs + mongodb .  
 
