@@ -20,8 +20,6 @@ Programmers can notify their progress by changing the status of the task (by cli
 * `new`
 * `active` - the task programmer is currently working on (will appear blue at Admin's dashboard)
 * `completed`
-
-[Working Demo](http://mesi-tasks.herokuapp.com/)
  
 ## Stack
 
