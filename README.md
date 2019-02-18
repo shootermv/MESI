@@ -27,7 +27,7 @@ Programmers can notify their progress by changing the status of the task (by cli
 * Backend: [Node.js](http://nodejs.org/)
 * Awesome [AngularJS](http://www.angularjs.org/) on the client
 * Responsive CSS based on [Twitter's bootstrap](http://twitter.github.com/bootstrap/)
-* Real Time syncronization ased on [socket.io](https://socket.io/) 
+* Real Time syncronization based on [socket.io](https://socket.io/) 
 
 ### Setup Develop Environment
 * (You should have node and Mongodb nistalled and running)
