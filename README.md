@@ -26,7 +26,7 @@ Programmers can notify their progress by changing the status of the task (by cli
 * Persistence store: [MongoDB](http://www.mongodb.org/)
 * Backend: [Node.js](http://nodejs.org/)
 * Awesome [AngularJS](http://www.angularjs.org/) on the client
-* CSS based on [Twitter's bootstrap](http://twitter.github.com/bootstrap/)
+* Responsive CSS based on [Twitter's bootstrap](http://twitter.github.com/bootstrap/)
 * Real Time syncronization ased on [socket.io](https://socket.io/) 
 
 ### Setup Develop Environment
