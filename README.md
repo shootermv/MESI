@@ -30,6 +30,7 @@ Programmers can notify their progress by changing the status of the task (by cli
 
 ### Setup Develop Environment
 * (You should have node and Mongodb nistalled and running)
+* clone project
 * run npm install
 * (to inistialize the DB) run `node server/initDB`
 * run  `npm start`
