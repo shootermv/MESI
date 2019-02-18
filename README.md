@@ -32,7 +32,7 @@ Programmers can notify their progress by changing the status of the task (by cli
 ### Setup Develop Environment
 * (You should have node and Mongodb nistalled and running)
 * clone project `git clone https://github.com/shootermv/MESI.git`
-* run npm install
+* run `npm i` to install dependencies
 * (to inistialize the DB) run `node server/initDB`
 * run  `npm start`
 
