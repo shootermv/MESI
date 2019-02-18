@@ -1,6 +1,6 @@
-# MESI - Tasks Management Application
+# MESI - Project Management Application
 [![Build Status](https://travis-ci.org/shootermv/MESI.svg?branch=master)](https://travis-ci.org/shootermv/MESI.svg?branch=master)
-
+Example application built with nodejs + angularjs + mongodb .  
 Usecases - 
   - Team leader can split the project to the tasks and share them among the programmers.
   - Each programmer can notify about his progress on the tasks at real time.
