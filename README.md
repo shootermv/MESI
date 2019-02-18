@@ -11,7 +11,7 @@ Usecases -
   - You can use it to manage your team of programmers.
 
 ## Authentication
-Mesi contains authentication implementation with Admin and User roles.
+Mesi contains user authentication implementation with "Admin" and "User" roles.
 Admin - for a team leader and User - for  programmer.
 
 Team leader can create tasks and drag them to programmer earea - to assign the task to the programmer.
@@ -30,7 +30,7 @@ Programmers can notify their progress by changing the status of the task (by cli
 
 ### Setup Develop Environment
 * (You should have node and Mongodb nistalled and running)
-* clone project
+* clone project `https://github.com/shootermv/MESI.git`
 * run npm install
 * (to inistialize the DB) run `node server/initDB`
 * run  `npm start`
